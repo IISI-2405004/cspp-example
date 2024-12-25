@@ -4,8 +4,11 @@
   box-sizing: border-box;
 }
 
-#app {
+body {
   font-family: "Microsoft JhengHei", Arial, sans-serif;
+}
+
+#app {
   display: grid;
   grid-template-columns: 256px 1fr;
   height: 100dvh;

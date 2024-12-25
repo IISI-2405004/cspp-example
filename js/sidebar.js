@@ -202,10 +202,10 @@ toggleSidebarBtn.addEventListener("click", () => {
 
   const logo = document.querySelector(".sidebar-logo");
   if (sidebar.classList.contains("collapsed")) {
-    logo.style.backgroundImage = 'url("../images/logo-icon.png")';
+    logo.style.backgroundImage = 'url("./images/logo-icon.png")';
     collapseAllChildren(menuContainer); // 收合所有展開的子選單
   } else {
-    logo.style.backgroundImage = 'url("../images/logo.png")';
+    logo.style.backgroundImage = 'url("./images/logo.png")';
   }
 });
 
