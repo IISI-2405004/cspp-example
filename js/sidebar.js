@@ -218,7 +218,7 @@ document.querySelectorAll(".menu-title-wrapper").forEach((menuTitle) => {
       document.body.appendChild(tooltip);
 
       const rect = menuTitle.getBoundingClientRect();
-      tooltip.style.top = `${rect.top}px`;
+      tooltip.style.top = `${rect.top + 6}px`;
       tooltip.style.left = `${rect.right + 10}px`;
     }
   });
