@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/index.css" />
+    <title>資通安全推動入口網 Example</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Sidebar -->
+      <aside class="sidebar-wrapper" id="sidebar">
+        <div class="sidebar-logo"></div>
+        <button class="btn sidebar-toggle-btn" id="toggleSidebarBtn">
+          <i class="fa-solid fa-angle-left"></i>
+        </button>
+        <menu class="menu" id="menuContainer"></menu>
+      </aside>
+
+      <main class="main-container">
+        <!-- Navbar -->
+        <nav class="navbar">
+          <button id="searchBtn" class="btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <input type="text" class="search-box" placeholder="請輸入關鍵字..." />
+
+          <button id="infoBtn" class="btn">
+            <i class="fa-regular fa-circle-question"></i>
+          </button>
+          <button id="notifyBtn" class="btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="bedge red">10</span>
+          </button>
+          <div class="user-wrapper">
+            <i class="fa-regular fa-circle-user"></i>
+            <span class="username">
+              Admin ( <span class="logout">登出</span> )
+            </span>
+          </div>
+        </nav>
+
+        <div class="main-content">
+          <div class="title-section mb-4">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">資通安全推動入口網</li>
+              <li class="breadcrumb-item slash">/</li>
+              <li class="breadcrumb-item active">會議及活動報名</li>
+            </ul>
+            <div class="title-wrapper">
+              <h1 class="page-title">會議排程</h1>
+              <div class="button-group">
+                <button class="btn btn-small secondary" id="searchBtn">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="btn btn-small primary" id="addBtn">
+                  <i class="fa-solid fa-plus"></i>
+                  <span>新增</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabs flex-1">
+            <ul class="tab-list">
+              <li class="tab active" data-tab="tab1">分類一</li>
+              <li class="tab" data-tab="tab2">分類二</li>
+              <li class="tab" data-tab="tab3">分類三</li>
+            </ul>
+            <div class="tab-contents flex-1">
+              <div id="tab1" class="tab-content active">
+                <div class="table-container">
+                  <table id="dataTable">
+                    <thead>
+                      <tr>
+                        <th width="28px">
+                          <input type="checkbox" id="checkAll" />
+                        </th>
+                        <th class="sortable" width="120px">
+                          編號
+                          <span class="sort-icon">
+                            <i id="idArrow" class="fa-solid fa-sort-up"></i>
+                            <i
+                              id="idArrow"
+                              class="fa-solid fa-sort-down active"
+                            ></i>
+                          </span>
+                        </th>
+                        <th class="sortable" width="360px">
+                          項目名稱
+                          <span class="sort-icon">
+                            <i id="idArrow" class="fa-solid fa-sort-up"></i>
+                            <i id="idArrow" class="fa-solid fa-sort-down"></i>
+                          </span>
+                        </th>
+                        <th class="sortable">
+                          部門
+                          <span class="sort-icon">
+                            <i id="idArrow" class="fa-solid fa-sort-up"></i>
+                            <i id="idArrow" class="fa-solid fa-sort-down"></i>
+                          </span>
+                        </th>
+                        <th class="sortable">
+                          提交日期
+                          <span class="sort-icon">
+                            <i id="idArrow" class="fa-solid fa-sort-up"></i>
+                            <i id="idArrow" class="fa-solid fa-sort-down"></i>
+                          </span>
+                        </th>
+                        <th class="sortable">
+                          狀態
+                          <span class="sort-icon">
+                            <i id="idArrow" class="fa-solid fa-sort-up"></i>
+                            <i id="idArrow" class="fa-solid fa-sort-down"></i>
+                          </span>
+                        </th>
+                        <th width="148px">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                  </table>
+                </div>
+
+                <div class="pagination mt-6">
+                  <span class="total">
+                    共<span id="totalRecords" class="ml-2 mr-2">12</span>筆
+                  </span>
+
+                  <div class="select-trigger" id="selectTrigger">
+                    <span class="select-trigger-text">10筆 / 頁</span>
+                    <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                  </div>
+                  <button id="toPrevBtn" class="btn pagination-item" disabled>
+                    <i class="fa-solid fa-chevron-left"></i>
+                  </button>
+                  <span id="currentPage" class="pagination-item active">1</span>
+                  <span id="currentPage" class="pagination-item">2</span>
+                  <button id="toNextBtn" class="btn pagination-item">
+                    <i class="fa-solid fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div id="tab2" class="tab-content">
+                <p>這裡放置【分類二】的內容</p>
+              </div>
+              <div id="tab3" class="tab-content">
+                <p>這裡放置【分類三】的內容</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Select (頁碼 Size 下拉選單) -->
+    <ul class="dropdown-panel" id="dropdownPanel">
+      <li class="dropdown-option" data-value="10">10筆</li>
+      <li class="dropdown-option" data-value="20">20筆</li>
+      <li class="dropdown-option" data-value="30">30筆</li>
+      <li class="dropdown-option" data-value="50">50筆</li>
+    </ul>
+
+    <script type="module" src="./js/index.js"></script>
+  </body>
+</html>

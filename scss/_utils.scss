@@ -1,0 +1,30 @@
+$spacing-unit: 4px;
+$max-spacing: 10;
+
+@for $i from 1 through $max-spacing {
+  .mt-#{$i} {
+    margin-top: $i * $spacing-unit;
+  }
+}
+
+@for $i from 1 through $max-spacing {
+  .mb-#{$i} {
+    margin-bottom: $i * $spacing-unit;
+  }
+}
+
+@for $i from 1 through $max-spacing {
+  .ml-#{$i} {
+    margin-left: $i * $spacing-unit;
+  }
+}
+
+@for $i from 1 through $max-spacing {
+  .mr-#{$i} {
+    margin-right: $i * $spacing-unit;
+  }
+}
+
+.flex-1 {
+  flex: 1;
+}
