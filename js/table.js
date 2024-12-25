@@ -1,104 +1,8 @@
 import { showToast } from "./utils.js";
 import { CustomSelect } from "./select.js";
+import { tableData } from "./mockData.js";
 
-let data = [
-  {
-    id: "0001",
-    title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-    department: "IT",
-    owner: "小明",
-    submitDate: "2024-12-01",
-    status: "pending",
-  },
-  {
-    id: "0002",
-    title: "OOOOOOOOOOOOO",
-    department: "HR",
-    owner: "小紅",
-    submitDate: "2024-12-02",
-    status: "closed",
-  },
-  {
-    id: "0003",
-    title: "OOOOOOOOOOOOOOOOOOOOOO",
-    department: "財務",
-    owner: "小王",
-    submitDate: "2024-12-03",
-    status: "reviewing",
-  },
-  {
-    id: "0004",
-    title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-    department: "IT",
-    owner: "小明",
-    submitDate: "2024-12-04",
-    status: "closed",
-  },
-  {
-    id: "0005",
-    title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-    department: "行銷",
-    owner: "小李",
-    submitDate: "2024-12-05",
-    status: "pending",
-  },
-  {
-    id: "0006",
-    title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-    department: "財務",
-    owner: "小王",
-    submitDate: "2024-12-06",
-    status: "recheck",
-  },
-  {
-    id: "0007",
-    title: "OOOOOOOOOOO",
-    department: "行銷",
-    owner: "小李",
-    submitDate: "2024-12-07",
-    status: "recheck",
-  },
-  {
-    id: "0008",
-    title: "OOOOOOOO",
-    department: "HR",
-    owner: "小紅",
-    submitDate: "2024-12-08",
-    status: "closed",
-  },
-  {
-    id: "0009",
-    title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-    department: "行銷",
-    owner: "小李",
-    submitDate: "2024-12-09",
-    status: "pending",
-  },
-  {
-    id: "0010",
-    title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-    department: "IT",
-    owner: "小明",
-    submitDate: "2024-12-10",
-    status: "closed",
-  },
-  {
-    id: "0011",
-    title: "OOOOO",
-    department: "財務",
-    owner: "小王",
-    submitDate: "2024-12-11",
-    status: "pending",
-  },
-  {
-    id: "0012",
-    title: "OOOOOOOOOOOO",
-    department: "行銷",
-    owner: "小李",
-    submitDate: "2024-12-12",
-    status: "closed",
-  },
-];
+let data = [...tableData];
 
 let isEditMode = false;
 let originalData = [];
@@ -303,7 +207,9 @@ function toggleEditMode() {
 function closedEditMode() {
   isEditMode = false;
   const editBtn = document.getElementById("editBtn");
-  document.getElementById("checkAll").attributes.removeNamedItem("disabled");
+  if (document.getElementById("checkAll").hasAttribute("disabled")) {
+    document.getElementById("checkAll").attributes.removeNamedItem("disabled");
+  }
   editBtn.classList.remove("hidden");
   document.getElementById("submitEditModeBtn").remove();
   document.getElementById("cancelEditModeBtn").remove();
