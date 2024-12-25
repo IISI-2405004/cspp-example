@@ -7,7 +7,7 @@ const data = [
     department: "IT",
     owner: "小明",
     submitDate: "2024-12-01",
-    status: "待審查",
+    status: "pending",
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const data = [
     department: "HR",
     owner: "小紅",
     submitDate: "2024-12-02",
-    status: "已完成",
+    status: "closed",
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ const data = [
     department: "財務",
     owner: "小王",
     submitDate: "2024-12-03",
-    status: "待審查",
+    status: "reviewing",
   },
   {
     id: 4,
@@ -31,7 +31,7 @@ const data = [
     department: "IT",
     owner: "小明",
     submitDate: "2024-12-04",
-    status: "已完成",
+    status: "closed",
   },
   {
     id: 5,
@@ -39,7 +39,7 @@ const data = [
     department: "行銷",
     owner: "小李",
     submitDate: "2024-12-05",
-    status: "待審查",
+    status: "pending",
   },
   {
     id: 6,
@@ -47,7 +47,7 @@ const data = [
     department: "財務",
     owner: "小王",
     submitDate: "2024-12-06",
-    status: "待審查",
+    status: "recheck",
   },
   {
     id: 7,
@@ -55,7 +55,7 @@ const data = [
     department: "行銷",
     owner: "小李",
     submitDate: "2024-12-07",
-    status: "已完成",
+    status: "recheck",
   },
   {
     id: 8,
@@ -63,7 +63,7 @@ const data = [
     department: "HR",
     owner: "小紅",
     submitDate: "2024-12-08",
-    status: "已完成",
+    status: "closed",
   },
   {
     id: 9,
@@ -71,7 +71,7 @@ const data = [
     department: "行銷",
     owner: "小李",
     submitDate: "2024-12-09",
-    status: "待審查",
+    status: "pending",
   },
   {
     id: 10,
@@ -79,7 +79,7 @@ const data = [
     department: "IT",
     owner: "小明",
     submitDate: "2024-12-10",
-    status: "已完成",
+    status: "closed",
   },
   {
     id: 11,
@@ -87,7 +87,7 @@ const data = [
     department: "財務",
     owner: "小王",
     submitDate: "2024-12-11",
-    status: "待審查",
+    status: "pending",
   },
   {
     id: 12,
@@ -95,7 +95,7 @@ const data = [
     department: "行銷",
     owner: "小李",
     submitDate: "2024-12-12",
-    status: "已完成",
+    status: "closed",
   },
 ];
 
@@ -140,6 +140,21 @@ function renderTable() {
   updatePaginationInfo();
 }
 
+function convertToStatusHTML(status) {
+  switch (status) {
+    case "pending":
+      return `<div class="status-wrapper"><i class="status-icon pending fa-solid fa-circle"></i><span>待審查</span></div>`;
+    case "reviewing":
+      return `<div class="status-wrapper"><i class="status-icon reviewing fa-solid fa-circle"></i><span>審查中</span></div>`;
+    case "recheck":
+      return `<div class="status-wrapper"><i class="status-icon recheck fa-solid fa-circle"></i><span>待複審</span></div>`;
+    case "closed":
+      return `<div class="status-wrapper"><i class="status-icon closed fa-solid fa-circle"></i><span>已結案</span></div>`;
+    default:
+      return "";
+  }
+}
+
 function generateRowHTML(item) {
   return `
     <tr>
@@ -148,11 +163,15 @@ function generateRowHTML(item) {
       <td>${item.title}</td>
       <td>${item.department}</td>
       <td>${item.submitDate}</td>
-      <td>${item.status}</td>
+      <td>${convertToStatusHTML(item.status)}</td>
       <td class="custom-width">
         <div class="btn-group">
-          <button class="btn btn-small secondary" data-action="review" data-id="${item.id}">審查</button>
-          <button class="btn btn-small danger" data-action="delete" data-id="${item.id}">刪除</button>
+          <button class="btn btn-small secondary" data-action="review" data-id="${
+            item.id
+          }">審查</button>
+          <button class="btn btn-small danger" data-action="delete" data-id="${
+            item.id
+          }">刪除</button>
         </div>
       </td>
     </tr>

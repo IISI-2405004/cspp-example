@@ -777,6 +777,33 @@ body {
   gap: 8px;
 }
 
+.status-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+}
+.status-icon.pending {
+  color: var(--lively_purple-400);
+}
+.status-icon.reviewing {
+  color: var(--lively_yellow-400);
+}
+.status-icon.recheck {
+  color: var(--lively_pink-400);
+}
+.status-icon.closed {
+  color: var(--neutral-400);
+}
+
 /* Button */
 .btn {
   -webkit-appearance: none;
@@ -1060,7 +1087,7 @@ tbody .btn-group {
   transform: translateY(-50%);
 }
 
-/* 下拉選單 (絕對定位，掛在 body 下) */
+/* Select Options (掛在 body 下) */
 .dropdown-panel {
   display: none;
   position: absolute;
@@ -1100,7 +1127,9 @@ input[type=checkbox] {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 16px;
   height: 16px;
   border: 1px solid var(--neutral-400);
@@ -1126,11 +1155,6 @@ input[type=checkbox]:checked::before {
   line-height: 16px;
   text-align: center;
 }
-input[type=checkbox].intermediate {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 input[type=checkbox].intermediate::before {
   content: "";
   display: block;
@@ -1139,8 +1163,8 @@ input[type=checkbox].intermediate::before {
   background-color: var(--lively_blue-500);
 }
 
-/* Bedge */
-.bedge {
+/* Badge */
+.badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1156,10 +1180,10 @@ input[type=checkbox].intermediate::before {
   top: -50%;
   transform: translate(-50%, 50%);
 }
-.bedge.small {
+.badge.small {
   height: 16px;
 }
-.bedge.red {
+.badge.red {
   background-color: var(--lively_pink-400);
   color: var(--neutral-100);
 }

@@ -309,7 +309,7 @@ tbody {
   }
 }
 
-/* 下拉選單 (絕對定位，掛在 body 下) */
+/* Select Options (掛在 body 下) */
 .dropdown-panel {
   display: none;
   position: absolute;
@@ -350,7 +350,9 @@ tbody {
 /* Checkbox */
 input[type="checkbox"] {
   appearance: none;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 16px;
   height: 16px;
   border: 1px solid var(--neutral-400);
@@ -380,10 +382,6 @@ input[type="checkbox"] {
   }
 
   &.intermediate {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
     &::before {
       content: "";
       display: block;
@@ -394,8 +392,8 @@ input[type="checkbox"] {
   }
 }
 
-/* Bedge */
-.bedge {
+/* Badge */
+.badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
