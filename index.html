@@ -182,10 +182,18 @@
 
     <!-- Select (頁碼 Size 下拉選單) -->
     <ul class="dropdown-panel" id="dropdownPanel">
-      <li class="dropdown-option" data-value="10">10筆</li>
-      <li class="dropdown-option" data-value="20">20筆</li>
-      <li class="dropdown-option" data-value="30">30筆</li>
-      <li class="dropdown-option" data-value="50">50筆</li>
+      <li class="dropdown-option" data-value="10">10 筆</li>
+      <li class="dropdown-option" data-value="20">20 筆</li>
+      <li class="dropdown-option" data-value="30">30 筆</li>
+      <li class="dropdown-option" data-value="50">50 筆</li>
+    </ul>
+
+    <!-- Select (狀態下拉選單) -->
+    <ul class="dropdown-panel" id="dropdownStatusPanel">
+      <li class="dropdown-option" data-value="pending">待審查</li>
+      <li class="dropdown-option" data-value="reviewing">審查中</li>
+      <li class="dropdown-option" data-value="recheck">待複審</li>
+      <li class="dropdown-option" data-value="closed">已結案</li>
     </ul>
 
     <!-- Modal - 刪除資料 -->
@@ -207,7 +215,26 @@
           </button>
         </div>
       </div>
-      <!-- 底部遮罩 -->
+      <div class="overlay"></div>
+    </div>
+
+    <!-- Modal - 編輯確認 -->
+    <div class="modal" id="editModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">提示視窗</h2>
+          <button class="btn close-btn" id="closeDeleteModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button class="btn btn-small secondary" id="cancelEditBtn">
+            取消
+          </button>
+          <button class="btn btn-small primary" id="submitEditBtn">確認</button>
+        </div>
+      </div>
       <div class="overlay"></div>
     </div>
 

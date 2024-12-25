@@ -1,60 +1,75 @@
-const selectTrigger = document.getElementById("selectTrigger");
-const selectTriggerText = document.querySelector(
-  "#selectTrigger .select-trigger-text"
-);
-const dropdownPanel = document.getElementById("dropdownPanel");
-const options = dropdownPanel.querySelectorAll(".dropdown-option");
+export class CustomSelect {
+  constructor(triggerId, panelId, callback) {
+    this.trigger = document.getElementById(triggerId);
+    this.panel = document.getElementById(panelId);
+    this.options = this.panel.querySelectorAll(".dropdown-option");
+    this.callback = callback;
+    this.isOpen = false;
 
-let isOpen = false;
-
-selectTrigger.addEventListener("click", (e) => {
-  isOpen = !isOpen;
-  if (isOpen) {
-    openDropdown();
-  } else {
-    closeDropdown();
+    this.init();
   }
-});
 
-options.forEach((option) => {
-  option.addEventListener("click", (e) => {
-    const text = e.target.textContent;
-    selectTriggerText.textContent = text + " / 頁";
-    closeDropdown();
-  });
-});
+  init() {
+    this.trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
 
-document.addEventListener("click", (e) => {
-  if (!selectTrigger.contains(e.target) && !dropdownPanel.contains(e.target)) {
-    isOpen = false;
-    closeDropdown();
+      this.isOpen = !this.isOpen;
+      this.toggleDropdown();
+    });
+
+    this.options.forEach((option) => {
+      option.addEventListener("click", (e) => {
+        const value = option.dataset.value;
+
+        if (typeof this.callback === "function") {
+          this.callback(value);
+        }
+
+        this.closeDropdown();
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!this.trigger.contains(e.target) && !this.panel.contains(e.target)) {
+        this.isOpen = false;
+        this.closeDropdown();
+      }
+    });
   }
-});
 
-function openDropdown() {
-  dropdownPanel.classList.add("open");
-
-  const rect = selectTrigger.getBoundingClientRect();
-  const panelRect = dropdownPanel.getBoundingClientRect();
-
-  const desiredHeight = panelRect.height < 200 ? panelRect.height : 200; // 與 CSS 中的 max-height 對應
-  const spaceBelow = window.innerHeight - rect.bottom;
-  const spaceAbove = rect.top;
-
-  // 重設 style 避免前次狀態遺留
-  dropdownPanel.style.top = "0px";
-  dropdownPanel.style.bottom = "auto";
-
-  dropdownPanel.style.left = rect.left + "px";
-  dropdownPanel.style.width = rect.width + "px";
-
-  if (spaceBelow < desiredHeight && spaceAbove > spaceBelow) {
-    dropdownPanel.style.top = rect.top - desiredHeight + "px";
-  } else {
-    dropdownPanel.style.top = rect.bottom + "px";
+  toggleDropdown() {
+    if (this.isOpen) {
+      this.openDropdown();
+    } else {
+      this.panel.classList.remove("open");
+    }
   }
-}
 
-function closeDropdown() {
-  dropdownPanel.classList.remove("open");
+  openDropdown() {
+    this.panel.classList.add("open");
+
+    const rect = this.trigger.getBoundingClientRect();
+    const panelHeight = this.panel.scrollHeight;
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const spaceAbove = rect.top;
+
+    // 重設樣式避免干擾
+    this.panel.style.top = "auto";
+    this.panel.style.bottom = "auto";
+
+    if (spaceBelow < panelHeight && spaceAbove > spaceBelow) {
+      this.panel.style.bottom = `${window.innerHeight - rect.top}px`;
+      this.panel.style.left = `${rect.left}px`;
+    } else {
+      this.panel.style.top = `${rect.bottom}px`;
+      this.panel.style.left = `${rect.left}px`;
+    }
+
+    this.panel.style.width = `${rect.width}px`;
+  }
+
+  closeDropdown() {
+    this.isOpen = false;
+    this.panel.classList.remove("open");
+  }
 }

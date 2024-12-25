@@ -1,6 +1,7 @@
 import { showToast } from "./utils.js";
+import { CustomSelect } from "./select.js";
 
-const data = [
+let data = [
   {
     id: "0001",
     title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
@@ -99,8 +100,10 @@ const data = [
   },
 ];
 
+let isEditMode = false;
+let originalData = [];
 let currentPage = 1;
-const pageSize = document
+let pageSize = document
   .querySelector("#selectTrigger .select-trigger-text")
   .textContent.split("筆")[0];
 
@@ -135,7 +138,9 @@ function updateCheckAllState(checkAllId, checkboxesClass) {
       deleteBtn.attributes.removeNamedItem("disabled");
     }
   } else {
-    editBtn.attributes.setNamedItem(document.createAttribute("disabled"));
+    if (editBtn) {
+      editBtn.attributes.setNamedItem(document.createAttribute("disabled"));
+    }
     deleteBtn.attributes.setNamedItem(document.createAttribute("disabled"));
   }
 }
@@ -168,7 +173,9 @@ function convertToStatusHTML(status) {
 function generateRowHTML(item) {
   return `
     <tr>
-      <td class="custom-width"><input class="row-check" type="checkbox" /></td>
+      <td class="custom-width"><input class="row-check" type="checkbox" data-value=${
+        item.id
+      } /></td>
       <td class="custom-width">${item.id}</td>
       <td><p>${item.title}</p></td>
       <td>${item.department}</td>
@@ -234,7 +241,7 @@ function deleteItem(id) {
   if (index !== -1) {
     data.splice(index, 1);
     renderTable();
-    showToast("刪除成功");
+    showToast("刪除成功", "success");
   }
 }
 
@@ -255,8 +262,224 @@ function handleDeleteModal(ids) {
   });
 }
 
+// 切換編輯模式
+function toggleEditMode() {
+  const editBtn = document.getElementById("editBtn");
+  const confirmBtn = document.createElement("button");
+  const cancelBtn = document.createElement("button");
+
+  confirmBtn.className = "btn btn-small primary";
+  confirmBtn.id = "submitEditModeBtn";
+  confirmBtn.innerText = "確認";
+  cancelBtn.className = "btn btn-small secondary";
+  cancelBtn.id = "cancelEditModeBtn";
+  cancelBtn.innerText = "取消";
+
+  const parent = editBtn.parentNode;
+  editBtn.classList.add("hidden");
+  parent.prepend(confirmBtn);
+  parent.prepend(cancelBtn);
+
+  originalData = JSON.parse(JSON.stringify(data)); // 複製原始資料
+  document
+    .getElementById("multiDeleteBtn")
+    .attributes.setNamedItem(document.createAttribute("disabled"));
+  isEditMode = true;
+
+  renderEditableTable();
+
+  confirmBtn.addEventListener("click", saveChanges);
+  cancelBtn.addEventListener("click", () => {
+    data = JSON.parse(JSON.stringify(originalData)); // 恢復原始資料
+    closedEditMode();
+  });
+}
+
+function closedEditMode() {
+  isEditMode = false;
+  const editBtn = document.getElementById("editBtn");
+  document.getElementById("checkAll").attributes.removeNamedItem("disabled");
+  editBtn.classList.remove("hidden");
+  document.getElementById("submitEditModeBtn").remove();
+  document.getElementById("cancelEditModeBtn").remove();
+  renderTable();
+  updateCheckAllState("checkAll", ".row-check");
+}
+
+// 渲染可編輯表格
+function renderEditableTable() {
+  const checkAll = document.getElementById("checkAll");
+  const tableBody = document.getElementById("tableBody");
+  const pageData = data.slice(currentPage - 1, pageSize);
+  checkAll.attributes.setNamedItem(document.createAttribute("disabled"));
+  tableBody.innerHTML = pageData
+    .map((item) => generateEditableRowHTML(item))
+    .join("");
+
+  data.forEach((item) => {
+    if (document.getElementById(`selectStatusTrigger${item.id}`)) {
+      const panelId = `dropdownStatusPanel${item.id}`;
+      const panelClone = document
+        .getElementById("dropdownStatusPanel")
+        .cloneNode(true);
+      panelClone.id = panelId;
+      document.body.appendChild(panelClone);
+
+      new CustomSelect(`selectStatusTrigger${item.id}`, panelId, (text) => {
+        const select = document.getElementById(`selectStatusTrigger${item.id}`);
+        select.querySelector(".select-trigger-text").innerHTML =
+          convertToStatusHTML(text);
+        select.dataset.value = text;
+        item.status = text;
+      });
+    }
+  });
+}
+
+// 產生可編輯列的 HTML
+function generateEditableRowHTML(item) {
+  const isChecked = document.querySelector(
+    `.row-check[data-value="${item.id}"]`
+  )?.checked;
+
+  return `
+    <tr>
+      <td class="custom-width">
+        <input class="row-check" type="checkbox" data-value="${item.id}" ${
+    isChecked ? "checked" : ""
+  } disabled />
+      </td>
+      <td class="custom-width">${item.id}</td>
+      <td>
+        ${
+          isChecked
+            ? `<input type="text" value="${item.title}" data-id="${item.id}" data-field="title" />`
+            : `<p>${item.title}</p>`
+        }
+      </td>
+      <td>${item.department}</td>
+      <td>${item.submitDate}</td>
+      <td>
+        ${
+          isChecked
+            ? `
+          <div class="select-trigger" id="selectStatusTrigger${
+            item.id
+          }" data-id="${item.id}" data-value="${
+                item.status
+              }" data-field="status">
+            <span class="select-trigger-text">
+              ${convertToStatusHTML(item.status)}
+            </span>
+            <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+          </div>
+        `
+            : convertToStatusHTML(item.status)
+        }
+      </td>
+      <td class="custom-width">
+        <div class="btn-group">
+          <button class="btn btn-small secondary" data-action="review" data-id="${
+            item.id
+          }" disabled>審查</button>
+          <button class="btn btn-small danger" data-action="delete" data-id="${
+            item.id
+          }" disabled>刪除</button>
+        </div>
+      </td>
+    </tr>
+  `;
+}
+
+// 保存修改
+function saveChanges() {
+  const inputs = document.querySelectorAll(
+    "input[data-id], .select-trigger[data-id]"
+  );
+  const changes = [];
+
+  inputs.forEach((input) => {
+    const id = input.dataset.id;
+    const field = input.dataset.field;
+    const value = input.value ?? input.dataset.value;
+
+    const original = originalData.find((row) => row.id === id);
+    if (original[field] !== value) {
+      const target = data.find((row) => row.id === id);
+      changes.push({ id, field, oldValue: original[field], newValue: value });
+      target[field] = value; // 更新資料
+    }
+  });
+
+  if (changes.length > 0) {
+    showChangesModal(changes);
+  } else {
+    showToast("未檢測到任何變更", "warning");
+  }
+}
+
+function convertToColumnTitle(field) {
+  switch (field) {
+    case "title":
+      return "項目標題";
+    case "status":
+      return "狀態";
+    default:
+      return "";
+  }
+}
+
+// 彈出變更內容的 Modal
+function showChangesModal(changes) {
+  const modal = document.getElementById("editModal");
+  const modalBody = modal.querySelector(".modal-body");
+
+  const changeList = changes
+    .map(
+      (change) =>
+        `<p>編號：${change.id}，欄位：${convertToColumnTitle(
+          change.field
+        )}，從「${change.oldValue}」改為「${change.newValue}」</p>`
+    )
+    .join("");
+
+  modalBody.innerHTML = `
+    <p>再次確認您變更的內容：</p>
+    ${changeList}
+  `;
+  modal.classList.add("open");
+
+  const confirmBtn = modal.querySelector("#submitEditBtn");
+  const editBtn = document.createElement("button");
+  editBtn.className = "btn btn-small primary";
+  editBtn.id = "editBtn";
+  editBtn.innerHTML = `
+    <i class="fa-solid fa-pen-to-square"></i>
+    <span>編輯</span>`;
+
+  confirmBtn.addEventListener("click", () => {
+    modal.classList.remove("open");
+    closedEditMode();
+    showToast("修改成功", "success");
+  });
+
+  const cancelBtn = modal.querySelector("#cancelEditBtn");
+  cancelBtn.addEventListener("click", () => {
+    modal.classList.remove("open");
+  });
+}
+
 generatePaginationItemsHTML();
 renderTable();
+
+new CustomSelect("selectTrigger", "dropdownPanel", (text) => {
+  pageSize = text;
+  currentPage = 1;
+  const triggerText = document.getElementById("selectTrigger");
+  triggerText.querySelector(".select-trigger-text").textContent =
+    text + "筆 / 頁";
+  renderTable();
+});
 
 const prevBtn = document.getElementById("toPrevBtn");
 const nextBtn = document.getElementById("toNextBtn");
@@ -297,6 +520,8 @@ document.getElementById("tableBody").addEventListener("change", (e) => {
     updateCheckAllState("checkAll", ".row-check");
   }
 });
+
+document.getElementById("editBtn").addEventListener("click", toggleEditMode);
 
 document.getElementById("multiDeleteBtn").addEventListener("click", () => {
   const checkedItems = Array.from(document.querySelectorAll(".row-check"))

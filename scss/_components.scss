@@ -109,6 +109,10 @@
       border-color: var(--lively_pink-300);
     }
   }
+
+  &.hidden {
+    display: none;
+  }
 }
 
 /* Breadcrumb */
@@ -354,7 +358,6 @@ td {
 
 /* Select Options (掛在 body 下) */
 .dropdown-panel {
-  display: none;
   position: absolute;
   background-color: var(--neutral-100);
   border: 1px solid var(--neutral-400);
@@ -365,11 +368,11 @@ td {
   padding: 0;
   list-style: none;
   overflow: hidden;
-  transition: max-height 0.2s ease;
+  opacity: 0;
   z-index: 1000;
 
   &.open {
-    display: block;
+    opacity: 1;
     max-height: 200px; /* 或其他想要的高度 */
     overflow-y: auto;
   }
@@ -515,6 +518,23 @@ input[type="checkbox"] {
       width: 8px;
       height: 8px;
       background-color: var(--lively_blue-500);
+    }
+
+    &[disabled] {
+      &::before {
+        background-color: var(--neutral-400);
+      }
+    }
+  }
+
+  &[disabled] {
+    background: var(--neutral-200);
+    border-color: var(--neutral-400);
+    cursor: not-allowed;
+
+    &:checked {
+      background: var(--neutral-400);
+      border-color: var(--neutral-400);
     }
   }
 }
@@ -669,6 +689,7 @@ input[type="checkbox"] {
 
     p {
       margin: 0;
+      word-break: break-all;
     }
   }
 
@@ -688,4 +709,67 @@ input[type="checkbox"] {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 2010;
+}
+
+/* Toast */
+.toast-message {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: var(--neutral-200);
+  color: var(--neutral-800);
+  border: 1px solid var(--neutral-400);
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.6;
+  box-shadow: 0px 16px 48px rgba(0, 0, 0, 0.1);
+  z-index: 3000;
+
+  &::before {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    content: "\f05a"; // FontAwesome Info Circle
+    font-family: "Font Awesome 6 Free";
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--neutral-500);
+  }
+
+  &.success {
+    background-color: var(--lively_green-100);
+    border-color: var(--lively_green-300);
+
+    &::before {
+      content: "\f058"; // FontAwesome Check Circle
+      color: var(--lively_green-400);
+    }
+  }
+
+  &.error {
+    background-color: var(--lively_pink-100);
+    border-color: var(--lively_pink-300);
+
+    &::before {
+      content: "\f057"; // FontAwesome X Mark Circle
+      color: var(--lively_pink-400);
+    }
+  }
+
+  &.warning {
+    background-color: var(--lively_yellow-100);
+    border-color: var(--lively_yellow-400);
+
+    &::before {
+      content: "\f06a"; // FontAwesome Exclamation Circle
+      color: var(--lively_yellow-400);
+    }
+  }
 }
