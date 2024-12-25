@@ -236,12 +236,17 @@ function updatePaginationInfo() {
   document.getElementById("totalRecords").textContent = data.length;
 }
 
-function deleteItem(id) {
+function deleteItems(ids) {
+  ids.split(",").forEach((id) => deleteSingleItem(id));
+  renderTable();
+  updateCheckAllState("checkAll", ".row-check");
+  showToast("刪除成功", "success");
+}
+
+function deleteSingleItem(id) {
   const index = data.findIndex((item) => item.id === parseInt(id));
   if (index !== -1) {
     data.splice(index, 1);
-    renderTable();
-    showToast("刪除成功", "success");
   }
 }
 
@@ -253,7 +258,7 @@ function handleDeleteModal(ids) {
   modal.classList.add("open");
 
   document.getElementById("submitDeleteBtn").addEventListener("click", () => {
-    deleteItem(id);
+    deleteItems(ids);
     modal.classList.remove("open");
   });
 
