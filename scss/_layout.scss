@@ -229,6 +229,11 @@ body {
   }
 }
 
+/* Main */
+.main-container {
+  overflow: hidden;
+}
+
 .main-content {
   height: calc(100vh - 80px);
   padding: 0 24px;

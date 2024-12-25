@@ -160,7 +160,7 @@ function generateRowHTML(item) {
     <tr>
       <td class="custom-width"><input class="row-check" type="checkbox" /></td>
       <td class="custom-width">${item.id}</td>
-      <td>${item.title}</td>
+      <td><p>${item.title}</p></td>
       <td>${item.department}</td>
       <td>${item.submitDate}</td>
       <td>${convertToStatusHTML(item.status)}</td>

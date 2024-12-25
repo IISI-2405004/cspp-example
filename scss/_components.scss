@@ -144,17 +144,16 @@
 
 /* Table */
 .table-container {
-  display: block;
-  width: 100%;
   max-width: 100%;
   max-height: calc(100dvh - 340px);
-  overflow: auto;
+  overflow-x: auto;
 }
 
 table {
-  width: 100%;
-  max-height: calc(100vh - 600px);
-  border-collapse: collapse;
+  min-width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 thead {
@@ -174,6 +173,13 @@ thead {
     user-select: none;
     white-space: nowrap;
     position: relative;
+
+    &:last-child {
+      position: sticky;
+      right: 0;
+      z-index: 1; /* 避免被蓋住 */
+      background-color: var(--neutral-600);
+    }
 
     &.sortable {
       cursor: pointer;
@@ -195,12 +201,6 @@ thead {
         }
       }
     }
-
-    &:last-child {
-      position: sticky;
-      right: 0;
-      z-index: 1; /* 避免被蓋住 */
-    }
   }
 }
 
@@ -210,14 +210,30 @@ tbody {
     padding: 8px 16px;
     font-size: 14px;
     line-height: 1.6;
-    word-break: break-all;
-    border-bottom: 1px solid #ccc;
+    position: relative;
+
+    /* 使用偽元素繪製底線
+      * 1. 解決瀏覽器因浮點數寬度計算誤差，導致的 `border-bottom` 有時無法正確渲染的問題。
+      * 2. 確保在表格縮放或滾動時，底線能穩定且一致顯示。
+      */
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: var(--neutral-400);
+      z-index: 0; /* 確保偽元素不會被遮擋 */
+    }
 
     &:last-child {
+      background-color: var(--neutral-100);
       position: sticky;
       right: 0;
       z-index: 1; /* 避免被蓋住 */
 
+      /* 陰影效果 */
       &::before {
         content: "";
         position: absolute;
@@ -232,15 +248,34 @@ tbody {
         box-shadow: inset -10px 0 10px -10px rgba(0, 0, 0, 0.15);
       }
     }
-
-    &:not(.custom-width) {
-      min-width: 120px;
-    }
   }
 
   .btn-group {
     display: flex;
     gap: 8px;
+  }
+
+  p {
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+}
+
+/* 依照需求特定欄位設定寬度 */
+th {
+  &:not(.custom-width) {
+    min-width: 120px;
+  }
+  &:nth-child(3) {
+    width: 420px;
+    min-width: 280px;
+  }
+}
+
+td {
+  &:nth-child(3) {
+    width: 420px;
+    min-width: 280px;
   }
 }
 
@@ -293,8 +328,8 @@ tbody {
   min-height: 32px;
   padding: 4px 12px;
   font-size: 14px;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: var(--neutral-100);
+  border: 1px solid var(--neutral-400);
   border-radius: 4px;
   cursor: pointer;
   user-select: none;

@@ -734,6 +734,11 @@ body {
   --left-space: 44px;
 }
 
+/* Main */
+.main-container {
+  overflow: hidden;
+}
+
 .main-content {
   height: calc(100vh - 80px);
   padding: 0 24px;
@@ -934,17 +939,16 @@ body {
 
 /* Table */
 .table-container {
-  display: block;
-  width: 100%;
   max-width: 100%;
   max-height: calc(100dvh - 340px);
-  overflow: auto;
+  overflow-x: auto;
 }
 
 table {
-  width: 100%;
-  max-height: calc(100vh - 600px);
-  border-collapse: collapse;
+  min-width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 thead {
@@ -967,6 +971,12 @@ thead th {
   white-space: nowrap;
   position: relative;
 }
+thead th:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 1; /* 避免被蓋住 */
+  background-color: var(--neutral-600);
+}
 thead th.sortable {
   cursor: pointer;
 }
@@ -984,24 +994,34 @@ thead th.sortable .sort-icon i {
 thead th.sortable .sort-icon .active {
   opacity: 1;
 }
-thead th:last-child {
-  position: sticky;
-  right: 0;
-  z-index: 1; /* 避免被蓋住 */
-}
 
 tbody td {
   min-height: 54px;
   padding: 8px 16px;
   font-size: 14px;
   line-height: 1.6;
-  word-break: break-all;
-  border-bottom: 1px solid #ccc;
+  position: relative;
+  /* 使用偽元素繪製底線
+    * 1. 解決瀏覽器因浮點數寬度計算誤差，導致的 `border-bottom` 有時無法正確渲染的問題。
+    * 2. 確保在表格縮放或滾動時，底線能穩定且一致顯示。
+    */
+}
+tbody td::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--neutral-400);
+  z-index: 0; /* 確保偽元素不會被遮擋 */
 }
 tbody td:last-child {
+  background-color: var(--neutral-100);
   position: sticky;
   right: 0;
   z-index: 1; /* 避免被蓋住 */
+  /* 陰影效果 */
 }
 tbody td:last-child::before {
   content: "";
@@ -1016,12 +1036,27 @@ tbody td:last-child::before {
   pointer-events: none;
   box-shadow: inset -10px 0 10px -10px rgba(0, 0, 0, 0.15);
 }
-tbody td:not(.custom-width) {
-  min-width: 120px;
-}
 tbody .btn-group {
   display: flex;
   gap: 8px;
+}
+tbody p {
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+/* 依照需求特定欄位設定寬度 */
+th:not(.custom-width) {
+  min-width: 120px;
+}
+th:nth-child(3) {
+  width: 420px;
+  min-width: 280px;
+}
+
+td:nth-child(3) {
+  width: 420px;
+  min-width: 280px;
 }
 
 /* Pagination */
@@ -1070,8 +1105,8 @@ tbody .btn-group {
   min-height: 32px;
   padding: 4px 12px;
   font-size: 14px;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: var(--neutral-100);
+  border: 1px solid var(--neutral-400);
   border-radius: 4px;
   cursor: pointer;
   -webkit-user-select: none;
