@@ -2,7 +2,7 @@ import { showToast } from "./utils.js";
 
 const data = [
   {
-    id: 1,
+    id: "0001",
     title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
     department: "IT",
     owner: "小明",
@@ -10,7 +10,7 @@ const data = [
     status: "pending",
   },
   {
-    id: 2,
+    id: "0002",
     title: "OOOOOOOOOOOOO",
     department: "HR",
     owner: "小紅",
@@ -18,7 +18,7 @@ const data = [
     status: "closed",
   },
   {
-    id: 3,
+    id: "0003",
     title: "OOOOOOOOOOOOOOOOOOOOOO",
     department: "財務",
     owner: "小王",
@@ -26,15 +26,15 @@ const data = [
     status: "reviewing",
   },
   {
-    id: 4,
-    title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+    id: "0004",
+    title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
     department: "IT",
     owner: "小明",
     submitDate: "2024-12-04",
     status: "closed",
   },
   {
-    id: 5,
+    id: "0005",
     title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
     department: "行銷",
     owner: "小李",
@@ -42,15 +42,15 @@ const data = [
     status: "pending",
   },
   {
-    id: 6,
-    title: "OOOOOOOO",
+    id: "0006",
+    title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
     department: "財務",
     owner: "小王",
     submitDate: "2024-12-06",
     status: "recheck",
   },
   {
-    id: 7,
+    id: "0007",
     title: "OOOOOOOOOOO",
     department: "行銷",
     owner: "小李",
@@ -58,7 +58,7 @@ const data = [
     status: "recheck",
   },
   {
-    id: 8,
+    id: "0008",
     title: "OOOOOOOO",
     department: "HR",
     owner: "小紅",
@@ -66,7 +66,7 @@ const data = [
     status: "closed",
   },
   {
-    id: 9,
+    id: "0009",
     title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
     department: "行銷",
     owner: "小李",
@@ -74,7 +74,7 @@ const data = [
     status: "pending",
   },
   {
-    id: 10,
+    id: "0010",
     title: "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
     department: "IT",
     owner: "小明",
@@ -82,7 +82,7 @@ const data = [
     status: "closed",
   },
   {
-    id: 11,
+    id: "0011",
     title: "OOOOO",
     department: "財務",
     owner: "小王",
@@ -90,7 +90,7 @@ const data = [
     status: "pending",
   },
   {
-    id: 12,
+    id: "0012",
     title: "OOOOOOOOOOOO",
     department: "行銷",
     owner: "小李",
@@ -100,14 +100,9 @@ const data = [
 ];
 
 let currentPage = 1;
-let recordsPerPage = 10;
-const sortDirection = {
-  id: 1,
-  title: 1,
-  department: 1,
-  submitDate: 1,
-  status: 1,
-};
+const pageSize = document
+  .querySelector("#selectTrigger .select-trigger-text")
+  .textContent.split("筆")[0];
 
 function toggleCheckboxState(checkboxes, state) {
   checkboxes.forEach((checkbox) => (checkbox.checked = state));
@@ -117,6 +112,8 @@ function updateCheckAllState(checkAllId, checkboxesClass) {
   const checkAll = document.getElementById(checkAllId);
   const checkboxes = Array.from(document.querySelectorAll(checkboxesClass));
   const totalChecked = checkboxes.filter((checkbox) => checkbox.checked).length;
+  const editBtn = document.getElementById("editBtn");
+  const deleteBtn = document.getElementById("multiDeleteBtn");
 
   if (totalChecked === 0) {
     checkAll.checked = false;
@@ -128,11 +125,24 @@ function updateCheckAllState(checkAllId, checkboxesClass) {
     checkAll.checked = false;
     checkAll.classList.add("intermediate");
   }
+
+  // 多筆編輯、刪除按鈕狀態
+  if (totalChecked > 0) {
+    if (editBtn.hasAttribute("disabled")) {
+      editBtn.attributes.removeNamedItem("disabled");
+    }
+    if (deleteBtn.hasAttribute("disabled")) {
+      deleteBtn.attributes.removeNamedItem("disabled");
+    }
+  } else {
+    editBtn.attributes.setNamedItem(document.createAttribute("disabled"));
+    deleteBtn.attributes.setNamedItem(document.createAttribute("disabled"));
+  }
 }
 
 function renderTable() {
-  const start = (currentPage - 1) * recordsPerPage;
-  const end = start + recordsPerPage;
+  const start = (currentPage - 1) * pageSize;
+  const end = start + pageSize;
   const tableData = data.slice(start, end);
 
   const tableBody = document.getElementById("tableBody");
@@ -178,15 +188,100 @@ function generateRowHTML(item) {
   `;
 }
 
+function generatePaginationItemsHTML() {
+  const wrapper = document.getElementById("paginationWrapper");
+  const totalPage = Math.ceil(data.length / pageSize);
+  const items = [];
+  for (let i = 1; i <= totalPage; i++) {
+    if (i === currentPage) {
+      items.push(`<li class="pagination-item active">${i}</li>`);
+    } else {
+      items.push(`<li class="pagination-item">${i}</li>`);
+    }
+  }
+  wrapper.innerHTML = items.join("");
+}
+
+function changePage(page) {
+  const paginationItems = document.querySelectorAll(".pagination-item");
+  paginationItems[currentPage - 1].classList.remove("active");
+  paginationItems[page - 1].classList.add("active");
+  currentPage = page;
+
+  if (currentPage === 1) {
+    document
+      .getElementById("toPrevBtn")
+      .attributes.setNamedItem(document.createAttribute("disabled"));
+    document.getElementById("toNextBtn").attributes.removeNamedItem("disabled");
+  } else if (currentPage === Math.ceil(data.length / pageSize)) {
+    document
+      .getElementById("toNextBtn")
+      .attributes.setNamedItem(document.createAttribute("disabled"));
+    document.getElementById("toPrevBtn").attributes.removeNamedItem("disabled");
+  } else {
+    document.getElementById("toPrevBtn").attributes.removeNamedItem("disabled");
+    document.getElementById("toNextBtn").attributes.removeNamedItem("disabled");
+  }
+  renderTable();
+}
+
 function updatePaginationInfo() {
-  document.getElementById("currentPage").textContent = currentPage;
   document.getElementById("totalRecords").textContent = data.length;
 }
 
+function deleteItem(id) {
+  const index = data.findIndex((item) => item.id === parseInt(id));
+  if (index !== -1) {
+    data.splice(index, 1);
+    renderTable();
+    showToast("刪除成功");
+  }
+}
+
+function handleDeleteModal(ids) {
+  const modal = document.getElementById("deleteModal");
+  const modalBody = modal.querySelector(".modal-body");
+  const items = ids.split(",").join("、");
+  modalBody.innerHTML = `<p>是否確定要刪除編號：${items}?</p>`;
+  modal.classList.add("open");
+
+  document.getElementById("submitDeleteBtn").addEventListener("click", () => {
+    deleteItem(id);
+    modal.classList.remove("open");
+  });
+
+  document.getElementById("cancelDeleteBtn").addEventListener("click", () => {
+    modal.classList.remove("open");
+  });
+}
+
+generatePaginationItemsHTML();
+renderTable();
+
+const prevBtn = document.getElementById("toPrevBtn");
+const nextBtn = document.getElementById("toNextBtn");
+
+prevBtn.addEventListener("click", () => {
+  if (currentPage > 1) {
+    const page = currentPage - 1;
+    changePage(page);
+  }
+});
+
+nextBtn.addEventListener("click", () => {
+  if (currentPage < Math.ceil(data.length / pageSize)) {
+    const page = currentPage + 1;
+    changePage(page);
+  }
+});
+
+document.querySelectorAll(".pagination-item").forEach((item, index) => {
+  item.addEventListener("click", () => changePage(index + 1));
+});
+
 document.getElementById("tableBody").addEventListener("click", (e) => {
   const target = e.target;
-  if (target.dataset.action === "review") reviewItem(target.dataset.id);
-  if (target.dataset.action === "delete") deleteItem(target.dataset.id);
+  if (target.dataset.action === "delete") handleDeleteModal(target.dataset.id);
 });
 
 document.getElementById("checkAll").addEventListener("change", (e) => {
@@ -203,19 +298,9 @@ document.getElementById("tableBody").addEventListener("change", (e) => {
   }
 });
 
-function reviewItem(id) {
-  alert(`審查項目 ID: ${id}`);
-}
-
-function deleteItem(id) {
-  if (confirm(`確定要刪除項目 ID: ${id}?`)) {
-    const index = data.findIndex((item) => item.id === parseInt(id));
-    if (index !== -1) {
-      data.splice(index, 1);
-      renderTable();
-      showToast("刪除成功！");
-    }
-  }
-}
-
-renderTable();
+document.getElementById("multiDeleteBtn").addEventListener("click", () => {
+  const checkedItems = Array.from(document.querySelectorAll(".row-check"))
+    .filter((checkbox) => checkbox.checked)
+    .map((checkbox) => checkbox.parentNode.nextElementSibling.textContent);
+  handleDeleteModal(checkedItems.join(","));
+});

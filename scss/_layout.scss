@@ -44,6 +44,7 @@ body {
   background-color: transparent;
 }
 
+/* Navbar */
 .navbar {
   height: 80px;
   padding: 0 32px;
@@ -68,16 +69,6 @@ body {
   .btn {
     position: relative;
     color: var(--neutral-500);
-  }
-
-  .search-box {
-    display: none;
-    margin-left: 10px;
-    padding: 5px;
-
-    &.active + .search-box {
-      display: inline-block;
-    }
   }
 
   .logout {
@@ -276,6 +267,10 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.search-box {
+  width: 200px;
 }
 
 .status-wrapper {

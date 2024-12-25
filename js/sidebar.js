@@ -229,7 +229,3 @@ document.querySelectorAll(".menu-title-wrapper").forEach((menuTitle) => {
     });
   });
 });
-
-document.getElementById("searchBtn").addEventListener("click", () => {
-  document.querySelector(".search-box").classList.toggle("active");
-});

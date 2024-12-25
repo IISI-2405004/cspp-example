@@ -27,10 +27,9 @@
       <main class="main-container">
         <!-- Navbar -->
         <nav class="navbar">
-          <button id="searchBtn" class="btn">
+          <button id="globalSearchBtn" class="btn">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
-          <input type="text" class="search-box" placeholder="請輸入關鍵字..." />
 
           <button id="infoBtn" class="btn">
             <i class="fa-regular fa-circle-question"></i>
@@ -57,8 +56,17 @@
             <div class="title-wrapper">
               <h1 class="page-title">會議排程</h1>
               <div class="button-group">
+                <div class="input-wrapper">
+                  <i class="prefix fa-solid fa-magnifying-glass"></i>
+                  <input
+                    type="text"
+                    class="small search-box"
+                    placeholder="請輸入關鍵字..."
+                  />
+                  <i class="suffix clear fa-solid fa-circle-xmark"></i>
+                </div>
                 <button class="btn btn-small secondary" id="searchBtn">
-                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <i class="fa-solid fa-filter"></i>
                 </button>
                 <button class="btn btn-small primary" id="addBtn">
                   <i class="fa-solid fa-plus"></i>
@@ -76,6 +84,20 @@
             </ul>
             <div class="tab-contents flex-1">
               <div id="tab1" class="tab-content active">
+                <div class="button-group justify-end mb-4">
+                  <button class="btn btn-small primary" id="editBtn" disabled>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>編輯</span>
+                  </button>
+                  <button
+                    class="btn btn-small danger"
+                    id="multiDeleteBtn"
+                    disabled
+                  >
+                    <i class="fa-solid fa-trash"></i>
+                    <span>刪除</span>
+                  </button>
+                </div>
                 <div class="table-container">
                   <table id="dataTable">
                     <thead>
@@ -83,7 +105,7 @@
                         <th class="custom-width" width="28px">
                           <input type="checkbox" id="checkAll" />
                         </th>
-                        <th class="sortable" width="120px">
+                        <th class="sortable custom-width" width="100px">
                           編號
                           <span class="sort-icon">
                             <i id="idArrow" class="fa-solid fa-sort-up"></i>
@@ -137,12 +159,11 @@
                     <span class="select-trigger-text">10筆 / 頁</span>
                     <i class="trigger-arrow fa-solid fa-chevron-down"></i>
                   </div>
-                  <button id="toPrevBtn" class="btn pagination-item" disabled>
+                  <button id="toPrevBtn" class="btn pagination-arrow" disabled>
                     <i class="fa-solid fa-chevron-left"></i>
                   </button>
-                  <span id="currentPage" class="pagination-item active">1</span>
-                  <span id="currentPage" class="pagination-item">2</span>
-                  <button id="toNextBtn" class="btn pagination-item">
+                  <ul id="paginationWrapper" class="pagination-list"></ul>
+                  <button id="toNextBtn" class="btn pagination-arrow">
                     <i class="fa-solid fa-chevron-right"></i>
                   </button>
                 </div>
@@ -166,6 +187,29 @@
       <li class="dropdown-option" data-value="30">30筆</li>
       <li class="dropdown-option" data-value="50">50筆</li>
     </ul>
+
+    <!-- Modal - 刪除資料 -->
+    <div class="modal" id="deleteModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">提示視窗</h2>
+          <button class="btn close-btn" id="closeDeleteModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button class="btn btn-small secondary" id="cancelDeleteBtn">
+            取消
+          </button>
+          <button class="btn btn-small danger" id="submitDeleteBtn">
+            確認
+          </button>
+        </div>
+      </div>
+      <!-- 底部遮罩 -->
+      <div class="overlay"></div>
+    </div>
 
     <script type="module" src="./js/index.js"></script>
   </body>
