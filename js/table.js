@@ -7,15 +7,13 @@ let data = [...tableData];
 let isEditMode = false;
 let originalData = [];
 let currentPage = 1;
-let pageSize = document
-  .querySelector("#selectTrigger .select-trigger-text")
-  .textContent.split("筆")[0];
+let pageSize = 10;
 
-function toggleCheckboxState(checkboxes, state) {
+export function toggleCheckboxState(checkboxes, state) {
   checkboxes.forEach((checkbox) => (checkbox.checked = state));
 }
 
-function updateCheckAllState(checkAllId, checkboxesClass) {
+export function updateCheckAllState(checkAllId, checkboxesClass) {
   const checkAll = document.getElementById(checkAllId);
   const checkboxes = Array.from(document.querySelectorAll(checkboxesClass));
   const totalChecked = checkboxes.filter((checkbox) => checkbox.checked).length;
@@ -56,11 +54,12 @@ function renderTable() {
   const tableData = data.slice(start, end);
 
   const tableBody = document.getElementById("tableBody");
+  if (!tableBody) return;
   tableBody.innerHTML = tableData.map(generateRowHTML).join("");
   updatePaginationInfo();
 }
 
-function convertToStatusHTML(status) {
+export function convertToStatusHTML(status) {
   switch (status) {
     case "pending":
       return `<div class="status-wrapper"><i class="status-icon pending fa-solid fa-circle"></i><span>待審查</span></div>`;
@@ -102,6 +101,8 @@ function generateRowHTML(item) {
 
 function generatePaginationItemsHTML() {
   const wrapper = document.getElementById("paginationWrapper");
+  if (!wrapper) return;
+
   const totalPage = Math.ceil(data.length / pageSize);
   const items = [];
   for (let i = 1; i <= totalPage; i++) {
@@ -114,7 +115,7 @@ function generatePaginationItemsHTML() {
   wrapper.innerHTML = items.join("");
 }
 
-function changePage(page) {
+export function changePage(page) {
   const paginationItems = document.querySelectorAll(".pagination-item");
   paginationItems[currentPage - 1].classList.remove("active");
   paginationItems[page - 1].classList.add("active");
@@ -171,7 +172,7 @@ function deleteSingleItem(id) {
   }
 }
 
-function handleDeleteModal(ids) {
+export function handleDeleteModal(ids) {
   const modal = document.getElementById("deleteModal");
   const modalBody = modal.querySelector(".modal-body");
   const items = ids.split(",").join("、");
@@ -189,7 +190,7 @@ function handleDeleteModal(ids) {
 }
 
 // 切換編輯模式
-function toggleEditMode() {
+export function toggleEditMode() {
   isEditMode = true;
 
   const editBtn = document.getElementById("editBtn");
@@ -287,10 +288,10 @@ function generateEditableRowHTML(item) {
         ${
           isChecked
             ? `
-          <div class="select-trigger" data-id="${item.id}" data-value="${item.department}" data-field="status">
-            <span class="select-trigger-text">
+          <div class="select-trigger small" data-id="${item.id}" data-value="${item.department}" data-field="status">
+            <div class="select-trigger-text">
               ${item.department}
-            </span>
+            </div>
             <i class="trigger-arrow fa-solid fa-chevron-down"></i>
           </div>
         `
@@ -301,10 +302,10 @@ function generateEditableRowHTML(item) {
         ${
           isChecked
             ? `
-          <div class="select-trigger" data-id="${item.id}" data-value="${item.department}" data-field="status">
-            <span class="select-trigger-text">
+          <div class="select-trigger small" data-id="${item.id}" data-value="${item.department}" data-field="status">
+            <div class="select-trigger-text">
               ${item.submitDate}
-            </span>
+            </div>
             <i class="trigger-arrow fa-solid fa-chevron-down"></i>
           </div>
         `
@@ -315,14 +316,14 @@ function generateEditableRowHTML(item) {
         ${
           isChecked
             ? `
-          <div class="select-trigger" id="selectStatusTrigger${
+          <div class="select-trigger small" id="selectStatusTrigger${
             item.id
           }" data-id="${item.id}" data-value="${
                 item.status
               }" data-field="status">
-            <span class="select-trigger-text">
+            <div class="select-trigger-text">
               ${convertToStatusHTML(item.status)}
-            </span>
+            </div>
             <i class="trigger-arrow fa-solid fa-chevron-down"></i>
           </div>
         `
@@ -423,61 +424,3 @@ function showChangesModal(changes) {
 
 generatePaginationItemsHTML();
 renderTable();
-
-new CustomSelect("selectTrigger", "dropdownPanel", (text) => {
-  pageSize = text;
-  currentPage = 1;
-  const triggerText = document.getElementById("selectTrigger");
-  triggerText.querySelector(".select-trigger-text").textContent =
-    text + "筆 / 頁";
-  renderTable();
-});
-
-const prevBtn = document.getElementById("toPrevBtn");
-const nextBtn = document.getElementById("toNextBtn");
-
-prevBtn.addEventListener("click", () => {
-  if (currentPage > 1) {
-    const page = currentPage - 1;
-    changePage(page);
-  }
-});
-
-nextBtn.addEventListener("click", () => {
-  if (currentPage < Math.ceil(data.length / pageSize)) {
-    const page = currentPage + 1;
-    changePage(page);
-  }
-});
-
-document.querySelectorAll(".pagination-item").forEach((item, index) => {
-  item.addEventListener("click", () => changePage(index + 1));
-});
-
-document.getElementById("tableBody").addEventListener("click", (e) => {
-  const target = e.target;
-  if (target.dataset.action === "delete") handleDeleteModal(target.dataset.id);
-});
-
-document.getElementById("checkAll").addEventListener("change", (e) => {
-  toggleCheckboxState(
-    document.querySelectorAll(".row-check"),
-    e.target.checked
-  );
-  updateCheckAllState("checkAll", ".row-check");
-});
-
-document.getElementById("tableBody").addEventListener("change", (e) => {
-  if (e.target.classList.contains("row-check")) {
-    updateCheckAllState("checkAll", ".row-check");
-  }
-});
-
-document.getElementById("editBtn").addEventListener("click", toggleEditMode);
-
-document.getElementById("multiDeleteBtn").addEventListener("click", () => {
-  const checkedItems = Array.from(document.querySelectorAll(".row-check"))
-    .filter((checkbox) => checkbox.checked)
-    .map((checkbox) => checkbox.parentNode.nextElementSibling.textContent);
-  handleDeleteModal(checkedItems.join(","));
-});

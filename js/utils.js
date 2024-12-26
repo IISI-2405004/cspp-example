@@ -21,3 +21,33 @@ export function showToast(message, type, duration = 2000) {
     timer = setTimeout(() => toast.remove(), duration);
   });
 }
+
+function generateIconHTML(type) {
+  switch (type) {
+    case "success":
+      return '<i class="icon-result fa-solid fa-circle-check"></i>';
+    case "error":
+      return '<i class="icon-result fa-solid fa-circle-xmark"></i>';
+    case "warning":
+      return '<i class="icon-result fa-solid fa-circle-exclamation"></i>';
+    default:
+      return '<i class="icon-result fa-solid fa-circle-info"></i>';
+  }
+}
+
+export function showResult(title, message, type, duration = 2000) {
+  const result = document.createElement("div");
+  result.className = `result-message show `;
+  const icon = generateIconHTML(type);
+  result.innerHTML = `
+    <div class="result-container ${type}">
+      ${icon}
+      <span class="result-title">${title}</span>
+      <span class="result-content">${message}</span>
+    </div>
+    <div class="overlay"></div>
+      `;
+  document.body.appendChild(result);
+
+  setTimeout(() => result.remove(), duration);
+}

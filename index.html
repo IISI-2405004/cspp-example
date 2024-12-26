@@ -160,8 +160,8 @@
                     共<span id="totalRecords" class="ml-2 mr-2">12</span>筆
                   </span>
 
-                  <div class="select-trigger" id="selectTrigger">
-                    <span class="select-trigger-text">10筆 / 頁</span>
+                  <div class="select-trigger small" id="selectTrigger">
+                    <div class="select-trigger-text">10筆 / 頁</div>
                     <i class="trigger-arrow fa-solid fa-chevron-down"></i>
                   </div>
                   <button id="toPrevBtn" class="btn pagination-arrow" disabled>
@@ -184,22 +184,6 @@
         </div>
       </main>
     </div>
-
-    <!-- Select (頁碼 Size 下拉選單) -->
-    <ul class="dropdown-panel" id="dropdownPanel">
-      <li class="dropdown-option" data-value="10">10 筆</li>
-      <li class="dropdown-option" data-value="20">20 筆</li>
-      <li class="dropdown-option" data-value="30">30 筆</li>
-      <li class="dropdown-option" data-value="50">50 筆</li>
-    </ul>
-
-    <!-- Select (狀態下拉選單) -->
-    <ul class="dropdown-panel" id="dropdownStatusPanel">
-      <li class="dropdown-option" data-value="pending">待審查</li>
-      <li class="dropdown-option" data-value="reviewing">審查中</li>
-      <li class="dropdown-option" data-value="recheck">待複審</li>
-      <li class="dropdown-option" data-value="closed">已結案</li>
-    </ul>
 
     <!-- Modal - 刪除資料 -->
     <div class="modal" id="deleteModal">
@@ -243,6 +227,23 @@
       <div class="overlay"></div>
     </div>
 
+    <!-- Select (頁碼 Size 下拉選單) -->
+    <ul class="dropdown-panel" id="dropdownPanel">
+      <li class="dropdown-option" data-value="10">10 筆</li>
+      <li class="dropdown-option" data-value="20">20 筆</li>
+      <li class="dropdown-option" data-value="30">30 筆</li>
+      <li class="dropdown-option" data-value="50">50 筆</li>
+    </ul>
+
+    <!-- Select (狀態下拉選單) -->
+    <ul class="dropdown-panel" id="dropdownStatusPanel">
+      <li class="dropdown-option" data-value="pending">待審查</li>
+      <li class="dropdown-option" data-value="reviewing">審查中</li>
+      <li class="dropdown-option" data-value="recheck">待複審</li>
+      <li class="dropdown-option" data-value="closed">已結案</li>
+    </ul>
+
     <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>
