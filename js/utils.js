@@ -51,3 +51,10 @@ export function showResult(title, message, type, duration = 2000) {
 
   setTimeout(() => result.remove(), duration);
 }
+
+export function getBaseUrl() {
+  const basePath = window.location.origin.includes("github.io")
+    ? window.location.origin + "/cspp-example" // GitHub Pages 路徑
+    : window.location.origin; // 本地或其他環境的根路徑
+  return basePath;
+}

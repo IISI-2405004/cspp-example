@@ -6,6 +6,7 @@ import {
   toggleCheckboxState,
   handleDeleteModal,
 } from "./table.js";
+import { getBaseUrl } from "./utils.js";
 
 function handleBeforeCloseModal() {
   const modal = document.getElementById("checkModal");
@@ -56,7 +57,7 @@ function handleSingleEditModal(ids) {
 }
 
 document.getElementById("addBtn").addEventListener("click", () => {
-  window.location.href = "/create.html";
+  window.location.href = getBaseUrl() + "/create.html";
 });
 
 new CustomSelect("selectTrigger", "dropdownPanel", (text) => {
@@ -121,7 +122,7 @@ document.getElementById("multiDeleteBtn").addEventListener("click", () => {
 // 1. 單頁面
 const editBtnSinglePage = document.getElementById("editId0001");
 editBtnSinglePage.addEventListener("click", () => {
-  window.location.href = "/edit.html";
+  window.location.href = getBaseUrl() + "/edit.html";
 });
 
 // 2. 彈跳視窗

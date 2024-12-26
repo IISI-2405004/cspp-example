@@ -1,21 +1,21 @@
 import { CustomSelect } from "./select.js";
 import { convertToStatusHTML } from "./table.js";
-import { showResult } from "./utils.js";
+import { showResult, getBaseUrl } from "./utils.js";
 
 function saveChange() {
   showResult("成功儲存", "即將跳轉到列表...", "success");
   setTimeout(() => {
-    window.location.href = "./index.html";
+    window.location.href = getBaseUrl();
   }, 1.5 * 1000);
 }
 
-function handleCheckModal(ids) {
+function handleCheckModal() {
   const modal = document.getElementById("checkModal");
   modal.classList.add("open");
 
   document.getElementById("submitCheckBtn").addEventListener("click", () => {
     modal.classList.remove("open");
-    window.location.href = "./index.html";
+    window.location.href = getBaseUrl();
   });
 
   document.getElementById("cancelCheckBtn").addEventListener("click", () => {
@@ -24,7 +24,7 @@ function handleCheckModal(ids) {
 }
 
 document.getElementById("backBtn").addEventListener("click", () => {
-  window.location.href = "./index.html";
+  window.location.href = getBaseUrl();
 });
 
 new CustomSelect("selectTrigger", "dropdownStatusPanel", (text) => {
