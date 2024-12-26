@@ -401,6 +401,7 @@ function showChangesModal(changes) {
 
   modalBody.innerHTML = `
     <p>再次確認您變更的內容：</p>
+    <p>資料沒有真的綁定，僅作為參考畫面</p>
     ${changeList}
   `;
   modal.classList.add("open");
