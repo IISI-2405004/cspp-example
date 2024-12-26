@@ -663,6 +663,9 @@ td:nth-child(3) {
        column-gap: 40px;
   row-gap: 8px;
 }
+.form-wrapper .form-title {
+  flex: 1 1 100%;
+}
 .form-wrapper .button-group {
   flex-basis: 100%;
 }
@@ -782,6 +785,9 @@ td:nth-child(3) {
   height: 32px;
   font-size: 14px;
   line-height: 32px;
+}
+.select-trigger .placeholder {
+  color: var(--neutral-400);
 }
 
 /* Select Options (掛在 body 下) */
@@ -993,6 +999,12 @@ input[type=text].large {
   font-size: 14px;
   color: var(--lively_green-400);
 }
+.file-wrapper .hint {
+  flex: 1 1 100%;
+  margin: 8px 0 0 0;
+  font-size: 12px;
+  color: var(--neutral-700);
+}
 
 /* Checkbox */
 input[type=checkbox] {
@@ -1163,6 +1175,73 @@ input[type=radio][disabled]:checked::before {
 }
 .tab-content.active {
   display: block;
+}
+
+/* Step */
+.step-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.step-item {
+  margin-right: 16px;
+  position: relative;
+}
+.step-item.completed .step-circle {
+  color: var(--lively_blue-500);
+  border: 1px solid var(--lively_blue-500);
+}
+.step-item.completed .step-line {
+  background-color: var(--lively_blue-500);
+}
+.step-item.active .step-circle {
+  background-color: var(--lively_blue-500);
+  color: var(--neutral-100);
+  border: 1px solid var(--lively_blue-500);
+}
+.step-item .step-circle {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 32px;
+  border: 1px solid var(--neutral-400);
+  color: var(--neutral-400);
+  z-index: 1;
+}
+.step-item .step-content {
+  display: flex;
+  align-items: center;
+}
+.step-item .step-title {
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  margin: 0;
+}
+.step-item .step-description {
+  flex-basis: 100%;
+  font-size: 14px;
+  color: var(--neutral-500);
+  margin: 0;
+  padding-left: 40px;
+}
+.step-item .step-line {
+  width: 120px;
+  height: 1px;
+  margin-left: 16px;
+  background-color: var(--neutral-400);
+}
+.step-item:last-child .step-line {
+  display: none;
 }
 
 /* Tooltip */

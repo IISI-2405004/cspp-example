@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/index.css" />
+    <title>資通安全推動入口網 Example</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Sidebar -->
+      <aside class="sidebar-wrapper" id="sidebar">
+        <div class="sidebar-logo"></div>
+        <button class="btn sidebar-toggle-btn" id="toggleSidebarBtn">
+          <i class="fa-solid fa-angle-left"></i>
+        </button>
+        <menu class="menu" id="menuContainer"></menu>
+      </aside>
+
+      <main class="main-container">
+        <!-- Navbar -->
+        <nav class="navbar">
+          <button id="globalSearchBtn" class="btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+
+          <button id="infoBtn" class="btn">
+            <i class="fa-regular fa-circle-question"></i>
+          </button>
+          <button id="notifyBtn" class="btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="badge red">10</span>
+          </button>
+          <div class="user-wrapper">
+            <i class="fa-regular fa-circle-user"></i>
+            <span class="username">
+              Admin ( <span class="logout">登出</span> )
+            </span>
+          </div>
+        </nav>
+
+        <div class="main-content">
+          <div class="title-section mb-4">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">資通安全推動入口網</li>
+              <li class="breadcrumb-item slash">/</li>
+              <li class="breadcrumb-item active">會議及活動報名</li>
+            </ul>
+            <div class="title-wrapper">
+              <h1 class="page-title">會議排程</h1>
+              <div class="button-group">
+                <button class="btn btn-small secondary" id="backBtn">
+                  <i class="fa-solid fa-arrow-rotate-left"></i>
+                  <span>返回</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-container">
+            <!-- 步驟 -->
+            <div class="step-container mb-8">
+              <div class="step-item completed">
+                <div class="step-content">
+                  <div class="step-circle">
+                    <i class="fa-solid fa-check"></i>
+                  </div>
+                  <h4 class="step-title">已完成步驟</h4>
+                  <div class="step-line"></div>
+                </div>
+                <p class="step-description">步驟說明文字內容</p>
+              </div>
+              <div class="step-item active">
+                <div class="step-content">
+                  <div class="step-circle">2</div>
+                  <h4 class="step-title">進行中的步驟</h4>
+                  <div class="step-line"></div>
+                </div>
+                <p class="step-description">步驟說明文字內容</p>
+              </div>
+              <div class="step-item">
+                <div class="step-content">
+                  <div class="step-circle">3</div>
+                  <h4 class="step-title">等待中的步驟</h4>
+                  <div class="step-line"></div>
+                </div>
+                <p class="step-description">步驟說明文字內容</p>
+              </div>
+            </div>
+
+            <form class="form-wrapper" id="createForm" action="">
+              <h2 class="form-title subtitle mb-4">步驟說明文字內容</h2>
+              <div class="form-item">
+                <label for="title">
+                  <i class="icon-required fa-solid fa-asterisk"></i>
+                  標題文字
+                </label>
+                <input
+                  class="small"
+                  type="text"
+                  id="title"
+                  name="title"
+                  placeholder="請輸入內容"
+                />
+              </div>
+              <div class="form-item">
+                <label for="title11">標題文字</label>
+                <input
+                  class="small"
+                  type="text"
+                  id="title11"
+                  name="title11"
+                  placeholder="請輸入內容"
+                />
+              </div>
+              <div class="form-item">
+                <label for="date">標題文字</label>
+                <!-- 展開的日期元件樣式以使用的套件即可，但字體、顏色須符合規範 -->
+                <div class="datepicker-input small">
+                  <span id="dateStartTime" class="text placeholder"
+                    >開始時間</span
+                  >
+                  <i class="icon-date-range"></i>
+                  <span id="dateEndTime" class="text placeholder"
+                    >結束時間</span
+                  >
+                  <i class="icon-calendar fa-solid fa-calendar-days"></i>
+                </div>
+              </div>
+              <div class="form-item">
+                <label>標題文字</label>
+                <div class="checkbox-group">
+                  <div class="checkbox-wrapper">
+                    <input
+                      type="checkbox"
+                      id="checkbox1"
+                      name="checkbox1"
+                      value="checkbox1"
+                    />
+                    <label for="checkbox1">選項1</label>
+                  </div>
+                  <div class="checkbox-wrapper">
+                    <input
+                      type="checkbox"
+                      id="checkbox2"
+                      name="checkbox2"
+                      value="checkbox2"
+                    />
+                    <label for="checkbox2">選項2</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-item">
+                <label>標題文字</label>
+                <div class="radio-group">
+                  <div class="radio-wrapper">
+                    <input
+                      type="radio"
+                      id="radio1"
+                      name="radio"
+                      value="radio1"
+                    />
+                    <label for="radio1">選項1</label>
+                  </div>
+                  <div class="radio-wrapper">
+                    <input
+                      type="radio"
+                      id="radio2"
+                      name="radio"
+                      value="radio2"
+                    />
+                    <label for="radio2">選項2</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-item">
+                <label for="status">
+                  <i class="icon-required fa-solid fa-asterisk"></i>
+                  狀態
+                </label>
+                <div class="select-trigger small" id="selectTrigger">
+                  <div class="select-trigger-text">
+                    <div class="status-wrapper">
+                      <i class="status-icon pending fa-solid fa-circle"></i>
+                      <span>待審查 </span>
+                    </div>
+                  </div>
+                  <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+              <div class="form-item">
+                <label>
+                  <i class="icon-required fa-solid fa-asterisk"></i>
+                  標題文字
+                </label>
+                <div class="select-trigger small" id="selectTrigger">
+                  <div class="select-trigger-text">
+                    <div class="status-wrapper">
+                      <span class="placeholder">請選擇</span>
+                    </div>
+                  </div>
+                  <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+              <div class="form-item">
+                <label>
+                  <i class="icon-required fa-solid fa-asterisk"></i>
+                  標題文字
+                </label>
+                <div class="select-trigger small" id="selectTrigger">
+                  <div class="select-trigger-text">
+                    <div class="status-wrapper">
+                      <span class="placeholder">請選擇</span>
+                    </div>
+                  </div>
+                  <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+              <h2 class="form-title subtitle mb-4">步驟說明文字內容</h2>
+              <div class="form-item">
+                <label for="content2">
+                  <i class="icon-required fa-solid fa-asterisk"></i>
+                  標題文字
+                </label>
+                <input
+                  class="small"
+                  type="text"
+                  id="content2"
+                  name="content2"
+                  placeholder="請輸入內容"
+                />
+              </div>
+              <div class="form-item">
+                <label for="content">
+                  <i class="icon-required fa-solid fa-asterisk"></i>
+                  標題文字
+                </label>
+                <input
+                  class="small"
+                  type="text"
+                  id="content"
+                  name="content"
+                  placeholder="請輸入內容"
+                />
+              </div>
+              <div class="form-item">
+                <label for="fileInput">檔案上傳</label>
+                <div class="file-wrapper">
+                  <label for="fileInput" class="btn btn-small primary">
+                    點擊上傳
+                  </label>
+                  <input
+                    type="file"
+                    id="fileInput"
+                    accept="image/png, image/jpeg"
+                  />
+                  <p class="hint">
+                    限制上傳檔案類型說明文，檔案大小不超過說明文
+                  </p>
+                </div>
+              </div>
+              <div class="form-item">
+                <label for="date">標題文字</label>
+                <!-- 展開的日期元件樣式以使用的套件即可，但字體、顏色須符合規範 -->
+                <div class="datepicker-input small">
+                  <span id="dateStartTime" class="text placeholder"
+                    >開始時間</span
+                  >
+                  <i class="icon-date-range"></i>
+                  <span id="dateEndTime" class="text placeholder"
+                    >結束時間</span
+                  >
+                  <i class="icon-calendar fa-solid fa-calendar-days"></i>
+                </div>
+              </div>
+              <div class="form-item">
+                <label>標題文字</label>
+                <div class="checkbox-group">
+                  <div class="checkbox-wrapper">
+                    <input
+                      type="checkbox"
+                      id="checkbox1"
+                      name="checkbox1"
+                      value="checkbox1"
+                    />
+                    <label for="checkbox1">選項1</label>
+                  </div>
+                  <div class="checkbox-wrapper">
+                    <input
+                      type="checkbox"
+                      id="checkbox2"
+                      name="checkbox2"
+                      value="checkbox2"
+                    />
+                    <label for="checkbox2">選項2</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-item">
+                <label>標題文字</label>
+                <div class="radio-group">
+                  <div class="radio-wrapper">
+                    <input
+                      type="radio"
+                      id="radio1"
+                      name="radio"
+                      value="radio1"
+                    />
+                    <label for="radio1">選項1</label>
+                  </div>
+                  <div class="radio-wrapper">
+                    <input
+                      type="radio"
+                      id="radio2"
+                      name="radio"
+                      value="radio2"
+                    />
+                    <label for="radio2">選項2</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-item">
+                <label>
+                  <i class="icon-required fa-solid fa-asterisk"></i>
+                  標題文字
+                </label>
+                <div class="select-trigger small" id="selectTrigger">
+                  <div class="select-trigger-text">
+                    <div class="status-wrapper">
+                      <span class="placeholder">請選擇</span>
+                    </div>
+                  </div>
+                  <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+              <div class="form-item">
+                <label>
+                  <i class="icon-required fa-solid fa-asterisk"></i>
+                  標題文字
+                </label>
+                <div class="select-trigger small" id="selectTrigger">
+                  <div class="select-trigger-text">
+                    <div class="status-wrapper">
+                      <span class="placeholder">請選擇</span>
+                    </div>
+                  </div>
+                  <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+
+              <div class="button-group justify-end">
+                <button class="btn btn-small secondary" id="cancelCreateBtn">
+                  取消編輯
+                </button>
+                <button class="btn btn-small primary" id="submitCreateBtn">
+                  存檔
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal - 取消確認 -->
+    <div class="modal" id="cancelCheckModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">提示視窗</h2>
+          <button class="btn close-btn" id="closeDeleteModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button class="btn btn-small secondary" id="cancelBtn">取消</button>
+          <button class="btn btn-small primary" id="submitBtn">確認</button>
+        </div>
+      </div>
+      <div class="overlay"></div>
+    </div>
+
+    <!-- Select (狀態下拉選單) -->
+    <ul class="dropdown-panel" id="dropdownStatusPanel">
+      <li class="dropdown-option" data-value="pending">待審查</li>
+      <li class="dropdown-option" data-value="reviewing">審查中</li>
+      <li class="dropdown-option" data-value="recheck">待複審</li>
+      <li class="dropdown-option" data-value="closed">已結案</li>
+    </ul>
+
+    <!-- Modal - 取消確認 -->
+    <div class="modal" id="checkModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">提示視窗</h2>
+          <button class="btn close-btn" id="closeCheckModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>有尚未儲存的資料，確定要離開嗎？</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-small secondary" id="cancelCheckBtn">
+            取消
+          </button>
+          <button class="btn btn-small primary" id="submitCheckBtn">
+            確認
+          </button>
+        </div>
+      </div>
+      <div class="overlay"></div>
+    </div>
+
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/create.js"></script>
+  </body>
+</html>

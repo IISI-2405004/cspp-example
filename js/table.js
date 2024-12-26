@@ -87,9 +87,12 @@ function generateRowHTML(item) {
       <td>${convertToStatusHTML(item.status)}</td>
       <td class="custom-width">
         <div class="btn-group">
-          <button class="btn btn-small primary" data-action="review" data-id="${
-            item.id
-          }">編輯</button>
+          <button 
+            id="editId${item.id}"
+            class="btn btn-small primary"
+            data-action="review"
+            data-id="${item.id}"
+          >編輯</button>
           <button class="btn btn-small danger" data-action="delete" data-id="${
             item.id
           }">刪除</button>

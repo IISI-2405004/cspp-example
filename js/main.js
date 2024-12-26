@@ -68,3 +68,13 @@ document.getElementById("multiDeleteBtn").addEventListener("click", () => {
     .map((checkbox) => checkbox.parentNode.nextElementSibling.textContent);
   handleDeleteModal(checkedItems.join(","));
 });
+
+// 編輯按鈕兩種模式
+// 1. 單頁面
+const editBtnSinglePage = document.getElementById("editId0001");
+editBtnSinglePage.addEventListener("click", () => {
+  window.location.href = "edit.html";
+});
+
+// 2. 彈跳視窗
+const editBtnModalPage = document.getElementById("editId0002");
