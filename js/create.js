@@ -5,7 +5,7 @@ import { showResult } from "./utils.js";
 function saveChange() {
   showResult("成功儲存", "即將跳轉到列表...", "success");
   setTimeout(() => {
-    window.location.href = "/index.html";
+    window.location.href = "./";
   }, 1.5 * 1000);
 }
 
@@ -15,7 +15,7 @@ function handleCheckModal(ids) {
 
   document.getElementById("submitCheckBtn").addEventListener("click", () => {
     modal.classList.remove("open");
-    window.location.href = "/index.html";
+    window.location.href = "./";
   });
 
   document.getElementById("cancelCheckBtn").addEventListener("click", () => {
@@ -24,7 +24,7 @@ function handleCheckModal(ids) {
 }
 
 document.getElementById("backBtn").addEventListener("click", () => {
-  window.location.href = "/index.html";
+  window.location.href = "./";
 });
 
 new CustomSelect("selectTrigger", "dropdownStatusPanel", (text) => {
