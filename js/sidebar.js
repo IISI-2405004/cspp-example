@@ -150,7 +150,7 @@ function createMenuItem(item, collapseAllChildren) {
 
     toggleArrow.addEventListener("click", (e) => {
       e.stopPropagation();
-
+      toggleArrow.parentElement.classList.toggle("active");
       submenu.classList.toggle("collapsed");
       toggleArrow.classList.toggle("opened");
 

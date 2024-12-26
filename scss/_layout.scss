@@ -167,6 +167,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
     user-select: none;
+    border-radius: 8px;
 
     .menu-title-wrapper {
       flex: 1 1 100%;
@@ -182,6 +183,8 @@ body {
 
       &:hover,
       &.active {
+        font-weight: bold;
+        color: var(--lively_blue-500);
         background-color: var(--lively_blue-100);
       }
     }
@@ -194,6 +197,19 @@ body {
     .menu-title {
       flex: 1;
       white-space: nowrap;
+    }
+
+    .toggle-arrow {
+      color: var(--neutral-500);
+    }
+  }
+
+  .sub-menu-item {
+    --submenu-active: transparent; /* 預設背景透明 */
+    background-color: var(--submenu-active);
+
+    &:has(.submenu:not(.collapsed)) {
+      --submenu-active: var(--lively_blue-100); /* 子層展開時改變背景色 */
     }
   }
 
