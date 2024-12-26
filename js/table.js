@@ -50,8 +50,9 @@ function updateCheckAllState(checkAllId, checkboxesClass) {
 }
 
 function renderTable() {
-  const start = (currentPage - 1) * pageSize;
-  const end = start + pageSize;
+  const start = (currentPage - 1) * +pageSize;
+  const end = start + +pageSize;
+
   const tableData = data.slice(start, end);
 
   const tableBody = document.getElementById("tableBody");
@@ -87,9 +88,9 @@ function generateRowHTML(item) {
       <td>${convertToStatusHTML(item.status)}</td>
       <td class="custom-width">
         <div class="btn-group">
-          <button class="btn btn-small secondary" data-action="review" data-id="${
+          <button class="btn btn-small primary" data-action="review" data-id="${
             item.id
-          }">審查</button>
+          }">編輯</button>
           <button class="btn btn-small danger" data-action="delete" data-id="${
             item.id
           }">刪除</button>
@@ -123,15 +124,31 @@ function changePage(page) {
     document
       .getElementById("toPrevBtn")
       .attributes.setNamedItem(document.createAttribute("disabled"));
-    document.getElementById("toNextBtn").attributes.removeNamedItem("disabled");
+    if (document.getElementById("toNextBtn").hasAttribute("disabled")) {
+      document
+        .getElementById("toNextBtn")
+        .attributes.removeNamedItem("disabled");
+    }
   } else if (currentPage === Math.ceil(data.length / pageSize)) {
     document
       .getElementById("toNextBtn")
       .attributes.setNamedItem(document.createAttribute("disabled"));
-    document.getElementById("toPrevBtn").attributes.removeNamedItem("disabled");
+    if (document.getElementById("toPrevBtn").hasAttribute("disabled")) {
+      document
+        .getElementById("toPrevBtn")
+        .attributes.removeNamedItem("disabled");
+    }
   } else {
-    document.getElementById("toPrevBtn").attributes.removeNamedItem("disabled");
-    document.getElementById("toNextBtn").attributes.removeNamedItem("disabled");
+    if (document.getElementById("toPrevBtn").hasAttribute("disabled")) {
+      document
+        .getElementById("toPrevBtn")
+        .attributes.removeNamedItem("disabled");
+    }
+    if (document.getElementById("toNextBtn").hasAttribute("disabled")) {
+      document
+        .getElementById("toNextBtn")
+        .attributes.removeNamedItem("disabled");
+    }
   }
   renderTable();
 }
@@ -173,27 +190,19 @@ function handleDeleteModal(ids) {
 
 // 切換編輯模式
 function toggleEditMode() {
+  isEditMode = true;
+
   const editBtn = document.getElementById("editBtn");
-  const confirmBtn = document.createElement("button");
-  const cancelBtn = document.createElement("button");
+  const multiDeleteBtn = document.getElementById("multiDeleteBtn");
+  const confirmBtn = document.getElementById("submitEditModeBtn");
+  const cancelBtn = document.getElementById("cancelEditModeBtn");
 
-  confirmBtn.className = "btn btn-small primary";
-  confirmBtn.id = "submitEditModeBtn";
-  confirmBtn.innerText = "確認";
-  cancelBtn.className = "btn btn-small secondary";
-  cancelBtn.id = "cancelEditModeBtn";
-  cancelBtn.innerText = "取消";
-
-  const parent = editBtn.parentNode;
   editBtn.classList.add("hidden");
-  parent.prepend(confirmBtn);
-  parent.prepend(cancelBtn);
+  multiDeleteBtn.classList.add("hidden");
+  confirmBtn.classList.remove("hidden");
+  cancelBtn.classList.remove("hidden");
 
   originalData = JSON.parse(JSON.stringify(data)); // 複製原始資料
-  document
-    .getElementById("multiDeleteBtn")
-    .attributes.setNamedItem(document.createAttribute("disabled"));
-  isEditMode = true;
 
   renderEditableTable();
 
@@ -207,12 +216,18 @@ function toggleEditMode() {
 function closedEditMode() {
   isEditMode = false;
   const editBtn = document.getElementById("editBtn");
+  const multiDeleteBtn = document.getElementById("multiDeleteBtn");
+  const confirmBtn = document.getElementById("submitEditModeBtn");
+  const cancelBtn = document.getElementById("cancelEditModeBtn");
+  editBtn.classList.remove("hidden");
+  multiDeleteBtn.classList.remove("hidden");
+  confirmBtn.classList.add("hidden");
+  cancelBtn.classList.add("hidden");
+
   if (document.getElementById("checkAll").hasAttribute("disabled")) {
     document.getElementById("checkAll").attributes.removeNamedItem("disabled");
   }
-  editBtn.classList.remove("hidden");
-  document.getElementById("submitEditModeBtn").remove();
-  document.getElementById("cancelEditModeBtn").remove();
+
   renderTable();
   updateCheckAllState("checkAll", ".row-check");
 }
@@ -268,8 +283,34 @@ function generateEditableRowHTML(item) {
             : `<p>${item.title}</p>`
         }
       </td>
-      <td>${item.department}</td>
-      <td>${item.submitDate}</td>
+      <td>
+        ${
+          isChecked
+            ? `
+          <div class="select-trigger" data-id="${item.id}" data-value="${item.department}" data-field="status">
+            <span class="select-trigger-text">
+              ${item.department}
+            </span>
+            <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+          </div>
+        `
+            : item.department
+        }
+      </td>
+      <td>
+        ${
+          isChecked
+            ? `
+          <div class="select-trigger" data-id="${item.id}" data-value="${item.department}" data-field="status">
+            <span class="select-trigger-text">
+              ${item.submitDate}
+            </span>
+            <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+          </div>
+        `
+            : item.submitDate
+        }
+      </td>
       <td>
         ${
           isChecked
@@ -290,9 +331,9 @@ function generateEditableRowHTML(item) {
       </td>
       <td class="custom-width">
         <div class="btn-group">
-          <button class="btn btn-small secondary" data-action="review" data-id="${
+          <button class="btn btn-small primary" data-action="review" data-id="${
             item.id
-          }" disabled>審查</button>
+          }" disabled>編輯</button>
           <button class="btn btn-small danger" data-action="delete" data-id="${
             item.id
           }" disabled>刪除</button>
