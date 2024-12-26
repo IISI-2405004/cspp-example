@@ -53,8 +53,11 @@ export function showResult(title, message, type, duration = 2000) {
 }
 
 export function getBaseUrl() {
+  console.log("getBaseUrl", window.location.origin);
+
   const basePath = window.location.origin.includes("github.io")
     ? window.location.origin + "/cspp-example" // GitHub Pages 路徑
     : window.location.origin; // 本地或其他環境的根路徑
+  console.log("basePath", basePath);
   return basePath;
 }
