@@ -50,3 +50,9 @@
     color: var(--neutral-400);
   }
 }
+
+#editSingleModal {
+  .modal-content {
+    max-width: 70vw;
+  }
+}

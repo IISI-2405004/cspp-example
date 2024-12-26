@@ -7,6 +7,54 @@ import {
   handleDeleteModal,
 } from "./table.js";
 
+function handleBeforeCloseModal() {
+  const modal = document.getElementById("checkModal");
+  const editModal = document.getElementById("editSingleModal");
+  modal.classList.add("open");
+
+  modal.querySelector(".overlay").addEventListener("click", () => {
+    modal.classList.remove("open");
+  });
+
+  document.getElementById("closeCheckModal").addEventListener("click", () => {
+    modal.classList.remove("open");
+  });
+
+  document.getElementById("cancelCheckBtn").addEventListener("click", () => {
+    modal.classList.remove("open");
+  });
+
+  document.getElementById("submitCheckBtn").addEventListener("click", () => {
+    modal.classList.remove("open");
+    editModal.classList.remove("open");
+  });
+}
+
+function handleSingleEditModal(ids) {
+  const modal = document.getElementById("editSingleModal");
+  modal.classList.add("open");
+
+  modal.querySelector(".overlay").addEventListener("click", () => {
+    handleBeforeCloseModal();
+  });
+
+  document.getElementById("closeSingleModal").addEventListener("click", () => {
+    handleBeforeCloseModal();
+  });
+
+  document
+    .getElementById("cancelEditSingleBtn")
+    .addEventListener("click", () => {
+      handleBeforeCloseModal();
+    });
+
+  document
+    .getElementById("submitEditSingleBtn")
+    .addEventListener("click", () => {
+      modal.classList.remove("open");
+    });
+}
+
 document.getElementById("addBtn").addEventListener("click", () => {
   window.location.href = "create.html";
 });
@@ -78,3 +126,6 @@ editBtnSinglePage.addEventListener("click", () => {
 
 // 2. 彈跳視窗
 const editBtnModalPage = document.getElementById("editId0002");
+editBtnModalPage.addEventListener("click", () => {
+  handleSingleEditModal();
+});

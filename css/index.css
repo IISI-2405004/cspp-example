@@ -1957,4 +1957,8 @@ body {
 }
 .status-icon.closed {
   color: var(--neutral-400);
+}
+
+#editSingleModal .modal-content {
+  max-width: 70vw;
 }/*# sourceMappingURL=index.css.map */
