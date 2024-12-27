@@ -693,8 +693,38 @@ input[type="text"] {
   align-items: center;
   flex-wrap: wrap;
 
+  &.draggable-file-wrapper {
+    display: flex;
+    width: 100%;
+  }
+
   input[type="file"] {
     display: none; /* 隱藏原生按鈕 */
+  }
+
+  .draggable-file {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 16px;
+    width: 100%;
+    min-height: 180px;
+    background-color: var(--lively_blue-100);
+    border: 1px dashed var(--lively_blue-300);
+    border-radius: 4px;
+  }
+
+  .draggable-file-title {
+    font-size: 14px;
+  }
+
+  .icon-upload {
+    width: 64px;
+    height: 64px;
+    font-size: 64px;
+    color: var(--lively_blue-300);
   }
 
   .file-list {

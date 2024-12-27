@@ -120,11 +120,17 @@
                   placeholder="請輸入標題"
                 />
               </div>
-              <div class="form-item">
+              <div class="form-item w-full">
                 <label for="fileInput">檔案上傳</label>
-                <div class="file-wrapper">
-                  <label for="fileInput" class="btn btn-small primary">
-                    點擊上傳
+                <div class="file-wrapper draggable-file-wrapper">
+                  <label for="fileInput" class="draggable-file">
+                    <i class="icon-upload fa-solid fa-cloud-arrow-up"></i>
+                    <span class="draggable-file-title"
+                      >點擊新增或拖曳檔案到此區塊</span
+                    >
+                    <button type="button" class="btn btn-small primary">
+                      新增
+                    </button>
                   </label>
                   <input
                     type="file"
