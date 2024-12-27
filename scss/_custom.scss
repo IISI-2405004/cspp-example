@@ -54,5 +54,19 @@
 #editSingleModal {
   .modal-content {
     max-width: 70vw;
+    opacity: 0;
+    transform: translateY(-50%);
+    animation: slideIn 0.3s ease forwards; /* 滑入動畫效果 */
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
