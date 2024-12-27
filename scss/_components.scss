@@ -417,6 +417,7 @@ td {
   gap: 8px;
   height: 32px; /* 根據當前使用的 input 尺寸調整 */
   line-height: 32px;
+  user-select: none;
 
   input[type="checkbox"] {
     flex: 0 0 16px;
@@ -436,6 +437,7 @@ td {
   gap: 8px;
   height: 32px; /* 根據當前使用的 input 尺寸調整 */
   line-height: 32px;
+  user-select: none;
 
   input[type="radio"] {
     flex: 0 0 16px;
@@ -507,6 +509,7 @@ td {
   margin: 0;
   padding: 4px 0;
   list-style: none;
+  user-select: none;
   overflow: hidden;
   opacity: 0;
   z-index: 1000;
@@ -632,6 +635,7 @@ input[type="text"] {
   border: 1px solid var(--neutral-400);
   border-radius: 4px;
   transition: border-color 0.2s ease;
+  user-select: none;
   cursor: pointer;
 
   &.focus {
@@ -748,6 +752,7 @@ input[type="checkbox"] {
   border: 1px solid var(--neutral-400);
   border-radius: 4px;
   background: var(--neutral-100);
+  user-select: none;
   cursor: pointer;
 
   &:hover {
@@ -810,6 +815,7 @@ input[type="radio"] {
   border: 1px solid var(--neutral-400);
   border-radius: 50%;
   background: var(--neutral-100);
+  user-select: none;
   cursor: pointer;
 
   &:hover {

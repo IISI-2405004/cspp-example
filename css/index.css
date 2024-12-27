@@ -735,6 +735,9 @@ td:nth-child(3) {
   gap: 8px;
   height: 32px; /* 根據當前使用的 input 尺寸調整 */
   line-height: 32px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .checkbox-wrapper input[type=checkbox] {
   flex: 0 0 16px;
@@ -752,6 +755,9 @@ td:nth-child(3) {
   gap: 8px;
   height: 32px; /* 根據當前使用的 input 尺寸調整 */
   line-height: 32px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .radio-wrapper input[type=radio] {
   flex: 0 0 16px;
@@ -818,6 +824,9 @@ td:nth-child(3) {
   margin: 0;
   padding: 4px 0;
   list-style: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   overflow: hidden;
   opacity: 0;
   z-index: 1000;
@@ -934,6 +943,9 @@ input[type=text].large {
   border: 1px solid var(--neutral-400);
   border-radius: 4px;
   transition: border-color 0.2s ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   cursor: pointer;
 }
 .datepicker-input.focus {
@@ -1036,6 +1048,9 @@ input[type=checkbox] {
   border: 1px solid var(--neutral-400);
   border-radius: 4px;
   background: var(--neutral-100);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   cursor: pointer;
 }
 input[type=checkbox]:hover {
@@ -1089,6 +1104,9 @@ input[type=radio] {
   border: 1px solid var(--neutral-400);
   border-radius: 50%;
   background: var(--neutral-100);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   cursor: pointer;
 }
 input[type=radio]:hover {
