@@ -96,9 +96,13 @@ export function convertToStatusHTML(status) {
 function generateRowHTML(item) {
   return `
     <tr>
-      <td class="custom-width"><input class="row-check" type="checkbox" data-value=${
-        item.id
-      } /></td>
+      <td class="custom-width">
+        <input
+          class="row-check"
+          type="checkbox"
+          data-value=${item.id}
+          aria-label="選取"
+        /></td>
       <td class="custom-width">${item.id}</td>
       <td><p>${item.title}</p></td>
       <td>${item.department}</td>
@@ -111,10 +115,14 @@ function generateRowHTML(item) {
             class="btn btn-small primary"
             data-action="review"
             data-id="${item.id}"
+            aria-label="編輯"
           >編輯</button>
-          <button class="btn btn-small danger" data-action="delete" data-id="${
-            item.id
-          }">刪除</button>
+          <button
+            class="btn btn-small danger"
+            data-action="delete"
+            data-id="${item.id}"
+            aria-label="刪除"
+          >刪除</button>
         </div>
       </td>
     </tr>
@@ -374,7 +382,7 @@ function generateEditableRowHTML(item) {
       <td class="custom-width">
         <input class="row-check" type="checkbox" data-value="${item.id}" ${
     isChecked ? "checked" : ""
-  } disabled />
+  } aria-label="選取" disabled />
       </td>
       <td class="custom-width">${item.id}</td>
       <td>
@@ -432,12 +440,20 @@ function generateEditableRowHTML(item) {
       </td>
       <td class="custom-width">
         <div class="btn-group">
-          <button class="btn btn-small primary" data-action="review" data-id="${
-            item.id
-          }" disabled>編輯</button>
-          <button class="btn btn-small danger" data-action="delete" data-id="${
-            item.id
-          }" disabled>刪除</button>
+          <button
+            class="btn btn-small primary"
+            data-action="review"
+            data-id="${item.id}"
+            aria-label="編輯"
+            disabled
+          >編輯</button>
+          <button
+            class="btn btn-small danger"
+            data-action="delete"
+            data-id="${item.id}"
+            aria-label="刪除"
+            disabled
+          >刪除</button>
         </div>
       </td>
     </tr>

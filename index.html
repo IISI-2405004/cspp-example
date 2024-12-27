@@ -17,8 +17,16 @@
     <div id="app">
       <!-- Sidebar -->
       <aside class="sidebar-wrapper" id="sidebar">
-        <a class="sidebar-logo" href="/"></a>
-        <button class="btn sidebar-toggle-btn" id="toggleSidebarBtn">
+        <a
+          class="sidebar-logo"
+          href="/"
+          aria-label="資通安全業務入口網 Logo"
+        ></a>
+        <button
+          class="btn sidebar-toggle-btn"
+          id="toggleSidebarBtn"
+          aria-label="側邊選單收合"
+        >
           <i class="fa-solid fa-angle-left"></i>
         </button>
         <menu class="menu" id="menuContainer"></menu>
@@ -27,14 +35,14 @@
       <main class="main-container">
         <!-- Navbar -->
         <nav class="navbar">
-          <button id="globalSearchBtn" class="btn">
+          <button id="globalSearchBtn" class="btn" aria-label="全域搜尋">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
 
-          <button id="infoBtn" class="btn">
+          <button id="infoBtn" class="btn" aria-label="資訊">
             <i class="fa-regular fa-circle-question"></i>
           </button>
-          <button id="notifyBtn" class="btn">
+          <button id="notifyBtn" class="btn" aria-label="通知">
             <i class="fa-regular fa-bell"></i>
             <span class="badge red">10</span>
           </button>
@@ -49,17 +57,25 @@
         <div class="main-content">
           <div class="title-section mb-4">
             <ul class="breadcrumb">
-              <li class="breadcrumb-item">資通安全推動入口網</li>
+              <li class="breadcrumb-item">資通安全業務入口網</li>
               <li class="breadcrumb-item slash">/</li>
               <li class="breadcrumb-item active">會議及活動報名</li>
             </ul>
             <div class="title-wrapper">
               <h1 class="page-title">會議排程</h1>
               <div class="button-group">
-                <button class="btn btn-small secondary" id="searchBtn">
+                <button
+                  class="btn btn-small secondary"
+                  id="searchBtn"
+                  aria-label="搜尋"
+                >
                   <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
-                <button class="btn btn-small primary" id="addBtn">
+                <button
+                  class="btn btn-small primary"
+                  id="addBtn"
+                  aria-label="新增"
+                >
                   <i class="fa-solid fa-plus"></i>
                   <span>新增</span>
                 </button>
@@ -76,13 +92,19 @@
             <div class="tab-contents flex-1">
               <div id="tab1" class="tab-content active">
                 <div class="table-action button-group justify-end">
-                  <button class="btn btn-small primary" id="editBtn" disabled>
+                  <button
+                    class="btn btn-small primary"
+                    id="editBtn"
+                    aria-label="多筆編輯"
+                    disabled
+                  >
                     <i class="fa-solid fa-pen-to-square"></i>
                     <span>多筆編輯</span>
                   </button>
                   <button
                     class="btn btn-small danger"
                     id="multiDeleteBtn"
+                    aria-label="多筆刪除"
                     disabled
                   >
                     <i class="fa-solid fa-trash-can"></i>
@@ -91,6 +113,7 @@
                   <button
                     class="btn btn-small secondary hidden"
                     id="cancelEditModeBtn"
+                    aria-label="取消編輯"
                   >
                     <i class="fa-solid fa-circle-xmark"></i>
                     <span>取消編輯</span>
@@ -98,6 +121,7 @@
                   <button
                     class="btn btn-small primary hidden"
                     id="submitEditModeBtn"
+                    aria-label="確認編輯"
                   >
                     <i class="fa-solid fa-file-circle-check"></i>
                     <span>多筆儲存</span>
@@ -108,7 +132,11 @@
                     <thead>
                       <tr>
                         <th class="custom-width">
-                          <input type="checkbox" id="checkAll" />
+                          <input
+                            type="checkbox"
+                            id="checkAll"
+                            aria-label="全選"
+                          />
                         </th>
                         <th class="sortable custom-width">
                           編號
@@ -164,11 +192,20 @@
                     <div class="select-trigger-text">10筆 / 頁</div>
                     <i class="trigger-arrow fa-solid fa-chevron-down"></i>
                   </div>
-                  <button id="toPrevBtn" class="btn pagination-arrow" disabled>
+                  <button
+                    id="toPrevBtn"
+                    class="btn pagination-arrow"
+                    aria-label="上一頁"
+                    disabled
+                  >
                     <i class="fa-solid fa-chevron-left"></i>
                   </button>
                   <ul id="paginationWrapper" class="pagination-list"></ul>
-                  <button id="toNextBtn" class="btn pagination-arrow">
+                  <button
+                    id="toNextBtn"
+                    class="btn pagination-arrow"
+                    aria-label="下一頁"
+                  >
                     <i class="fa-solid fa-chevron-right"></i>
                   </button>
                 </div>
@@ -190,16 +227,28 @@
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title">提示視窗</h2>
-          <button class="btn close-btn" id="closeDeleteModal">
+          <button
+            class="btn close-btn"
+            id="closeDeleteModal"
+            aria-label="關閉視窗"
+          >
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
         <div class="modal-body"></div>
         <div class="modal-footer">
-          <button class="btn btn-small secondary" id="cancelDeleteBtn">
+          <button
+            class="btn btn-small secondary"
+            id="cancelDeleteBtn"
+            aria-label="取消"
+          >
             取消
           </button>
-          <button class="btn btn-small danger" id="submitDeleteBtn">
+          <button
+            class="btn btn-small danger"
+            id="submitDeleteBtn"
+            aria-label="確認"
+          >
             確認
           </button>
         </div>
@@ -212,16 +261,30 @@
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title">提示視窗</h2>
-          <button class="btn close-btn" id="closeDeleteModal">
+          <button
+            class="btn close-btn"
+            id="closeDeleteModal"
+            aria-label="關閉視窗"
+          >
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
         <div class="modal-body"></div>
         <div class="modal-footer">
-          <button class="btn btn-small secondary" id="cancelEditBtn">
+          <button
+            class="btn btn-small secondary"
+            id="cancelEditBtn"
+            aria-label="取消"
+          >
             取消
           </button>
-          <button class="btn btn-small primary" id="submitEditBtn">確認</button>
+          <button
+            class="btn btn-small primary"
+            id="submitEditBtn"
+            aria-label="確認"
+          >
+            確認
+          </button>
         </div>
       </div>
       <div class="overlay"></div>
@@ -232,7 +295,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title">大標題</h2>
-          <button class="btn close-btn" id="closeSingleModal">
+          <button
+            class="btn close-btn"
+            id="closeSingleModal"
+            aria-label="關閉視窗"
+          >
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
@@ -292,6 +359,7 @@
                     id="checkbox1"
                     name="checkbox1"
                     value="checkbox1"
+                    aria-label="選項1"
                   />
                   <label for="checkbox1">選項1</label>
                 </div>
@@ -301,6 +369,7 @@
                     id="checkbox2"
                     name="checkbox2"
                     value="checkbox2"
+                    aria-label="選項2"
                   />
                   <label for="checkbox2">選項2</label>
                 </div>
@@ -365,10 +434,18 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-small secondary" id="cancelEditSingleBtn">
+          <button
+            class="btn btn-small secondary"
+            id="cancelEditSingleBtn"
+            aria-label="取消"
+          >
             取消
           </button>
-          <button class="btn btn-small primary" id="submitEditSingleBtn">
+          <button
+            class="btn btn-small primary"
+            id="submitEditSingleBtn"
+            aria-label="確認"
+          >
             確認
           </button>
         </div>
@@ -381,7 +458,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title">提示視窗</h2>
-          <button class="btn close-btn" id="closeCheckModal">
+          <button
+            class="btn close-btn"
+            id="closeCheckModal"
+            aria-label="關閉視窗"
+          >
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
@@ -389,10 +470,18 @@
           <p>有尚未儲存的資料，確定要關閉嗎？</p>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-small secondary" id="cancelCheckBtn">
+          <button
+            class="btn btn-small secondary"
+            id="cancelCheckBtn"
+            aria-label="取消"
+          >
             取消
           </button>
-          <button class="btn btn-small primary" id="submitCheckBtn">
+          <button
+            class="btn btn-small primary"
+            id="submitCheckBtn"
+            aria-label="確認"
+          >
             確認
           </button>
         </div>
