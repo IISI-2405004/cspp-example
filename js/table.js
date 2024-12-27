@@ -1,4 +1,4 @@
-import { showToast } from "./utils.js";
+import { showToast, getBaseUrl } from "./utils.js";
 import { CustomSelect } from "./select.js";
 import { tableData } from "./mockData.js";
 
@@ -57,6 +57,19 @@ function renderTable() {
   if (!tableBody) return;
   tableBody.innerHTML = tableData.map(generateRowHTML).join("");
   updatePaginationInfo();
+
+  // 編輯按鈕兩種模式
+  // 1. 單頁面
+  const editBtnSinglePage = document.getElementById("editId0001");
+  editBtnSinglePage.addEventListener("click", () => {
+    window.location.href = getBaseUrl() + "/edit.html";
+  });
+
+  // 2. 彈跳視窗
+  const editBtnModalPage = document.getElementById("editId0002");
+  editBtnModalPage.addEventListener("click", () => {
+    handleSingleEditModal();
+  });
 }
 
 export function convertToStatusHTML(status) {
@@ -175,6 +188,54 @@ function deleteSingleItem(id) {
   }
 }
 
+function handleBeforeCloseModal() {
+  const modal = document.getElementById("checkModal");
+  const editModal = document.getElementById("editSingleModal");
+  modal.classList.add("open");
+
+  modal.querySelector(".overlay").addEventListener("click", () => {
+    modal.classList.remove("open");
+  });
+
+  document.getElementById("closeCheckModal").addEventListener("click", () => {
+    modal.classList.remove("open");
+  });
+
+  document.getElementById("cancelCheckBtn").addEventListener("click", () => {
+    modal.classList.remove("open");
+  });
+
+  document.getElementById("submitCheckBtn").addEventListener("click", () => {
+    modal.classList.remove("open");
+    editModal.classList.remove("open");
+  });
+}
+
+function handleSingleEditModal(ids) {
+  const modal = document.getElementById("editSingleModal");
+  modal.classList.add("open");
+
+  modal.querySelector(".overlay").addEventListener("click", () => {
+    handleBeforeCloseModal();
+  });
+
+  document.getElementById("closeSingleModal").addEventListener("click", () => {
+    handleBeforeCloseModal();
+  });
+
+  document
+    .getElementById("cancelEditSingleBtn")
+    .addEventListener("click", () => {
+      handleBeforeCloseModal();
+    });
+
+  document
+    .getElementById("submitEditSingleBtn")
+    .addEventListener("click", () => {
+      modal.classList.remove("open");
+    });
+}
+
 export function handleDeleteModal(ids) {
   const modal = document.getElementById("deleteModal");
   const modalBody = modal.querySelector(".modal-body");
@@ -291,7 +352,7 @@ function generateEditableRowHTML(item) {
         ${
           isChecked
             ? `
-          <div class="select-trigger small" data-id="${item.id}" data-value="${item.department}" data-field="status">
+          <div class="select-trigger small" data-id="${item.id}" data-value="${item.department}" data-field="department">
             <div class="select-trigger-text">
               ${item.department}
             </div>
@@ -305,7 +366,7 @@ function generateEditableRowHTML(item) {
         ${
           isChecked
             ? `
-          <div class="select-trigger small" data-id="${item.id}" data-value="${item.department}" data-field="status">
+          <div class="select-trigger small" data-id="${item.id}" data-value="${item.submitDate}" data-field="submitDate">
             <div class="select-trigger-text">
               ${item.submitDate}
             </div>
@@ -401,7 +462,7 @@ function showChangesModal(changes) {
 
   modalBody.innerHTML = `
     <p>再次確認您變更的內容：</p>
-    <p>資料沒有真的綁定，僅作為參考畫面</p>
+    <p>(資料沒有真的綁定，僅作為參考畫面)</p>
     ${changeList}
   `;
   modal.classList.add("open");
