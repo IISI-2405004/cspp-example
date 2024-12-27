@@ -1,8 +1,7 @@
 import { CustomSelect } from "./select.js";
 import {
-  changePage,
-  changePageSize,
   renderTable,
+  changePageSize,
   toggleEditMode,
   updateCheckAllState,
   toggleCheckboxState,
