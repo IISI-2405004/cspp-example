@@ -503,6 +503,9 @@ table {
 }
 
 thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   background-color: var(--neutral-600);
   color: var(--neutral-100);
 }
@@ -1950,17 +1953,28 @@ body {
 }
 
 .table-action {
-  position: sticky;
-  top: 0;
+  width: 100%;
   background-color: #fff;
   padding: 16px 0;
-  z-index: 10;
+  z-index: 5;
 }
 
-#dataTable thead {
-  position: sticky;
-  top: 64px;
-  z-index: 2;
+.table-container {
+  max-height: 70vh; /* 限制表格高度，讓表頭 sticky 定位 */
+  overflow: auto;
+}
+
+#dataTable thead th:first-child {
+  min-width: 48px;
+}
+#dataTable thead th:nth-child(2) {
+  min-width: 100px;
+}
+#dataTable tbody td:first-child {
+  width: 48px;
+}
+#dataTable tbody td:nth-child(2) {
+  width: 100px;
 }
 
 .search-box {
