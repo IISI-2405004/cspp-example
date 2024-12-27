@@ -686,6 +686,12 @@ td:nth-child(3) {
 .form-item.w-full {
   flex: 1 1 100%;
 }
+.form-item.error input {
+  border-color: var(--lively_pink-400);
+}
+.form-item.error .form-item-content .message {
+  color: var(--lively_pink-400);
+}
 .form-item label {
   flex: 0 0 72px;
   padding-top: 6px;
@@ -695,6 +701,17 @@ td:nth-child(3) {
   color: var(--neutral-700);
   white-space: nowrap;
   position: relative;
+}
+.form-item .form-item-content {
+  flex: 1;
+  position: relative;
+}
+.form-item .form-item-content .message {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  font-size: 12px;
+  color: var(--neutral-500);
 }
 .form-item .icon-required {
   font-size: 10px;

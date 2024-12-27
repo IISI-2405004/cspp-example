@@ -358,6 +358,18 @@ td {
     flex: 1 1 100%;
   }
 
+  &.error {
+    input {
+      border-color: var(--lively_pink-400);
+    }
+
+    .form-item-content {
+      .message {
+        color: var(--lively_pink-400);
+      }
+    }
+  }
+
   label {
     flex: 0 0 72px;
     padding-top: 6px;
@@ -367,6 +379,19 @@ td {
     color: var(--neutral-700);
     white-space: nowrap;
     position: relative;
+  }
+
+  .form-item-content {
+    flex: 1;
+    position: relative;
+
+    .message {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      font-size: 12px;
+      color: var(--neutral-500);
+    }
   }
 
   .icon-required {
