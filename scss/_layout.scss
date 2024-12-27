@@ -9,6 +9,11 @@ body {
   overflow: hidden;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 #app {
   display: grid;
   grid-template-columns: 256px 1fr;
@@ -73,6 +78,7 @@ body {
   }
 
   .logout {
+    color: var(--neutral-700);
     text-decoration: underline;
     cursor: pointer;
 

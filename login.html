@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/index.css" />
+    <title>資通安全業務入口網 Example</title>
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="logo">
+        <img src="./images/logo.png" alt="資通安全業務入口網 Logo" />
+      </div>
+      <main class="login-container">
+        <div class="login-wrapper">
+          <div class="tabs flex-1">
+            <ul class="tab-list">
+              <li class="tab active" data-tab="tab1">OOO</li>
+              <li class="tab" data-tab="tab2">OOO</li>
+              <li class="tab" data-tab="tab3">OOO</li>
+            </ul>
+            <div class="tab-contents flex-1">
+              <div id="tab1" class="tab-content active">
+                <i class="icon-user fa-solid fa-circle-user mb-6"></i>
+                <h4 class="login-title">驗證方式：OOOOOO</h4>
+                <form class="form-wrapper" id="loginForm" action="">
+                  <div class="form-item w-full">
+                    <label for="user">
+                      <span>OOOOOO</span>
+                      <i class="icon-info fa-solid fa-circle-info"></i>
+                    </label>
+                    <input type="text" id="user" name="user" />
+                  </div>
+                </form>
+                <div class="info-wrapper">
+                  <div class="info-item">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>OOO</span>
+                  </div>
+                  <div class="info-item">
+                    <i class="fa-solid fa-unlock"></i>
+                    <span>OOOOOO</span>
+                  </div>
+                </div>
+                <a class="btn btn-large primary" href="/" aria-label="登入">
+                  執行身分認證
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="news-wrapper">
+          <h2 class="news-title">
+            <span>公告消息</span>
+            <button type="button" class="btn secondary">更多消息</button>
+          </h2>
+          <ul class="news-list">
+            <li class="news-item">
+              <span class="date">2024-10-25</span>
+              <span class="tag green">活動</span>
+              <p class="content">
+                政府資安人力職能轉換訓練(本訓練不須會員資格)
+              </p>
+              <button type="button" class="more-btn btn">
+                <i class="fa-solid fa-circle-arrow-right"></i>
+              </button>
+            </li>
+            <li class="news-item">
+              <span class="date">2024-10-15</span>
+              <span class="tag blue">新聞</span>
+              <p class="content">
+                最新消息最新消息內文最新消息內文最新消息內文
+              </p>
+              <button type="button" class="more-btn btn">
+                <i class="fa-solid fa-circle-arrow-right"></i>
+              </button>
+            </li>
+            <li class="news-item">
+              <span class="date">2024-09-05</span>
+              <span class="tag">公告</span>
+              <p class="content">
+                最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息
+              </p>
+              <button type="button" class="more-btn btn">
+                <i class="fa-solid fa-circle-arrow-right"></i>
+              </button>
+            </li>
+            <li class="news-item">
+              <span class="date">2024-09-01</span>
+              <span class="tag green">活動</span>
+              <p class="content">
+                最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息
+              </p>
+              <button type="button" class="more-btn btn">
+                <i class="fa-solid fa-circle-arrow-right"></i>
+              </button>
+            </li>
+            <li class="news-item">
+              <span class="date">2024-08-27</span>
+              <span class="tag green">活動</span>
+              <p class="content">
+                最新消息內文最新消息內文最新消息內文最新消息內文
+              </p>
+              <button type="button" class="more-btn btn">
+                <i class="fa-solid fa-circle-arrow-right"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </main>
+      <footer class="footer">
+        <div class="logo">
+          <img src="./images/footer-logo.png" alt="數位發展部資通安全署" />
+        </div>
+        <p>地址：100057 臺北市中正區延平南路143號</p>
+        <p>電話：02-2380-8500 / 民意信箱：www-mailbox.acs.gov.tw</p>
+      </footer>
+    </div>
+  </body>
+</html>
