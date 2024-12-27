@@ -47,7 +47,9 @@ export function updateCheckAllState(checkAllId, checkboxesClass) {
   }
 }
 
-function renderTable() {
+export function renderTable() {
+  initPagination();
+
   const start = (currentPage - 1) * +pageSize;
   const end = start + +pageSize;
 
@@ -60,13 +62,17 @@ function renderTable() {
 
   // 編輯按鈕兩種模式
   // 1. 單頁面
-  const editBtnSinglePage = document.getElementById("editId0001");
+  const editBtnSinglePage = document.getElementById(
+    `editId${data[(currentPage - 1) * pageSize].id}`
+  );
   editBtnSinglePage.addEventListener("click", () => {
     window.location.href = getBaseUrl() + "/edit.html";
   });
 
   // 2. 彈跳視窗
-  const editBtnModalPage = document.getElementById("editId0002");
+  const editBtnModalPage = document.getElementById(
+    `editId${data[(currentPage - 1) * pageSize + 1].id}`
+  );
   editBtnModalPage.addEventListener("click", () => {
     handleSingleEditModal();
   });
@@ -129,6 +135,36 @@ function generatePaginationItemsHTML() {
     }
   }
   wrapper.innerHTML = items.join("");
+
+  document.querySelectorAll(".pagination-item").forEach((item, index) => {
+    item.addEventListener("click", () => changePage(index + 1));
+  });
+}
+
+function initPagination() {
+  generatePaginationItemsHTML();
+  const prevBtn = document.getElementById("toPrevBtn");
+  const nextBtn = document.getElementById("toNextBtn");
+
+  prevBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+      const page = currentPage - 1;
+      changePage(page);
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if (currentPage < Math.ceil(data.length / pageSize)) {
+      const page = currentPage + 1;
+      changePage(page);
+    }
+  });
+}
+
+export function changePageSize(size) {
+  pageSize = +size;
+  currentPage = 1;
+  renderTable();
 }
 
 export function changePage(page) {
@@ -486,6 +522,3 @@ function showChangesModal(changes) {
     modal.classList.remove("open");
   });
 }
-
-generatePaginationItemsHTML();
-renderTable();

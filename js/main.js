@@ -1,6 +1,8 @@
 import { CustomSelect } from "./select.js";
 import {
   changePage,
+  changePageSize,
+  renderTable,
   toggleEditMode,
   updateCheckAllState,
   toggleCheckboxState,
@@ -12,34 +14,13 @@ document.getElementById("addBtn").addEventListener("click", () => {
   window.location.href = getBaseUrl() + "/create.html";
 });
 
+renderTable();
+
 new CustomSelect("selectTrigger", "dropdownPanel", (text) => {
-  pageSize = text;
-  currentPage = 1;
   const triggerText = document.getElementById("selectTrigger");
   triggerText.querySelector(".select-trigger-text").textContent =
     text + "筆 / 頁";
-  renderTable();
-});
-
-const prevBtn = document.getElementById("toPrevBtn");
-const nextBtn = document.getElementById("toNextBtn");
-
-prevBtn.addEventListener("click", () => {
-  if (currentPage > 1) {
-    const page = currentPage - 1;
-    changePage(page);
-  }
-});
-
-nextBtn.addEventListener("click", () => {
-  if (currentPage < Math.ceil(data.length / pageSize)) {
-    const page = currentPage + 1;
-    changePage(page);
-  }
-});
-
-document.querySelectorAll(".pagination-item").forEach((item, index) => {
-  item.addEventListener("click", () => changePage(index + 1));
+  changePageSize(text);
 });
 
 document.getElementById("tableBody").addEventListener("click", (e) => {
