@@ -2067,7 +2067,8 @@ a {
 }
 
 #editSingleModal .modal-content {
-  max-width: 70vw;
+  width: 70vw;
+  max-width: 1000px;
   opacity: 0;
   transform: translateY(-50%);
   animation: slideIn 0.3s ease forwards; /* 滑入動畫效果 */
