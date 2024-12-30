@@ -26,8 +26,8 @@
     grid-template-columns: repeat(2, 1fr);
     align-items: flex-start;
     gap: 64px;
-    width: 100%;
-    max-width: 85vw;
+    width: 80vw;
+    max-width: 1480px;
     margin: 0 auto;
   }
 
@@ -119,6 +119,7 @@
     color: var(--lively_blue-500);
     margin-bottom: 32px;
     padding-left: 8px;
+    padding-right: 12px;
     border-left: 6px solid var(--lively_blue-200);
   }
 
@@ -133,10 +134,10 @@
     display: flex;
     align-items: flex-start;
     gap: 24px;
-    padding: 12px 0;
+    padding: 12px 12px 12px 0;
     font-size: 16px;
     line-height: 1.6;
-    background-color: rgba(256, 256, 256, 0.8);
+    background-color: rgba(256, 256, 256, 0.85);
 
     .date {
       white-space: nowrap;
