@@ -77,10 +77,12 @@ function generatePaginationItemsHTML() {
           item.previousElementSibling &&
           parseInt(item.previousElementSibling.textContent) + 1;
         if (jumpTo) changePage(jumpTo);
+        item.blur();
       });
     } else {
       item.addEventListener("click", () => {
         changePage(Number(item.textContent));
+        item.blur();
       });
     }
   });
@@ -96,6 +98,7 @@ function initPagination() {
     if (currentPage > 1) {
       changePage(currentPage - 1);
     }
+    prevBtn.blur();
   });
 
   nextBtn.addEventListener("click", () => {
@@ -103,6 +106,7 @@ function initPagination() {
     if (currentPage < totalPage) {
       changePage(currentPage + 1);
     }
+    nextBtn.blur();
   });
 }
 

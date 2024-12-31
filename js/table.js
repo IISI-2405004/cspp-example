@@ -146,7 +146,10 @@ function generatePaginationItemsHTML() {
   wrapper.innerHTML = items.join("");
 
   document.querySelectorAll(".pagination-item").forEach((item, index) => {
-    item.addEventListener("click", () => changePage(index + 1));
+    item.addEventListener("click", () => {
+      changePage(index + 1);
+      item.blur();
+    });
   });
 }
 
@@ -160,6 +163,7 @@ function initPagination() {
       const page = currentPage - 1;
       changePage(page);
     }
+    prevBtn.blur();
   });
 
   nextBtn.addEventListener("click", () => {
@@ -167,6 +171,8 @@ function initPagination() {
       const page = currentPage + 1;
       changePage(page);
     }
+
+    nextBtn.blur();
   });
 }
 
