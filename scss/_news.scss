@@ -1,4 +1,4 @@
-.login-page {
+.news-page {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -17,95 +17,38 @@
     }
   }
 
-  .login-container {
+  .news-container {
     flex: 1;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(480px, 1fr));
-    align-items: flex-start;
-    gap: 64px;
     width: 80vw;
-    max-width: 1280px;
+    max-width: 1320px;
     margin: 0 auto;
+    padding-bottom: 80px;
   }
 
-  .login-wrapper {
-    background-color: var(--neutral-100);
-    border-radius: 24px;
-    max-width: 100%;
-    box-shadow: 0px 16px 48px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-  }
-
-  .tab-list {
-    gap: 0;
-  }
-
-  .tab {
-    width: calc(100% / 3);
-    height: 60px;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-
-    &:hover,
-    &.active {
-      background-color: var(--lively_blue-500);
-      color: var(--neutral-100);
-    }
-  }
-
-  .tab-contents {
-    padding: 48px;
-  }
-
-  .tab-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .icon-user {
-    font-size: 70px;
-    color: var(--lively_blue-500);
-  }
-
-  .icon-info {
-    color: var(--neutral-500);
-  }
-
-  .login-title {
+  .news-title {
     width: 100%;
     margin: 0;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
 
   .form-wrapper {
     width: 100%;
-  }
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    background-color: var(--neutral-200);
+    border-radius: 8px;
 
-  .form-item {
-    gap: 24px;
-
-    label {
-      padding-left: 0;
-      padding-top: 8px;
+    .select-trigger {
+      flex: 1 1 200px;
+      min-width: 120px;
     }
-  }
 
-  .info-wrapper {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin: 24px 0;
-    font-size: 12px;
-    color: var(--lively_blue-500);
-    gap: 24px;
-  }
-
-  .info-item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    input {
+      min-width: 120px;
+    }
   }
 
   .news-title {
@@ -144,8 +87,8 @@
       padding: 0 8px;
       white-space: nowrap;
       color: var(--neutral-500);
-      background-color: var(--neutral-100);
       border: 1px solid var(--neutral-500);
+      background-color: var(--neutral-100);
 
       &.green {
         color: var(--lively_green-400);
@@ -201,14 +144,11 @@
 }
 
 @media screen and (max-width: 1280px) {
-  .login-page {
-    .login-container {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      padding-bottom: 80px;
+  .news-page {
+    .form-wrapper {
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
-
     .footer {
       &::before {
         width: 100vw;

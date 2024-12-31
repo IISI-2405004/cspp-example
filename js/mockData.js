@@ -280,3 +280,177 @@ export const tableData = [
     status: "pending",
   },
 ];
+
+export const newsData = [
+  {
+    id: 1,
+    title: "政府資安人力職能轉換訓練(本訓練不須會員資格)",
+    type: "event",
+    date: "2024-12-01",
+  },
+  {
+    id: 2,
+    title: "最新消息內文最新消息內文最新消息內文最新消息內文",
+    type: "news",
+    date: "2024-11-28",
+  },
+  {
+    id: 3,
+    title:
+      "最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文",
+    type: "announcement",
+    date: "2024-11-26",
+  },
+  {
+    id: 4,
+    title:
+      "最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文",
+    type: "event",
+    date: "2024-11-24",
+  },
+  {
+    id: 5,
+    title: "最新消息內文最新消息內文最新消息內文",
+    type: "news",
+    date: "2024-11-22",
+  },
+  {
+    id: 6,
+    title: "最新消息內文最新消息內文",
+    type: "announcement",
+    date: "2024-11-20",
+  },
+  {
+    id: 7,
+    title: "最新消息內文",
+    type: "event",
+    date: "2024-11-18",
+  },
+  {
+    id: 8,
+    title: "最新消息內文最新消息內文最新消息內文",
+    type: "news",
+    date: "2024-11-16",
+  },
+  {
+    id: 9,
+    title: "最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文",
+    type: "announcement",
+    date: "2024-11-14",
+  },
+  {
+    id: 10,
+    title: "最新消息內文最新消息內文",
+    type: "event",
+    date: "2024-11-12",
+  },
+  {
+    id: 11,
+    title: "最新消息內文最新消息內文最新消息內文",
+    type: "news",
+    date: "2024-11-10",
+  },
+  {
+    id: 12,
+    title: "最新消息內文最新消息內文最新消息內文",
+    type: "announcement",
+    date: "2024-11-08",
+  },
+  {
+    id: 13,
+    title: "最新消息內文",
+    type: "event",
+    date: "2024-11-06",
+  },
+  {
+    id: 14,
+    title: "最新消息內文",
+    type: "news",
+    date: "2024-11-04",
+  },
+  {
+    id: 15,
+    title: "最新消息內文最新消息內文最新消息內文",
+    type: "announcement",
+    date: "2024-11-02",
+  },
+  {
+    id: 16,
+    title: "最新消息內文最新消息內文最新消息內文",
+    type: "event",
+    date: "2024-11-01",
+  },
+  {
+    id: 17,
+    title: "最新消息內文最新消息內文最新消息內文最新消息內文",
+    type: "news",
+    date: "2024-10-31",
+  },
+  {
+    id: 18,
+    title: "最新消息內文",
+    type: "announcement",
+    date: "2024-10-30",
+  },
+  {
+    id: 19,
+    title: "最新消息內文",
+    type: "event",
+    date: "2024-10-30",
+  },
+  {
+    id: 20,
+    title: "最新消息內文",
+    type: "news",
+    date: "2024-10-30",
+  },
+  {
+    id: 21,
+    title: "最新消息內文最新消息內文最新消息內文最新消息內文",
+    type: "announcement",
+    date: "2024-10-29",
+  },
+  {
+    id: 22,
+    title: "最新消息內文最新消息內文最新消息內文最新消息內文",
+    type: "event",
+    date: "2024-10-24",
+  },
+  {
+    id: 23,
+    title: "最新消息內文最新消息內文",
+    type: "news",
+    date: "2024-10-22",
+  },
+  {
+    id: 24,
+    title: "最新消息內文",
+    type: "announcement",
+    date: "2024-10-20",
+  },
+  {
+    id: 25,
+    title:
+      "最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文最新消息內文",
+    type: "event",
+    date: "2024-10-18",
+  },
+  {
+    id: 26,
+    title: "最新消息內文",
+    type: "news",
+    date: "2024-10-16",
+  },
+  {
+    id: 27,
+    title: "最新消息內文",
+    type: "announcement",
+    date: "2024-10-14",
+  },
+  {
+    id: 28,
+    title: "最新消息內文",
+    type: "event",
+    date: "2024-10-12",
+  },
+];

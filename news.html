@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/index.css" />
+    <title>資通安全業務入口網 Example</title>
+  </head>
+  <body>
+    <div class="news-page">
+      <div class="logo">
+        <a href="login.html" aria-label="資通安全業務入口網 Logo">
+          <img src="./images/logo.png" alt="資通安全業務入口網 Logo" />
+        </a>
+      </div>
+      <main class="news-container">
+        <h2 class="news-title">
+          <span>公告消息</span>
+        </h2>
+        <div class="form-wrapper">
+          <div class="select-trigger" id="selectTypeTrigger">
+            <div class="select-trigger-text">全部</div>
+            <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+          </div>
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="標題關鍵字"
+          />
+          <button type="button" class="btn primary" aria-label="搜尋">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>搜尋</span>
+          </button>
+        </div>
+        <ul id="newsList" class="news-list"></ul>
+        <div class="pagination mt-6">
+          <span class="total">
+            共<span id="totalRecords" class="ml-2 mr-2">12</span>筆
+          </span>
+
+          <div class="select-trigger small" id="selectTrigger">
+            <div class="select-trigger-text">10筆 / 頁</div>
+            <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+          </div>
+          <button
+            id="toPrevBtn"
+            class="btn pagination-arrow"
+            aria-label="上一頁"
+            disabled
+          >
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <ul id="paginationWrapper" class="pagination-list"></ul>
+          <button
+            id="toNextBtn"
+            class="btn pagination-arrow"
+            aria-label="下一頁"
+          >
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </main>
+      <footer class="footer">
+        <div class="logo">
+          <img src="./images/footer-logo.png" alt="數位發展部資通安全署" />
+        </div>
+        <p>地址：100057 臺北市中正區延平南路143號</p>
+        <p>電話：02-2380-8500 / 民意信箱：www-mailbox.acs.gov.tw</p>
+      </footer>
+    </div>
+
+    <!-- Select (頁碼 Size 下拉選單) -->
+    <ul class="dropdown-panel" id="dropdownPanel">
+      <li class="dropdown-option" data-value="10">10 筆</li>
+      <li class="dropdown-option" data-value="20">20 筆</li>
+      <li class="dropdown-option" data-value="30">30 筆</li>
+      <li class="dropdown-option" data-value="50">50 筆</li>
+    </ul>
+
+    <ul class="dropdown-panel" id="dropdownTypePanel">
+      <li class="dropdown-option" data-value="all">全部</li>
+      <li class="dropdown-option" data-value="news">新聞</li>
+      <li class="dropdown-option" data-value="event">活動</li>
+      <li class="dropdown-option" data-value="announcement">公告</li>
+    </ul>
+
+    <script type="module" src="./js/news.js"></script>
+  </body>
+</html>
