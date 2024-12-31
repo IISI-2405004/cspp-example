@@ -1,10 +1,4 @@
 /* Custom styles */
-#queryForm {
-  label {
-    flex-basis: 120px;
-  }
-}
-
 .table-container {
   max-height: 70vh; /* 限制表格高度，讓表頭 sticky 定位 */
   overflow: auto;
@@ -112,15 +106,21 @@
   }
 }
 
+#queryForm {
+  .form-item-title {
+    flex-basis: 120px;
+  }
+}
+
 #createForm {
   .form-item-title {
-    flex: 0 0 190px;
+    flex-basis: 190px;
   }
 }
 
 #formGroup {
   .form-item-title {
-    flex: 0 0 160px;
+    flex-basis: 160px;
   }
 }
 
@@ -131,6 +131,17 @@
     opacity: 0;
     transform: translateY(-50%);
     animation: slideIn 0.3s ease forwards; /* 滑入動畫效果 */
+  }
+}
+
+@media screen and (max-width: 986px) {
+  #queryForm,
+  #createForm,
+  #formGroup,
+  #editSingleModal {
+    .form-item-title {
+      flex-basis: auto;
+    }
   }
 }
 

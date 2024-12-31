@@ -469,8 +469,26 @@ tbody {
 }
 
 @media screen and (max-width: 986px) {
+  .form-wrapper {
+    row-gap: 0;
+    column-gap: 0;
+  }
+
   .form-item {
     flex: 1 1 100%;
+    flex-direction: column;
+    gap: 4px;
+
+    &.required {
+      .form-item-title::before {
+        left: -8px;
+      }
+    }
+
+    .form-item-title {
+      flex: 1 1 100%;
+      padding-left: 0;
+    }
   }
 }
 
