@@ -49,3 +49,17 @@ document.getElementById("multiDeleteBtn").addEventListener("click", () => {
     .map((checkbox) => checkbox.parentNode.nextElementSibling.textContent);
   handleDeleteModal(checkedItems.join(","));
 });
+
+document.getElementById("queryCollapseBtn").addEventListener("click", () => {
+  const querySection = document.getElementById("querySection");
+  querySection.classList.toggle("collapsed");
+  if (querySection.classList.contains("collapsed")) {
+    document.getElementById(
+      "queryCollapseBtn"
+    ).innerHTML = `<i class="fa-solid fa-chevron-down"></i>`;
+  } else {
+    document.getElementById(
+      "queryCollapseBtn"
+    ).innerHTML = `<i class="fa-solid fa-chevron-up"></i>`;
+  }
+});

@@ -58,20 +58,17 @@
         <div class="main-content">
           <div class="title-section mb-4">
             <ul class="breadcrumb">
-              <li class="breadcrumb-item">資通安全業務入口網</li>
+              <li class="breadcrumb-item">
+                <a href="index.html" aria-label="首頁">首頁</a>
+              </li>
               <li class="breadcrumb-item slash">/</li>
-              <li class="breadcrumb-item active">會議及活動報名</li>
+              <li class="breadcrumb-item">使用機關管理</li>
+              <li class="breadcrumb-item slash">/</li>
+              <li class="breadcrumb-item active">機關基本資料管理</li>
             </ul>
             <div class="title-wrapper">
-              <h1 class="page-title">會議排程</h1>
+              <h1 class="page-title">機關基本資料管理</h1>
               <div class="button-group">
-                <button
-                  class="btn btn-small secondary"
-                  id="searchBtn"
-                  aria-label="搜尋"
-                >
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
                 <button
                   class="btn btn-small primary"
                   id="addBtn"
@@ -80,143 +77,176 @@
                   <i class="fa-solid fa-plus"></i>
                   <span>新增</span>
                 </button>
+                <button
+                  class="btn btn-small primary"
+                  id="addBtn"
+                  aria-label="新增"
+                >
+                  <i class="fa-solid fa-upload"></i>
+                  <span>匯入</span>
+                </button>
               </div>
             </div>
           </div>
 
-          <div class="tabs flex-1">
-            <ul class="tab-list">
-              <li class="tab active" data-tab="tab1">分類一</li>
-              <li class="tab" data-tab="tab2">分類二</li>
-              <li class="tab" data-tab="tab3">分類三</li>
-            </ul>
-            <div class="tab-contents flex-1">
-              <div id="tab1" class="tab-content active">
-                <div class="table-action button-group justify-end">
-                  <button
-                    class="btn btn-small primary"
-                    id="editBtn"
-                    aria-label="多筆編輯"
-                    disabled
-                  >
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    <span>多筆編輯</span>
-                  </button>
-                  <button
-                    class="btn btn-small danger"
-                    id="multiDeleteBtn"
-                    aria-label="多筆刪除"
-                    disabled
-                  >
-                    <i class="fa-solid fa-trash-can"></i>
-                    <span>多筆刪除</span>
-                  </button>
-                  <button
-                    class="btn btn-small secondary hidden"
-                    id="cancelEditModeBtn"
-                    aria-label="取消編輯"
-                  >
-                    <i class="fa-solid fa-circle-xmark"></i>
-                    <span>取消編輯</span>
-                  </button>
-                  <button
-                    class="btn btn-small primary hidden"
-                    id="submitEditModeBtn"
-                    aria-label="確認編輯"
-                  >
-                    <i class="fa-solid fa-file-circle-check"></i>
-                    <span>多筆儲存</span>
-                  </button>
-                </div>
-                <div class="table-container">
-                  <table id="dataTable">
-                    <thead>
-                      <tr>
-                        <th class="custom-width">
-                          <input
-                            type="checkbox"
-                            id="checkAll"
-                            aria-label="全選"
-                          />
-                        </th>
-                        <th class="sortable custom-width">
-                          編號
-                          <span class="sort-icon">
-                            <i id="idArrow" class="fa-solid fa-sort-up"></i>
-                            <i
-                              id="idArrow"
-                              class="fa-solid fa-sort-down active"
-                            ></i>
-                          </span>
-                        </th>
-                        <th class="sortable custom-width">
-                          項目名稱
-                          <span class="sort-icon">
-                            <i id="idArrow" class="fa-solid fa-sort-up"></i>
-                            <i id="idArrow" class="fa-solid fa-sort-down"></i>
-                          </span>
-                        </th>
-                        <th class="sortable">
-                          部門
-                          <span class="sort-icon">
-                            <i id="idArrow" class="fa-solid fa-sort-up"></i>
-                            <i id="idArrow" class="fa-solid fa-sort-down"></i>
-                          </span>
-                        </th>
-                        <th class="sortable">
-                          提交日期
-                          <span class="sort-icon">
-                            <i id="idArrow" class="fa-solid fa-sort-up"></i>
-                            <i id="idArrow" class="fa-solid fa-sort-down"></i>
-                          </span>
-                        </th>
-                        <th class="sortable">
-                          狀態
-                          <span class="sort-icon">
-                            <i id="idArrow" class="fa-solid fa-sort-up"></i>
-                            <i id="idArrow" class="fa-solid fa-sort-down"></i>
-                          </span>
-                        </th>
-                        <th class="custom-width" width="148px">操作</th>
-                      </tr>
-                    </thead>
-                    <tbody id="tableBody"></tbody>
-                  </table>
-                </div>
-
-                <div class="pagination mt-6">
-                  <span class="total">
-                    共<span id="totalRecords" class="ml-2 mr-2">12</span>筆
-                  </span>
-
-                  <div class="select-trigger small" id="selectTrigger">
-                    <div class="select-trigger-text">10筆 / 頁</div>
-                    <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+          <div id="querySection" class="query-section box mb-4">
+            <h3 class="section-title">
+              <span>查詢暫存資料條件</span>
+              <button id="queryCollapseBtn" class="collapse-btn btn btn-small">
+                <i class="fa-solid fa-chevron-up"></i>
+              </button>
+            </h3>
+            <div class="query-wrapper">
+              <form class="form-wrapper mt-4" id="queryForm" action="">
+                <div class="form-item required">
+                  <label>核定日期區間</label>
+                  <!-- 展開的日期元件樣式以使用的套件即可，但字體、顏色須符合規範 -->
+                  <div class="datepicker-input small">
+                    <span id="dateStartTime" class="text"> 2024-01-01 </span>
+                    <i class="icon-date-range"></i>
+                    <span id="dateEndTime" class="text"> 2024-12-31 </span>
+                    <i class="icon-calendar fa-solid fa-calendar-days"></i>
                   </div>
-                  <button
-                    id="toPrevBtn"
-                    class="btn pagination-arrow"
-                    aria-label="上一頁"
-                    disabled
-                  >
-                    <i class="fa-solid fa-chevron-left"></i>
-                  </button>
-                  <ul id="paginationWrapper" class="pagination-list"></ul>
-                  <button
-                    id="toNextBtn"
-                    class="btn pagination-arrow"
-                    aria-label="下一頁"
-                  >
-                    <i class="fa-solid fa-chevron-right"></i>
-                  </button>
                 </div>
+                <div class="form-item">
+                  <label for="number"> 核定文號 </label>
+                  <input
+                    class="small"
+                    type="text"
+                    id="number"
+                    name="number"
+                    value="院授數資安字第11312345678號"
+                    placeholder="請輸入"
+                  />
+                </div>
+                <div class="form-item">
+                  <label for="name"> 機關名稱 </label>
+                  <input
+                    class="small"
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="國立XX大學醫學院附設醫院"
+                    placeholder="請輸入"
+                  />
+                </div>
+              </form>
+              <div class="button-group justify-end mt-6">
+                <button type="button" class="btn btn-small secondary">
+                  清除
+                </button>
+                <button type="button" class="btn btn-small primary">
+                  查詢
+                </button>
               </div>
-              <div id="tab2" class="tab-content">
-                <p>這裡放置【分類二】的內容</p>
+            </div>
+          </div>
+
+          <div class="box flex-1">
+            <h3 class="section-title mb-4">
+              <span>查詢暫存資料結果</span>
+            </h3>
+            <div class="button-group justify-end mb-4">
+              <button
+                class="btn btn-small primary"
+                id="editBtn"
+                aria-label="多筆編輯"
+                disabled
+              >
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>多筆編輯</span>
+              </button>
+              <button
+                class="btn btn-small danger"
+                id="multiDeleteBtn"
+                aria-label="多筆刪除"
+                disabled
+              >
+                <i class="fa-solid fa-trash-can"></i>
+                <span>多筆刪除</span>
+              </button>
+              <button
+                class="btn btn-small secondary hidden"
+                id="cancelEditModeBtn"
+                aria-label="取消編輯"
+              >
+                <i class="fa-solid fa-circle-xmark"></i>
+                <span>取消編輯</span>
+              </button>
+              <button
+                class="btn btn-small primary hidden"
+                id="submitEditModeBtn"
+                aria-label="確認編輯"
+              >
+                <i class="fa-solid fa-file-circle-check"></i>
+                <span>多筆儲存</span>
+              </button>
+            </div>
+            <div class="table-container">
+              <table id="dataTable">
+                <thead>
+                  <tr>
+                    <th class="align-center">
+                      <input type="checkbox" id="checkAll" aria-label="全選" />
+                    </th>
+                    <th class="sortable align-center">
+                      序號
+                      <span class="sort-icon">
+                        <i id="idArrow" class="fa-solid fa-sort-up"></i>
+                        <i
+                          id="idArrow"
+                          class="fa-solid fa-sort-down active"
+                        ></i>
+                      </span>
+                    </th>
+                    <th class="sortable align-center">
+                      核定日期
+                      <span class="sort-icon">
+                        <i id="idArrow" class="fa-solid fa-sort-up"></i>
+                        <i id="idArrow" class="fa-solid fa-sort-down"></i>
+                      </span>
+                    </th>
+                    <th>核定文號</th>
+                    <th>機關名稱</th>
+                    <!-- <th class="sortable align-center">
+                      狀態
+                      <span class="sort-icon">
+                        <i id="idArrow" class="fa-solid fa-sort-up"></i>
+                        <i id="idArrow" class="fa-solid fa-sort-down"></i>
+                      </span>
+                    </th> -->
+                    <th class="align-center">操作</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+              </table>
+            </div>
+
+            <div class="pagination mt-6">
+              <span class="total">
+                共<span id="totalRecords" class="ml-2 mr-2">12</span>筆
+              </span>
+
+              <div class="select-trigger small" id="selectTrigger">
+                <div class="select-trigger-text">10筆 / 頁</div>
+                <i class="trigger-arrow fa-solid fa-chevron-down"></i>
               </div>
-              <div id="tab3" class="tab-content">
-                <p>這裡放置【分類三】的內容</p>
-              </div>
+              <button
+                id="toPrevBtn"
+                class="btn pagination-arrow"
+                aria-label="上一頁"
+                disabled
+              >
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <ul id="paginationWrapper" class="pagination-list"></ul>
+              <button
+                id="toNextBtn"
+                class="btn pagination-arrow"
+                aria-label="下一頁"
+              >
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
             </div>
           </div>
         </div>

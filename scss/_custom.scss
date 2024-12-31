@@ -1,13 +1,8 @@
 /* Custom styles */
-.tab-contents {
-  padding-top: 0;
-}
-
-.table-action {
-  width: 100%;
-  background-color: #fff;
-  padding: 16px 0;
-  z-index: 5;
+#queryForm {
+  label {
+    flex-basis: 120px;
+  }
 }
 
 .table-container {
@@ -15,28 +10,71 @@
   overflow: auto;
 }
 
+/* 依照需求特定欄位設定寬度 */
 #dataTable {
   thead {
     th {
       &:first-child {
+        width: 48px;
         min-width: 48px;
       }
 
       &:nth-child(2) {
-        min-width: 100px;
+        width: 84px;
+        min-width: 84px;
+      }
+
+      &:nth-child(3) {
+        width: 160px;
+        min-width: 160px;
+      }
+
+      &:nth-child(4) {
+        width: 260px;
+        min-width: 260px;
+      }
+
+      &:nth-child(5) {
+        min-width: 320px;
+      }
+
+      &:last-child {
+        width: 148px;
+        min-width: 148px;
       }
     }
   }
 
   tbody {
     td {
-      &:first-child {
-        width: 48px;
+      // &:first-child {
+      //   width: 48px;
+      //   min-width: 48px;
+      // }
+
+      // &:nth-child(2) {
+      //   width: 84px;
+      //   min-width: 84px;
+      // }
+
+      // &:nth-child(3) {
+      //   width: 160px;
+      //   min-width: 160px;
+      // }
+
+      &:nth-child(4) {
+        width: 260px;
+        max-width: 260px;
       }
 
-      &:nth-child(2) {
-        width: 100px;
+      &:nth-child(5) {
+        max-width: 420px;
       }
+
+      // &:last-child {
+      //   width: 148px;
+      //   min-width: 148px;
+      // }
     }
   }
 }
@@ -48,6 +86,7 @@
 .status-wrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
 }
 

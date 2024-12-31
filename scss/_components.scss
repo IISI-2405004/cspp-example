@@ -179,6 +179,10 @@ thead {
       background-color: var(--neutral-600);
     }
 
+    &.align-center {
+      text-align: center;
+    }
+
     &.sortable {
       cursor: pointer;
 
@@ -246,6 +250,10 @@ tbody {
         box-shadow: inset -10px 0 10px -10px rgba(0, 0, 0, 0.15);
       }
     }
+
+    &.align-center {
+      text-align: center;
+    }
   }
 
   .btn-group {
@@ -255,26 +263,9 @@ tbody {
 
   p {
     margin: 0;
-    word-break: break-all;
-    word-wrap: break-word;
-  }
-}
-
-/* 依照需求特定欄位設定寬度 */
-th {
-  &:not(.custom-width) {
-    min-width: 120px;
-  }
-  &:nth-child(3) {
-    width: 420px;
-    min-width: 280px;
-  }
-}
-
-td {
-  &:nth-child(3) {
-    width: 420px;
-    min-width: 280px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
 
@@ -323,6 +314,11 @@ td {
       background-color: var(--neutral-200);
       cursor: not-allowed;
     }
+
+    &.ellipsis {
+      color: var(--neutral-400);
+      border-color: transparent;
+    }
   }
 }
 
@@ -356,6 +352,7 @@ td {
   align-items: flex-start;
   gap: 8px;
   padding-bottom: 24px;
+  position: relative;
 
   &.w-full {
     flex: 1 1 100%;
@@ -370,6 +367,17 @@ td {
       .message {
         color: var(--lively_pink-400);
       }
+    }
+  }
+
+  &.required {
+    label::before {
+      display: block;
+      position: absolute;
+      top: 4px;
+      left: 0;
+      content: "*";
+      color: var(--lively_pink-500);
     }
   }
 

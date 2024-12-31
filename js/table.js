@@ -96,19 +96,20 @@ export function convertToStatusHTML(status) {
 function generateRowHTML(item) {
   return `
     <tr>
-      <td class="custom-width">
+      <td class="align-center">
         <input
           class="row-check"
           type="checkbox"
           data-value=${item.id}
           aria-label="選取"
-        /></td>
-      <td class="custom-width">${item.id}</td>
-      <td><p>${item.title}</p></td>
-      <td>${item.department}</td>
-      <td>${item.submitDate}</td>
-      <td>${convertToStatusHTML(item.status)}</td>
-      <td class="custom-width">
+        />
+      </td>
+      <td class="align-center">${item.id}</td>
+      <td class="align-center">${item.submitDate}</td>
+      <td><p>${item.ref}</p></td>
+      <td><p>${item.organ}</p></td>
+
+      <td class="align-center">
         <div class="btn-group">
           <button 
             id="editId${item.id}"
@@ -379,42 +380,19 @@ function generateEditableRowHTML(item) {
 
   return `
     <tr>
-      <td class="custom-width">
+      <td class="align-center">
         <input class="row-check" type="checkbox" data-value="${item.id}" ${
     isChecked ? "checked" : ""
   } aria-label="選取" disabled />
       </td>
-      <td class="custom-width">${item.id}</td>
-      <td>
-        ${
-          isChecked
-            ? `<input type="text" value="${item.title}" data-id="${item.id}" data-field="title" />`
-            : `<p>${item.title}</p>`
-        }
-      </td>
-      <td>
+      <td class="align-center">${item.id}</td>
+      <td class="align-center">
         ${
           isChecked
             ? `
-          <div class="select-trigger small" data-id="${item.id}" data-value="${item.department}" data-field="department">
-            <div class="select-trigger-text">
-              ${item.department}
-            </div>
-            <i class="trigger-arrow fa-solid fa-chevron-down"></i>
-          </div>
-        `
-            : item.department
-        }
-      </td>
-      <td>
-        ${
-          isChecked
-            ? `
-          <div class="select-trigger small" data-id="${item.id}" data-value="${item.submitDate}" data-field="submitDate">
-            <div class="select-trigger-text">
-              ${item.submitDate}
-            </div>
-            <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+          <div class="datepicker-input small">
+            <span id="dateTime" class="text">${item.submitDate}</span>
+            <i class="icon-calendar fa-solid fa-calendar-days"></i>
           </div>
         `
             : item.submitDate
@@ -423,22 +401,18 @@ function generateEditableRowHTML(item) {
       <td>
         ${
           isChecked
-            ? `
-          <div class="select-trigger small" id="selectStatusTrigger${
-            item.id
-          }" data-id="${item.id}" data-value="${
-                item.status
-              }" data-field="status">
-            <div class="select-trigger-text">
-              ${convertToStatusHTML(item.status)}
-            </div>
-            <i class="trigger-arrow fa-solid fa-chevron-down"></i>
-          </div>
-        `
-            : convertToStatusHTML(item.status)
+            ? `<input class="small" type="text" value="${item.ref}" data-id="${item.id}" data-field="ref" />`
+            : `<p>${item.ref}</p>`
         }
       </td>
-      <td class="custom-width">
+      <td>
+        ${
+          isChecked
+            ? `<input class="small" type="text" value="${item.organ}" data-id="${item.id}" data-field="organ" />`
+            : `<p>${item.organ}</p>`
+        }
+      </td>
+      <td class="align-center">
         <div class="btn-group">
           <button
             class="btn btn-small primary"
@@ -489,10 +463,10 @@ function saveChanges() {
 
 function convertToColumnTitle(field) {
   switch (field) {
-    case "title":
-      return "項目標題";
-    case "status":
-      return "狀態";
+    case "ref":
+      return "核定文號";
+    case "organ":
+      return "機關名稱";
     default:
       return "";
   }
@@ -506,7 +480,7 @@ function showChangesModal(changes) {
   const changeList = changes
     .map(
       (change) =>
-        `<p>編號：${change.id}，欄位：${convertToColumnTitle(
+        `<p>序號：${change.id}，欄位：${convertToColumnTitle(
           change.field
         )}，從「${change.oldValue}」改為「${change.newValue}」</p>`
     )

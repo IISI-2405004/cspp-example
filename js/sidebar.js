@@ -8,31 +8,34 @@ const menuItems = [
     name: "使用機關管理",
     enName: "Agency Management",
     icon: "./images/agency_management.png",
+    children: [
+      {
+        name: "機關基本資料管理",
+        enName: "Agency Management Basic Information",
+      },
+      {
+        name: "機關基本資料維護",
+        enName: "Agency Management Basic Information Maintenance",
+      },
+      {
+        name: "責任等級與異動資料查詢",
+        enName: "Responsibility Level and Change Data Query",
+      },
+      {
+        name: "機關資通安全責任資料查詢",
+        enName: "Agency Cybersecurity Responsibility Data Query",
+      },
+      {
+        name: "資安法納管機關資安責任統計",
+        enName:
+          "Cybersecurity Responsibility Statistics of Agencies under the Cybersecurity Management Act",
+      },
+    ],
   },
   {
     name: "資安人員管理",
     enName: "Personnel Management",
     icon: "./images/personnel_management.png",
-    children: [
-      {
-        name: "第二層項目-1",
-        enName: "Second Level-1",
-      },
-      {
-        name: "第二層項目-2",
-        enName: "Second Level-2",
-        children: [
-          {
-            name: "第三層項目-1",
-            enName: "Third Level-1",
-          },
-          {
-            name: "第三層項目-2",
-            enName: "Third Level-2",
-          },
-        ],
-      },
-    ],
   },
   {
     name: "資安履歷",
@@ -186,8 +189,15 @@ function collapseAllChildren(submenu) {
 
 const menuContainer = document.getElementById("menuContainer");
 
-menuItems.forEach((item) => {
+menuItems.forEach((item, index) => {
   const menuItem = createMenuItem(item, collapseAllChildren);
+  if (index === 0) {
+    menuItem.querySelector(".menu-title-wrapper").classList.add("active");
+    menuItem.querySelector(".submenu").classList.remove("collapsed");
+    menuItem
+      .querySelector(".submenu .menu-title-wrapper")
+      .classList.add("active");
+  }
   menuContainer.appendChild(menuItem);
 });
 

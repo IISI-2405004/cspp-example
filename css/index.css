@@ -515,7 +515,7 @@ thead th {
   font-size: 14px;
   line-height: 1.6;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
@@ -527,6 +527,9 @@ thead th:last-child {
   right: 0;
   z-index: 1; /* 避免被蓋住 */
   background-color: var(--neutral-600);
+}
+thead th.align-center {
+  text-align: center;
 }
 thead th.sortable {
   cursor: pointer;
@@ -587,28 +590,18 @@ tbody td:last-child::before {
   pointer-events: none;
   box-shadow: inset -10px 0 10px -10px rgba(0, 0, 0, 0.15);
 }
+tbody td.align-center {
+  text-align: center;
+}
 tbody .btn-group {
   display: flex;
   gap: 8px;
 }
 tbody p {
   margin: 0;
-  word-break: break-all;
-  word-wrap: break-word;
-}
-
-/* 依照需求特定欄位設定寬度 */
-th:not(.custom-width) {
-  min-width: 120px;
-}
-th:nth-child(3) {
-  width: 420px;
-  min-width: 280px;
-}
-
-td:nth-child(3) {
-  width: 420px;
-  min-width: 280px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /* Pagination */
@@ -657,6 +650,11 @@ td:nth-child(3) {
   background-color: var(--neutral-200);
   cursor: not-allowed;
 }
+.pagination .pagination-arrow.ellipsis,
+.pagination .pagination-item.ellipsis {
+  color: var(--neutral-400);
+  border-color: transparent;
+}
 
 /* Form */
 .form-wrapper {
@@ -685,6 +683,7 @@ td:nth-child(3) {
   align-items: flex-start;
   gap: 8px;
   padding-bottom: 24px;
+  position: relative;
 }
 .form-item.w-full {
   flex: 1 1 100%;
@@ -694,6 +693,14 @@ td:nth-child(3) {
 }
 .form-item.error .form-item-content .message {
   color: var(--lively_pink-400);
+}
+.form-item.required label::before {
+  display: block;
+  position: absolute;
+  top: 4px;
+  left: 0;
+  content: "*";
+  color: var(--lively_pink-500);
 }
 .form-item label {
   flex: 0 0 72px;
@@ -1827,10 +1834,33 @@ a {
   margin: 0;
 }
 
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--lively_blue-500);
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0;
+}
+
 .button-group {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.box {
+  padding: 16px 24px;
+  background-color: var(--neutral-100);
+  border-radius: 8px;
+}
+
+.query-section.collapsed .query-wrapper {
+  display: none;
+}
+.query-section .collapse-btn {
+  color: var(--neutral-500);
 }
 
 .mt-1 {
@@ -2006,15 +2036,8 @@ a {
 }
 
 /* Custom styles */
-.tab-contents {
-  padding-top: 0;
-}
-
-.table-action {
-  width: 100%;
-  background-color: #fff;
-  padding: 16px 0;
-  z-index: 5;
+#queryForm label {
+  flex-basis: 120px;
 }
 
 .table-container {
@@ -2022,17 +2045,36 @@ a {
   overflow: auto;
 }
 
+/* 依照需求特定欄位設定寬度 */
 #dataTable thead th:first-child {
+  width: 48px;
   min-width: 48px;
 }
 #dataTable thead th:nth-child(2) {
-  min-width: 100px;
+  width: 84px;
+  min-width: 84px;
 }
-#dataTable tbody td:first-child {
-  width: 48px;
+#dataTable thead th:nth-child(3) {
+  width: 160px;
+  min-width: 160px;
 }
-#dataTable tbody td:nth-child(2) {
-  width: 100px;
+#dataTable thead th:nth-child(4) {
+  width: 260px;
+  min-width: 260px;
+}
+#dataTable thead th:nth-child(5) {
+  min-width: 320px;
+}
+#dataTable thead th:last-child {
+  width: 148px;
+  min-width: 148px;
+}
+#dataTable tbody td:nth-child(4) {
+  width: 260px;
+  max-width: 260px;
+}
+#dataTable tbody td:nth-child(5) {
+  max-width: 420px;
 }
 
 .search-box {
@@ -2042,6 +2084,7 @@ a {
 .status-wrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
 }
 

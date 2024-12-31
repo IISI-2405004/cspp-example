@@ -301,8 +301,36 @@ a {
   margin: 0;
 }
 
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--lively_blue-500);
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0;
+}
+
 .button-group {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.box {
+  padding: 16px 24px;
+  background-color: var(--neutral-100);
+  border-radius: 8px;
+}
+
+.query-section {
+  &.collapsed {
+    .query-wrapper {
+      display: none;
+    }
+  }
+
+  .collapse-btn {
+    color: var(--neutral-500);
+  }
 }
