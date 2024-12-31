@@ -677,6 +677,20 @@ tbody p {
   width: 100%;
 }
 
+.form-group-section {
+  flex: 1 1 100%;
+  padding: 24px;
+  background-color: var(--neutral-200);
+  border-radius: 8px;
+}
+.form-group-section .form-group-title {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.6;
+  color: var(--neutral-700);
+  margin: 0 0 24px 0;
+}
+
 .form-item {
   flex: 0 1 calc(50% - 20px);
   display: flex;
@@ -694,7 +708,7 @@ tbody p {
 .form-item.error .form-item-content .message {
   color: var(--lively_pink-400);
 }
-.form-item.required label::before {
+.form-item.required .form-item-title::before {
   display: block;
   position: absolute;
   top: 4px;
@@ -702,7 +716,7 @@ tbody p {
   content: "*";
   color: var(--lively_pink-500);
 }
-.form-item label {
+.form-item .form-item-title {
   flex: 0 0 72px;
   padding-top: 6px;
   padding-left: 12px;
@@ -722,14 +736,6 @@ tbody p {
   left: 0;
   font-size: 12px;
   color: var(--neutral-500);
-}
-.form-item .icon-required {
-  font-size: 10px;
-  color: var(--lively_pink-400);
-  position: absolute;
-  top: calc(50% + 3px);
-  left: 0;
-  transform: translateY(-50%);
 }
 
 .checkbox-group,
@@ -816,11 +822,35 @@ tbody p {
 }
 .select-trigger.small {
   height: 32px;
+  padding: 0 8px;
   font-size: 14px;
   line-height: 32px;
 }
 .select-trigger .placeholder {
   color: var(--neutral-400);
+}
+.select-trigger .multi-option {
+  position: relative;
+  padding-left: 10px;
+  padding-right: 32px;
+  color: var(--neutral-600);
+  background-color: var(--neutral-200);
+  border: 1px solid var(--neutral-300);
+  line-height: 22px;
+  border-radius: 4px;
+}
+.select-trigger .multi-option.ellipsis {
+  padding-right: 10px;
+  cursor: initial;
+}
+.select-trigger .multi-option .icon-close {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: var(--neutral-400);
+  cursor: pointer;
 }
 
 /* Select Options (掛在 body 下) */
@@ -897,6 +927,7 @@ input[type=text][disabled] {
   cursor: not-allowed;
 }
 input[type=text].small {
+  padding: 0 8px;
   height: 32px;
   font-size: 14px;
 }
@@ -938,6 +969,43 @@ input[type=text].large {
   padding-right: 24px;
 }
 
+/* Textarea */
+textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--neutral-700);
+  background-color: var(--neutral-100);
+  border: 1px solid var(--neutral-400);
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+}
+textarea:focus {
+  border-color: var(--lively_blue-500);
+  outline: none;
+}
+textarea::-moz-placeholder {
+  color: var(--neutral-400);
+}
+textarea::placeholder {
+  color: var(--neutral-400);
+}
+textarea[disabled] {
+  color: var(--neutral-400);
+  background-color: var(--neutral-200);
+  border-color: var(--neutral-400);
+  cursor: not-allowed;
+}
+textarea.small {
+  padding: 6px 8px;
+  font-size: 14px;
+}
+
 /* Datepicker */
 .datepicker-input {
   display: flex;
@@ -969,6 +1037,7 @@ input[type=text].large {
 }
 .datepicker-input.small {
   height: 32px;
+  padding: 0 8px;
   font-size: 14px;
   line-height: 32px;
 }
@@ -1228,7 +1297,7 @@ input[type=radio][disabled]:checked::before {
 .tab-list {
   display: flex;
   margin: 0;
-  padding: 0;
+  padding: 0 24px;
   gap: 16px;
   list-style-type: none;
 }
@@ -2097,16 +2166,24 @@ a {
   font-size: 8px;
 }
 .status-icon.pending {
-  color: var(--lively_purple-400);
+  color: var(--lively_purple-500);
 }
 .status-icon.reviewing {
-  color: var(--lively_yellow-400);
+  color: var(--lively_yellow-500);
 }
 .status-icon.recheck {
-  color: var(--lively_pink-400);
+  color: var(--lively_pink-500);
 }
 .status-icon.closed {
-  color: var(--neutral-400);
+  color: var(--neutral-500);
+}
+
+#createForm .form-item-title {
+  flex: 0 0 190px;
+}
+
+#formGroup .form-item-title {
+  flex: 0 0 160px;
 }
 
 #editSingleModal .modal-content {

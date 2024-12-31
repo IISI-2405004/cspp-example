@@ -79,8 +79,8 @@
                 </button>
                 <button
                   class="btn btn-small primary"
-                  id="addBtn"
-                  aria-label="新增"
+                  id="importBtn"
+                  aria-label="匯入"
                 >
                   <i class="fa-solid fa-upload"></i>
                   <span>匯入</span>
@@ -96,10 +96,10 @@
                 <i class="fa-solid fa-chevron-up"></i>
               </button>
             </h3>
-            <div class="query-wrapper">
-              <form class="form-wrapper mt-4" id="queryForm" action="">
+            <div class="query-wrapper mt-4">
+              <form class="form-wrapper" id="queryForm" action="">
                 <div class="form-item required">
-                  <label>核定日期區間</label>
+                  <label class="form-item-title">核定日期區間</label>
                   <!-- 展開的日期元件樣式以使用的套件即可，但字體、顏色須符合規範 -->
                   <div class="datepicker-input small">
                     <span id="dateStartTime" class="text"> 2024-01-01 </span>
@@ -109,7 +109,7 @@
                   </div>
                 </div>
                 <div class="form-item">
-                  <label for="number"> 核定文號 </label>
+                  <label class="form-item-title" for="number"> 核定文號 </label>
                   <input
                     class="small"
                     type="text"
@@ -120,7 +120,7 @@
                   />
                 </div>
                 <div class="form-item">
-                  <label for="name"> 機關名稱 </label>
+                  <label class="form-item-title" for="name"> 機關名稱 </label>
                   <input
                     class="small"
                     type="text"
@@ -336,11 +336,8 @@
         </div>
         <div class="modal-body">
           <form class="form-wrapper" id="editForm" action="">
-            <div class="form-item">
-              <label for="title">
-                <i class="icon-required fa-solid fa-asterisk"></i>
-                標題文字
-              </label>
+            <div class="form-item required">
+              <label class="form-item-title" for="title"> 標題文字 </label>
               <div class="form-item-content">
                 <input
                   class="small"
@@ -353,7 +350,7 @@
               </div>
             </div>
             <div class="form-item error">
-              <label for="title11">標題文字</label>
+              <label class="form-item-title" for="title11">標題文字</label>
               <div class="form-item-content">
                 <input
                   class="small"
@@ -366,7 +363,7 @@
               </div>
             </div>
             <div class="form-item">
-              <label>標題文字</label>
+              <label class="form-item-title">標題文字</label>
               <!-- 展開的日期元件樣式以使用的套件即可，但字體、顏色須符合規範 -->
               <div class="form-item-content">
                 <div class="datepicker-input small">
@@ -382,7 +379,7 @@
               </div>
             </div>
             <div class="form-item">
-              <label>標題文字</label>
+              <label class="form-item-title">標題文字</label>
               <div class="checkbox-group">
                 <div class="checkbox-wrapper">
                   <input
@@ -407,7 +404,7 @@
               </div>
             </div>
             <div class="form-item">
-              <label>標題文字</label>
+              <label class="form-item-title">標題文字</label>
               <div class="radio-group">
                 <div class="radio-wrapper">
                   <input type="radio" id="radio1" name="radio" value="radio1" />
@@ -420,10 +417,7 @@
               </div>
             </div>
             <div class="form-item">
-              <label>
-                <i class="icon-required fa-solid fa-asterisk"></i>
-                狀態
-              </label>
+              <label class="form-item-title"> 狀態 </label>
               <div class="select-trigger small" id="selectTrigger">
                 <div class="select-trigger-text">
                   <div class="status-wrapper">
@@ -435,10 +429,7 @@
               </div>
             </div>
             <div class="form-item">
-              <label>
-                <i class="icon-required fa-solid fa-asterisk"></i>
-                標題文字
-              </label>
+              <label class="form-item-title"> 標題文字 </label>
               <div class="select-trigger small" id="selectTrigger">
                 <div class="select-trigger-text">
                   <div class="status-wrapper">
@@ -449,10 +440,7 @@
               </div>
             </div>
             <div class="form-item">
-              <label>
-                <i class="icon-required fa-solid fa-asterisk"></i>
-                標題文字
-              </label>
+              <label class="form-item-title"> 標題文字 </label>
               <div class="select-trigger small" id="selectTrigger">
                 <div class="select-trigger-text">
                   <div class="status-wrapper">

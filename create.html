@@ -58,12 +58,16 @@
         <div class="main-content">
           <div class="title-section mb-4">
             <ul class="breadcrumb">
-              <li class="breadcrumb-item">資通安全業務入口網</li>
+              <li class="breadcrumb-item">
+                <a href="index.html" aria-label="首頁">首頁</a>
+              </li>
               <li class="breadcrumb-item slash">/</li>
-              <li class="breadcrumb-item active">會議及活動報名</li>
+              <li class="breadcrumb-item">使用機關管理</li>
+              <li class="breadcrumb-item slash">/</li>
+              <li class="breadcrumb-item active">機關基本資料管理</li>
             </ul>
             <div class="title-wrapper">
-              <h1 class="page-title">會議排程</h1>
+              <h1 class="page-title">機關基本資料管理</h1>
               <div class="button-group">
                 <button
                   class="btn btn-small secondary"
@@ -77,276 +81,471 @@
             </div>
           </div>
 
-          <div class="section-container">
-            <h2 class="subtitle mb-4">新增項目</h2>
-            <form class="form-wrapper" id="createForm" action="">
-              <div class="form-item">
-                <label for="title">
-                  <i class="icon-required fa-solid fa-asterisk"></i>
-                  標題
-                </label>
-                <input
-                  class="small"
-                  type="text"
-                  id="title"
-                  name="title"
-                  placeholder="請輸入標題"
-                />
-              </div>
-              <div class="form-item">
-                <label>
-                  <i class="icon-required fa-solid fa-asterisk"></i>
-                  狀態
-                </label>
-                <div class="select-trigger small" id="selectTrigger">
-                  <div class="select-trigger-text">
-                    <div class="status-wrapper">
-                      <i class="status-icon pending fa-solid fa-circle"></i>
-                      <span>待審查 </span>
+          <div class="tabs flex-1">
+            <ul class="tab-list">
+              <li class="tab active" data-tab="create">機關基本資料新增</li>
+              <li class="tab" data-tab="import">機關基本資料新增匯入</li>
+            </ul>
+            <div class="tab-contents flex-1">
+              <div id="create" data-tab="create" class="tab-content active">
+                <h2 class="subtitle mb-4">機關基本資料</h2>
+                <form class="form-wrapper" id="createForm" action="">
+                  <div class="form-item required">
+                    <label class="form-item-title" for="title">
+                      核定文號
+                    </label>
+                    <input
+                      class="small"
+                      type="text"
+                      id="title"
+                      name="title"
+                      placeholder="請輸入"
+                    />
+                  </div>
+                  <div class="form-item required">
+                    <label class="form-item-title"> 核定日期 </label>
+                    <!-- 展開的日期元件樣式以使用的套件即可，但字體、顏色須符合規範 -->
+                    <div class="datepicker-input small">
+                      <span id="dateTime" class="text placeholder"
+                        >請選擇日期</span
+                      >
+                      <i class="icon-calendar fa-solid fa-calendar-days"></i>
                     </div>
                   </div>
-                  <i class="trigger-arrow fa-solid fa-chevron-down"></i>
-                </div>
-              </div>
-              <div class="form-item w-full">
-                <label for="content">
-                  <i class="icon-required fa-solid fa-asterisk"></i>
-                  標題
-                </label>
-                <input
-                  class="small"
-                  type="text"
-                  id="content"
-                  name="content"
-                  placeholder="請輸入標題"
-                />
-              </div>
-              <div class="form-item w-full">
-                <label for="fileInput">檔案上傳</label>
-                <div class="file-wrapper draggable-file-wrapper">
-                  <label for="fileInput" class="draggable-file">
-                    <i class="icon-upload fa-solid fa-cloud-arrow-up"></i>
-                    <span class="draggable-file-title">
-                      點擊新增或拖曳檔案到此區塊
-                    </span>
-                    <button type="button" class="btn btn-small primary">
+                  <div class="form-item required">
+                    <label class="form-item-title">代碼類別</label>
+                    <div class="radio-group">
+                      <div class="radio-wrapper">
+                        <input
+                          type="radio"
+                          id="radio1"
+                          name="radio"
+                          value="radio1"
+                          aria-label="OID"
+                        />
+                        <label for="radio1">OID</label>
+                      </div>
+                      <div class="radio-wrapper">
+                        <input
+                          type="radio"
+                          id="radio2"
+                          name="radio"
+                          value="radio2"
+                          aria-label="統一編號"
+                        />
+                        <label for="radio2">統一編號</label>
+                      </div>
+                      <div class="radio-wrapper">
+                        <input
+                          type="radio"
+                          id="radio3"
+                          name="radio"
+                          value="radio3"
+                          aria-label="無機關代碼"
+                        />
+                        <label for="radio3">無機關代碼</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-item">
+                    <label class="form-item-title" for="code"> 代碼 </label>
+                    <input
+                      class="small"
+                      type="text"
+                      id="code"
+                      name="code"
+                      placeholder="請輸入"
+                    />
+                  </div>
+                  <div class="form-item required">
+                    <label class="form-item-title" for="organ">
+                      機關名稱
+                    </label>
+                    <input
+                      class="small"
+                      type="text"
+                      id="organ"
+                      name="organ"
+                      placeholder="請輸入"
+                    />
+                  </div>
+                  <div class="form-item required">
+                    <label class="form-item-title" for="type">
+                      納管身分別
+                    </label>
+                    <div class="radio-group">
+                      <div class="radio-wrapper">
+                        <input
+                          type="radio"
+                          id="radio3"
+                          name="radio"
+                          value="radio3"
+                          aria-label="公務機關"
+                        />
+                        <label for="radio3">公務機關</label>
+                      </div>
+                      <div class="radio-wrapper">
+                        <input
+                          type="radio"
+                          id="radio4"
+                          name="radio"
+                          value="radio4"
+                          aria-label="特定非公務機關"
+                        />
+                        <label for="radio4">特定非公務機關</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-item required">
+                    <label class="form-item-title" for="organContact">
+                      機關聯絡方式
+                    </label>
+                    <input
+                      class="small"
+                      type="text"
+                      id="organContact"
+                      name="organContact"
+                      placeholder="請輸入"
+                    />
+                  </div>
+                  <div class="form-item">
+                    <label class="form-item-title" for="organ2">
+                      提報機關
+                    </label>
+                    <input
+                      class="small"
+                      type="text"
+                      id="organ2"
+                      name="organ2"
+                      placeholder="請輸入"
+                    />
+                  </div>
+                  <div class="form-item">
+                    <label class="form-item-title" for="organ3">
+                      上一級機關
+                    </label>
+                    <input
+                      class="small"
+                      type="text"
+                      id="organ3"
+                      name="organ3"
+                      placeholder="請輸入"
+                    />
+                  </div>
+                  <div class="form-item">
+                    <label class="form-item-title" for="organ4">
+                      上級機關
+                    </label>
+                    <input
+                      class="small"
+                      type="text"
+                      id="organ4"
+                      name="organ4"
+                      placeholder="請輸入"
+                    />
+                  </div>
+                  <div class="form-item">
+                    <label class="form-item-title" for="organ5">
+                      中央目的事業主管機關
+                    </label>
+                    <input
+                      class="small"
+                      type="text"
+                      id="organ5"
+                      name="organ5"
+                      placeholder="請輸入"
+                    />
+                  </div>
+                  <div class="form-item required">
+                    <label class="form-item-title"> 資通安全責任等級 </label>
+                    <div class="select-trigger small" id="selectLevelTrigger">
+                      <div class="select-trigger-text">
+                        <div class="status-wrapper">
+                          <span>A級</span>
+                        </div>
+                      </div>
+                      <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                    </div>
+                  </div>
+                  <div class="form-item required">
+                    <label class="form-item-title"> 法條依據 </label>
+                    <div class="select-trigger small" id="selectMultiTrigger">
+                      <div class="select-trigger-text">
+                        <div class="status-wrapper">
+                          <span class="multi-option">
+                            法條一名稱
+                            <i class="icon-close fa-solid fa-xmark"></i>
+                          </span>
+                          <span class="multi-option">
+                            法條二文字
+                            <i class="icon-close fa-solid fa-xmark"></i>
+                          </span>
+                          <span class="multi-option ellipsis"> +2 </span>
+                        </div>
+                      </div>
+                      <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                    </div>
+                  </div>
+                  <div class="form-item required">
+                    <label class="form-item-title"> 機關屬性 </label>
+                    <div class="select-trigger small" id="selectOrganTrigger">
+                      <div class="select-trigger-text">
+                        <div class="status-wrapper">
+                          <span>中央機關</span>
+                        </div>
+                      </div>
+                      <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                    </div>
+                  </div>
+                  <div class="form-item required">
+                    <label class="form-item-title"> 異動註記 </label>
+                    <div class="select-trigger small" id="selectCommentTrigger">
+                      <div class="select-trigger-text">
+                        <div class="status-wrapper">
+                          <span>首次核定</span>
+                        </div>
+                      </div>
+                      <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                    </div>
+                  </div>
+                  <div class="form-item">
+                    <label class="form-item-title"
+                      >是否為關鍵基礎設施提供者</label
+                    >
+                    <div class="radio-group">
+                      <div class="radio-wrapper">
+                        <input
+                          type="radio"
+                          id="yes"
+                          name="radio"
+                          value="yes"
+                          aria-label="是"
+                        />
+                        <label for="yes">是</label>
+                      </div>
+                      <div class="radio-wrapper">
+                        <input
+                          type="radio"
+                          id="no"
+                          name="radio"
+                          value="no"
+                          aria-label="否"
+                        />
+                        <label for="no">否</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group-section mb-6">
+                    <h3 class="form-group-title">關鍵基礎設施(CI)</h3>
+                    <div id="formGroup" class="form-wrapper">
+                      <div class="form-item">
+                        <label class="form-item-title"> 領域 </label>
+                        <div
+                          class="select-trigger small"
+                          id="selectCommentTrigger"
+                        >
+                          <div class="select-trigger-text">
+                            <div class="status-wrapper">
+                              <span>能源</span>
+                            </div>
+                          </div>
+                          <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                        </div>
+                      </div>
+                      <div class="form-item">
+                        <label class="form-item-title" for="sub">
+                          次領域
+                        </label>
+                        <input
+                          class="small"
+                          type="text"
+                          id="sub"
+                          name="sub"
+                          placeholder="請輸入"
+                        />
+                      </div>
+                      <div class="form-item">
+                        <label class="form-item-title"> 等級 </label>
+                        <div
+                          class="select-trigger small"
+                          id="selectCommentTrigger"
+                        >
+                          <div class="select-trigger-text">
+                            <div class="status-wrapper">
+                              <span>一級</span>
+                            </div>
+                          </div>
+                          <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                        </div>
+                      </div>
+                      <div class="form-item">
+                        <label class="form-item-title"> 名稱 </label>
+                        <div
+                          class="select-trigger small"
+                          id="selectCommentTrigger"
+                        >
+                          <div class="select-trigger-text">
+                            <div class="status-wrapper">
+                              <span>國立XX大學醫學院附設醫院</span>
+                            </div>
+                          </div>
+                          <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+                        </div>
+                      </div>
+                      <div class="form-item">
+                        <label class="form-item-title" for="core">
+                          核心業務
+                        </label>
+                        <input
+                          class="small"
+                          type="text"
+                          id="core"
+                          name="core"
+                          placeholder="請輸入"
+                        />
+                      </div>
+                      <div class="form-item">
+                        <label class="form-item-title" for="organ6">
+                          通報應變主管機關
+                        </label>
+                        <input
+                          class="small"
+                          type="text"
+                          id="organ6"
+                          name="organ6"
+                          placeholder="請輸入"
+                        />
+                      </div>
+                      <div class="form-item">
+                        <label class="form-item-title" for="cii">
+                          CII-系統
+                        </label>
+                        <input
+                          class="small"
+                          type="text"
+                          id="cii"
+                          name="cii"
+                          placeholder="請輸入"
+                        />
+                      </div>
+                      <div class="form-item">
+                        <label class="form-item-title" for="cii">
+                          CII-系統維管者
+                        </label>
+                        <input
+                          class="small"
+                          type="text"
+                          id="cii-maintainer"
+                          name="cii-maintainer"
+                          placeholder="請輸入"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-item w-full">
+                    <label class="form-item-title" for="desc"> 調整說明 </label>
+                    <input
+                      class="small"
+                      type="text"
+                      id="desc"
+                      name="desc"
+                      placeholder="請輸入"
+                    />
+                  </div>
+                  <div class="form-item w-full">
+                    <label class="form-item-title" for="info"> 備註 </label>
+                    <textarea
+                      class="small"
+                      rows="5"
+                      id="info"
+                      name="info"
+                      placeholder="請輸入"
+                    ></textarea>
+                  </div>
+
+                  <div class="button-group justify-end">
+                    <button
+                      class="btn btn-small secondary"
+                      id="clearBtn"
+                      aria-label="清除"
+                    >
+                      清除
+                    </button>
+                    <button
+                      class="btn btn-small secondary"
+                      id="cancelCreateBtn"
+                      aria-label="取消"
+                    >
+                      取消
+                    </button>
+                    <button
+                      class="btn btn-small primary"
+                      id="submitCreateBtn"
+                      aria-label="暫存"
+                    >
+                      暫存
+                    </button>
+                    <button
+                      class="btn btn-small primary"
+                      id="submitCreateBtn"
+                      aria-label="新增"
+                    >
                       新增
                     </button>
-                  </label>
-                  <input
-                    type="file"
-                    id="fileInput"
-                    accept="image/png, image/jpeg"
-                  />
-                  <p class="hint">
-                    限制上傳檔案類型說明文，檔案大小不超過說明文
-                  </p>
-                  <ul class="file-list">
-                    <li class="file-item">
-                      <i class="icon-file fa-solid fa-file-lines"></i>
-                      <span class="file-name">檔案名稱.jpg</span>
-                      <i class="icon-check fa-solid fa-circle-check"></i>
-                      <i class="icon-delete fa-solid fa-xmark"></i>
-                    </li>
-                  </ul>
-                </div>
+                  </div>
+                </form>
               </div>
-              <div class="form-item">
-                <label for="title1">
-                  <i class="icon-required fa-solid fa-asterisk"></i>
-                  標題
-                </label>
-                <input
-                  class="small"
-                  type="text"
-                  id="title1"
-                  name="title1"
-                  placeholder="請輸入標題"
-                />
-              </div>
-              <div class="form-item">
-                <label>
-                  <i class="icon-required fa-solid fa-asterisk"></i>
-                  提交日期
-                </label>
-                <!-- 展開的日期元件樣式以使用的套件即可，但字體、顏色須符合規範 -->
-                <div class="datepicker-input small">
-                  <span id="dateTime" class="text placeholder">請選擇日期</span>
-                  <i class="icon-calendar fa-solid fa-calendar-days"></i>
-                </div>
-              </div>
-              <div class="form-item">
-                <label>執行時間</label>
-                <!-- 展開的日期元件樣式以使用的套件即可，但字體、顏色須符合規範 -->
-                <div class="datepicker-input small">
-                  <span id="dateStartTime" class="text placeholder"
-                    >開始時間</span
+              <div id="import" data-tab="import" class="tab-content">
+                <h2 class="subtitle mb-4">資料匯入</h2>
+                <form action="" class="form-wrapper">
+                  <div class="form-item w-full">
+                    <div class="file-wrapper draggable-file-wrapper">
+                      <label for="fileInput" class="draggable-file">
+                        <i class="icon-upload fa-solid fa-cloud-arrow-up"></i>
+                        <span class="draggable-file-title">
+                          點擊新增或拖曳檔案到此區塊
+                        </span>
+                        <button type="button" class="btn btn-small primary">
+                          新增
+                        </button>
+                      </label>
+                      <input
+                        type="file"
+                        id="fileInput"
+                        accept="image/png, image/jpeg"
+                      />
+                      <p class="hint">
+                        限制上傳檔案類型說明文，檔案大小不超過說明文
+                      </p>
+                      <ul class="file-list">
+                        <li class="file-item">
+                          <i class="icon-file fa-solid fa-file-lines"></i>
+                          <span class="file-name">檔案名稱.jpg</span>
+                          <i class="icon-check fa-solid fa-circle-check"></i>
+                          <i class="icon-delete fa-solid fa-xmark"></i>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </form>
+                <div class="button-group justify-end">
+                  <button
+                    class="btn btn-small secondary"
+                    id="cancelCreateBtn2"
+                    aria-label="取消"
                   >
-                  <i class="icon-date-range"></i>
-                  <span id="dateEndTime" class="text placeholder"
-                    >結束時間</span
+                    取消
+                  </button>
+                  <button
+                    class="btn btn-small primary"
+                    id="submitCreateBtn2"
+                    aria-label="匯入"
                   >
-                  <i class="icon-calendar fa-solid fa-calendar-days"></i>
+                    匯入
+                  </button>
                 </div>
               </div>
-              <div class="form-item">
-                <label for="title2">標題</label>
-                <input
-                  class="small"
-                  type="text"
-                  id="title2"
-                  name="title2"
-                  placeholder="請輸入標題"
-                />
-              </div>
-              <div class="form-item">
-                <label for="title3">標題</label>
-                <input
-                  class="small"
-                  type="text"
-                  id="title3"
-                  name="title3"
-                  placeholder="請輸入標題"
-                />
-              </div>
-              <div class="form-item">
-                <label>標題</label>
-                <div class="checkbox-group">
-                  <div class="checkbox-wrapper">
-                    <input
-                      type="checkbox"
-                      id="checkbox1"
-                      name="checkbox1"
-                      value="checkbox1"
-                      aria-label="選項1"
-                    />
-                    <label for="checkbox1">選項1</label>
-                  </div>
-                  <div class="checkbox-wrapper">
-                    <input
-                      type="checkbox"
-                      id="checkbox2"
-                      name="checkbox2"
-                      value="checkbox2"
-                      aria-label="選項2"
-                    />
-                    <label for="checkbox2">選項2</label>
-                  </div>
-                  <div class="checkbox-wrapper">
-                    <input
-                      type="checkbox"
-                      id="checkbox3"
-                      name="checkbox3"
-                      value="checkbox3"
-                      aria-label="選項3"
-                    />
-                    <label for="checkbox3">選項3</label>
-                  </div>
-                </div>
-              </div>
-              <div class="form-item">
-                <label>標題</label>
-                <div class="radio-group">
-                  <div class="radio-wrapper">
-                    <input
-                      type="radio"
-                      id="radio1"
-                      name="radio"
-                      value="radio1"
-                      aria-label="選項1"
-                    />
-                    <label for="radio1">選項1</label>
-                  </div>
-                  <div class="radio-wrapper">
-                    <input
-                      type="radio"
-                      id="radio2"
-                      name="radio"
-                      value="radio2"
-                      aria-label="選項2"
-                    />
-                    <label for="radio2">選項2</label>
-                  </div>
-                </div>
-              </div>
-              <div class="form-item">
-                <label for="title6">標題</label>
-                <input
-                  class="small"
-                  type="text"
-                  id="title6"
-                  name="title6"
-                  placeholder="請輸入標題"
-                />
-              </div>
-              <div class="form-item">
-                <label for="title7">標題</label>
-                <input
-                  class="small"
-                  type="text"
-                  id="title7"
-                  name="title7"
-                  placeholder="請輸入標題"
-                />
-              </div>
-              <div class="form-item">
-                <label for="title8">標題</label>
-                <input
-                  class="small"
-                  type="text"
-                  id="title8"
-                  name="title8"
-                  placeholder="請輸入標題"
-                />
-              </div>
-              <div class="form-item">
-                <label for="title9">標題</label>
-                <input
-                  class="small"
-                  type="text"
-                  id="title9"
-                  name="title9"
-                  placeholder="請輸入標題"
-                />
-              </div>
-              <div class="form-item">
-                <label for="title10">標題</label>
-                <input
-                  class="small"
-                  type="text"
-                  id="title10"
-                  name="title10"
-                  placeholder="請輸入標題"
-                />
-              </div>
-              <div class="form-item">
-                <label for="title11">標題</label>
-                <input
-                  class="small"
-                  type="text"
-                  id="title11"
-                  name="title11"
-                  placeholder="請輸入標題"
-                />
-              </div>
-
-              <div class="button-group justify-end">
-                <button
-                  class="btn btn-small secondary"
-                  id="cancelCreateBtn"
-                  aria-label="取消"
-                >
-                  取消
-                </button>
-                <button
-                  class="btn btn-small primary"
-                  id="submitCreateBtn"
-                  aria-label="新增"
-                >
-                  新增
-                </button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </main>
@@ -387,11 +586,12 @@
     </div>
 
     <!-- Select (狀態下拉選單) -->
-    <ul class="dropdown-panel" id="dropdownStatusPanel">
-      <li class="dropdown-option" data-value="pending">待審查</li>
-      <li class="dropdown-option" data-value="reviewing">審查中</li>
-      <li class="dropdown-option" data-value="recheck">待複審</li>
-      <li class="dropdown-option" data-value="closed">已結案</li>
+    <ul class="dropdown-panel" id="dropdownLevelPanel">
+      <li class="dropdown-option" data-value="a">A級</li>
+      <li class="dropdown-option" data-value="b">B級</li>
+      <li class="dropdown-option" data-value="c">C級</li>
+      <li class="dropdown-option" data-value="d">D級</li>
+      <li class="dropdown-option" data-value="e">E級</li>
     </ul>
 
     <!-- Modal - 取消確認 -->

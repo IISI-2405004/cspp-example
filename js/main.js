@@ -10,7 +10,11 @@ import {
 import { getBaseUrl } from "./utils.js";
 
 document.getElementById("addBtn").addEventListener("click", () => {
-  window.location.href = getBaseUrl() + "/create.html";
+  window.location.href = `${getBaseUrl()}/create.html?tab=create`;
+});
+
+document.getElementById("importBtn").addEventListener("click", () => {
+  window.location.href = `${getBaseUrl()}/create.html?tab=import`;
 });
 
 renderTable();

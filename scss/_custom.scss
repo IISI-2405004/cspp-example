@@ -99,16 +99,28 @@
   font-size: 8px;
 
   &.pending {
-    color: var(--lively_purple-400);
+    color: var(--lively_purple-500);
   }
   &.reviewing {
-    color: var(--lively_yellow-400);
+    color: var(--lively_yellow-500);
   }
   &.recheck {
-    color: var(--lively_pink-400);
+    color: var(--lively_pink-500);
   }
   &.closed {
-    color: var(--neutral-400);
+    color: var(--neutral-500);
+  }
+}
+
+#createForm {
+  .form-item-title {
+    flex: 0 0 190px;
+  }
+}
+
+#formGroup {
+  .form-item-title {
+    flex: 0 0 160px;
   }
 }
 
