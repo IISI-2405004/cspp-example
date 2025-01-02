@@ -493,6 +493,9 @@ template {
 /* Table */
 .table-container {
   max-width: 100%;
+  position: relative;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 table {
@@ -2189,46 +2192,50 @@ a {
 }
 
 /* Custom styles */
-.table-container {
-  max-height: 70vh; /* 限制表格高度，讓表頭 sticky 定位 */
-  overflow: auto;
+.table-action {
+  padding: 16px 24px;
+  margin: 0 -24px;
+  background-color: var(--neutral-100);
+  position: sticky;
+  top: 0;
+  z-index: 200;
 }
 
 /* 依照需求特定欄位設定寬度 */
-#dataTable thead th:first-child {
+.data-table thead th:first-child {
   width: 48px;
   min-width: 48px;
 }
-#dataTable thead th:nth-child(2) {
+.data-table thead th:nth-child(2) {
   width: 84px;
   min-width: 84px;
 }
-#dataTable thead th:nth-child(3) {
+.data-table thead th:nth-child(3) {
   width: 160px;
   min-width: 160px;
 }
-#dataTable thead th:nth-child(4) {
+.data-table thead th:nth-child(4) {
   width: 260px;
   min-width: 260px;
 }
-#dataTable thead th:nth-child(5) {
+.data-table thead th:nth-child(5) {
   min-width: 320px;
 }
-#dataTable thead th:nth-child(6) {
+.data-table thead th:nth-child(6) {
   min-width: 120px;
 }
-#dataTable thead th:last-child {
+.data-table thead th:last-child {
   width: 148px;
   min-width: 148px;
 }
-#dataTable tbody td:nth-child(4) {
+.data-table tbody td:nth-child(4) {
   width: 260px;
   max-width: 260px;
 }
-#dataTable tbody td:nth-child(5) {
+.data-table tbody td:nth-child(5) {
   max-width: 420px;
 }
-#dataTable tbody td:nth-child(6) {
+.data-table tbody td:nth-child(6) {
   min-width: 120px;
 }
 
