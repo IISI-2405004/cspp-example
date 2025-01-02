@@ -117,28 +117,42 @@ function generatePaginationItemsHTML() {
 function initPagination() {
   generatePaginationItemsHTML();
   initJumpToPage();
-
-  const prevBtn = document.getElementById("toPrevBtn");
-  const nextBtn = document.getElementById("toNextBtn");
-
-  prevBtn.addEventListener("click", () => {
-    if (currentPage > 1) {
-      changePage(currentPage - 1);
-    }
-    prevBtn.blur();
-  });
-
-  nextBtn.addEventListener("click", () => {
-    const totalPage = Math.ceil(data.length / pageSize);
-    if (currentPage < totalPage) {
-      changePage(currentPage + 1);
-    }
-    nextBtn.blur();
-  });
 }
 
 function changePage(page) {
   currentPage = page;
+
+  if (currentPage === 1) {
+    document
+      .getElementById("toPrevBtn")
+      .attributes.setNamedItem(document.createAttribute("disabled"));
+    if (document.getElementById("toNextBtn").hasAttribute("disabled")) {
+      document
+        .getElementById("toNextBtn")
+        .attributes.removeNamedItem("disabled");
+    }
+  } else if (currentPage === Math.ceil(data.length / pageSize)) {
+    document
+      .getElementById("toNextBtn")
+      .attributes.setNamedItem(document.createAttribute("disabled"));
+    if (document.getElementById("toPrevBtn").hasAttribute("disabled")) {
+      document
+        .getElementById("toPrevBtn")
+        .attributes.removeNamedItem("disabled");
+    }
+  } else {
+    if (document.getElementById("toPrevBtn").hasAttribute("disabled")) {
+      document
+        .getElementById("toPrevBtn")
+        .attributes.removeNamedItem("disabled");
+    }
+    if (document.getElementById("toNextBtn").hasAttribute("disabled")) {
+      document
+        .getElementById("toNextBtn")
+        .attributes.removeNamedItem("disabled");
+    }
+  }
+  document.getElementById("jumpInput").value = currentPage;
   renderList();
 }
 
@@ -220,3 +234,25 @@ new CustomSelect("selectTypeTrigger", "dropdownTypePanel", (text) => {
 });
 
 renderList();
+
+const prevBtn = document.getElementById("toPrevBtn");
+const nextBtn = document.getElementById("toNextBtn");
+
+prevBtn.addEventListener("click", () => {
+  if (currentPage > 1) {
+    changePage(currentPage - 1);
+    prevBtn.blur();
+  }
+});
+
+nextBtn.addEventListener("click", () => {
+  console.log("click");
+
+  const totalPage = Math.ceil(data.length / pageSize);
+  console.log("currentPage", currentPage);
+
+  if (currentPage < totalPage) {
+    changePage(currentPage + 1);
+  }
+  nextBtn.blur();
+});

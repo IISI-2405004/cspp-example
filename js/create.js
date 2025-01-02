@@ -1,6 +1,5 @@
 import { CustomSelect } from "./select.js";
-import { convertToStatusHTML } from "./table.js";
-import { showResult, getBaseUrl } from "./utils.js";
+import { showResult, getBaseUrl, convertToStatusHTML } from "./utils.js";
 
 function saveChange() {
   showResult("成功儲存", "即將跳轉到列表...", "success");

@@ -52,6 +52,21 @@ export function showResult(title, message, type, duration = 2000) {
   setTimeout(() => result.remove(), duration);
 }
 
+export function convertToStatusHTML(status) {
+  switch (status) {
+    case "pending":
+      return `<div class="status-wrapper"><i class="status-icon pending fa-solid fa-circle"></i><span>待審查</span></div>`;
+    case "reviewing":
+      return `<div class="status-wrapper"><i class="status-icon reviewing fa-solid fa-circle"></i><span>審查中</span></div>`;
+    case "recheck":
+      return `<div class="status-wrapper"><i class="status-icon recheck fa-solid fa-circle"></i><span>待複審</span></div>`;
+    case "closed":
+      return `<div class="status-wrapper"><i class="status-icon closed fa-solid fa-circle"></i><span>已結案</span></div>`;
+    default:
+      return "";
+  }
+}
+
 export function getBaseUrl() {
   const basePath = window.location.origin.includes("github.io")
     ? window.location.origin + "/cspp-example" // GitHub Pages 路徑

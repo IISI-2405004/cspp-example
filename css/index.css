@@ -667,6 +667,11 @@ tbody p {
   width: 40px;
 }
 
+@media screen and (max-width: 992px) {
+  .pagination .pagination-list {
+    display: none;
+  }
+}
 /* Form */
 .form-wrapper {
   display: flex;
