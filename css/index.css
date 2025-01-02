@@ -549,6 +549,9 @@ thead th.sortable .sort-icon .active {
   opacity: 1;
 }
 
+tbody tr:nth-child(even) td {
+  background-color: var(--neutral-200);
+}
 tbody td {
   min-height: 54px;
   padding: 8px 16px;
@@ -567,7 +570,7 @@ tbody td::after {
   left: 0;
   right: 0;
   height: 1px;
-  background-color: var(--neutral-400);
+  background-color: var(--neutral-300);
   z-index: 0; /* 確保偽元素不會被遮擋 */
 }
 tbody td:last-child {
