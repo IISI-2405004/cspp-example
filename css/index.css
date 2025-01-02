@@ -656,6 +656,17 @@ tbody p {
   border-color: transparent;
 }
 
+.jump-to-page {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  margin-left: 8px;
+}
+.jump-to-page .jump-to-page-input {
+  width: 40px;
+}
+
 /* Form */
 .form-wrapper {
   display: flex;
@@ -981,6 +992,57 @@ input[type=text].large {
 .input-wrapper input {
   padding-left: 28px;
   padding-right: 24px;
+}
+
+/* Input Number */
+input[type=number] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--neutral-700);
+  background-color: var(--neutral-100);
+  border: 1px solid var(--neutral-400);
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+}
+input[type=number]:focus {
+  border-color: var(--lively_blue-500);
+  outline: none;
+}
+input[type=number]:focus ~ .clear {
+  display: flex;
+}
+input[type=number]::-moz-placeholder {
+  color: var(--neutral-400);
+}
+input[type=number]::placeholder {
+  color: var(--neutral-400);
+}
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+  margin: 0;
+}
+input[type=number][disabled] {
+  color: var(--neutral-400);
+  background-color: var(--neutral-200);
+  border-color: var(--neutral-400);
+  cursor: not-allowed;
+}
+input[type=number].small {
+  padding: 0 8px;
+  height: 32px;
+  font-size: 14px;
+}
+input[type=number].large {
+  height: 48px;
+  font-size: 18px;
 }
 
 /* Textarea */
@@ -2144,6 +2206,9 @@ a {
 #dataTable thead th:nth-child(5) {
   min-width: 320px;
 }
+#dataTable thead th:nth-child(6) {
+  min-width: 120px;
+}
 #dataTable thead th:last-child {
   width: 148px;
   min-width: 148px;
@@ -2154,6 +2219,9 @@ a {
 }
 #dataTable tbody td:nth-child(5) {
   max-width: 420px;
+}
+#dataTable tbody td:nth-child(6) {
+  min-width: 120px;
 }
 
 .search-box {
@@ -2208,7 +2276,7 @@ a {
   animation: slideIn 0.3s ease forwards; /* 滑入動畫效果 */
 }
 
-@media screen and (max-width: 986px) {
+@media screen and (max-width: 992px) {
   #queryForm .form-item-title,
   #createForm .form-item-title,
   #formGroup .form-item-title,
@@ -2397,7 +2465,7 @@ a {
   font-size: 14px;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 992px) {
   .login-page {
     padding: 16px;
   }

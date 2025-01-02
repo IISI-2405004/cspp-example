@@ -108,7 +108,7 @@ function generateRowHTML(item) {
       <td class="align-center">${item.submitDate}</td>
       <td><p>${item.ref}</p></td>
       <td><p>${item.organ}</p></td>
-
+      <td>${convertToStatusHTML(item.status)}</td>
       <td class="align-center">
         <div class="btn-group">
           <button 
@@ -128,6 +128,32 @@ function generateRowHTML(item) {
       </td>
     </tr>
   `;
+}
+
+function initJumpToPage() {
+  const jumpInput = document.getElementById("jumpInput");
+
+  // 在輸入框中按下 Enter 鍵時觸發跳轉
+  jumpInput.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+      const page = parseInt(jumpInput.value, 10);
+
+      if (
+        !isNaN(page) &&
+        page >= 1 &&
+        page <= Math.ceil(data.length / pageSize)
+      ) {
+        changePage(page);
+        jumpInput.value = page; // 清空輸入框
+      } else {
+        jumpInput.value = currentPage; // 顯示當前頁碼
+      }
+    }
+  });
+
+  jumpInput.addEventListener("blur", () => {
+    jumpInput.value = currentPage; // 顯示當前頁碼
+  });
 }
 
 function generatePaginationItemsHTML() {
@@ -155,6 +181,8 @@ function generatePaginationItemsHTML() {
 
 function initPagination() {
   generatePaginationItemsHTML();
+  initJumpToPage();
+
   const prevBtn = document.getElementById("toPrevBtn");
   const nextBtn = document.getElementById("toNextBtn");
 
@@ -418,6 +446,24 @@ function generateEditableRowHTML(item) {
             : `<p>${item.organ}</p>`
         }
       </td>
+       <td>
+        ${
+          isChecked
+            ? `
+          <div class="select-trigger small" id="selectStatusTrigger${
+            item.id
+          }" data-id="${item.id}" data-value="${
+                item.status
+              }" data-field="status">
+            <div class="select-trigger-text">
+              ${convertToStatusHTML(item.status)}
+            </div>
+            <i class="trigger-arrow fa-solid fa-chevron-down"></i>
+          </div>
+        `
+            : convertToStatusHTML(item.status)
+        }
+      </td>
       <td class="align-center">
         <div class="btn-group">
           <button
@@ -473,6 +519,8 @@ function convertToColumnTitle(field) {
       return "核定文號";
     case "organ":
       return "機關名稱";
+    case "status":
+      return "狀態";
     default:
       return "";
   }
