@@ -26,6 +26,7 @@
     width: 80vw;
     max-width: 1280px;
     margin: 0 auto;
+    padding-bottom: 80px;
   }
 
   .login-wrapper {
@@ -193,7 +194,6 @@
     }
 
     p {
-      padding-left: 54px;
       margin-top: 0;
       margin-bottom: 8px;
       font-size: 14px;
@@ -216,7 +216,6 @@
       flex-direction: column-reverse;
       align-items: stretch;
       gap: 24px;
-      padding-bottom: 80px;
     }
 
     .tab {
