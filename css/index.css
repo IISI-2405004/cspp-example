@@ -2201,7 +2201,6 @@ a {
   z-index: 200;
 }
 
-/* 依照需求特定欄位設定寬度 */
 .data-table thead th:first-child {
   width: 48px;
   min-width: 48px;
@@ -2406,7 +2405,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 32px;
+  font-size: 40px;
   color: var(--lively_blue-500);
   margin-bottom: 32px;
   padding-left: 8px;
@@ -2549,11 +2548,6 @@ a {
   margin: 0 auto;
   padding-bottom: 80px;
 }
-.news-page .news-title {
-  width: 100%;
-  margin: 0;
-  margin-bottom: 32px;
-}
 .news-page .form-wrapper {
   width: 100%;
   padding: 24px;
@@ -2575,7 +2569,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 32px;
+  font-size: 40px;
   color: var(--lively_blue-500);
   margin-bottom: 32px;
   padding-left: 8px;
